@@ -18,10 +18,12 @@ export default class SideBar extends Component{
                         Projects
                     </a>
                 </Link>
-                <a class="item">
-                    <i aria-hidden="true" class="calendar icon"></i>
-                    Calendar
-                </a>
+                <Link to="/calendar" >
+                    <a class="item">
+                        <i aria-hidden="true" class="calendar icon"></i>
+                        Calendar
+                    </a>
+                </Link>
           </div>
         )
     }
