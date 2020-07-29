@@ -1,11 +1,26 @@
 import React from 'react';
 import './App.css';
-import Layout from './components/Layout'
+import SideBar from './components/SideBar';
+import NavBar from './components/NavBar';
+import Content from './components/Content';
+
 
 function App() {
   return (
     <div>
-        <Layout/>
+        <div class="ui segment pushable">
+          <SideBar/>
+
+          <div class="pusher">
+            <NavBar/>
+
+
+
+            <div class="ui basic segment">
+              <Content/> 
+            </div>
+          </div>
+        </div>
     </div>
   );
 }
