@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import { Container, Header, Icon, Image, Menu, Segment, Sidebar, Button } from 'semantic-ui-react'
-import ProjectCard from './ProjectCard';
+import ProjectCard from '../components/ProjectCard';
 
 // content changes here with router
 // need Many of these
+// will become a container component
 
-export default class Content extends Component{
+export default class Projects extends Component{
     render(){
         return(
             <>

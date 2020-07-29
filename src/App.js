@@ -2,7 +2,8 @@ import React from 'react';
 import './App.css';
 import SideBar from './components/SideBar';
 import NavBar from './components/NavBar';
-import Content from './components/Content';
+import Projects from './containers/Projects';
+import Profile from './components/Profile';
 
 
 function App() {
@@ -17,7 +18,8 @@ function App() {
 
 
             <div class="ui basic segment">
-              <Content/> 
+              <Projects/> 
+              <Profile/>
             </div>
           </div>
         </div>
