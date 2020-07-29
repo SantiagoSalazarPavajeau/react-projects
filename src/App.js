@@ -2,8 +2,7 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 import SideBar from './components/SideBar';
@@ -14,17 +13,12 @@ import Profile from './components/Profile';
 
 function App() {
   return (
-    <div>
+    <>
+      <Router>
         <div class="ui segment pushable">
-          <Router>
-
             <SideBar/>
-
             <div class="pusher">
               <NavBar/>
-
-
-
               <div class="ui basic segment">
                   <Switch>
                     <Route path="/login">
@@ -36,15 +30,12 @@ function App() {
                     <Route>
                       <Profile/>
                     </Route>
-                  </Switch>
-                
-                
-                
+                  </Switch>                                            
               </div>
             </div>
-            </Router>
         </div>
-    </div>
+      </Router>
+    </>
   );
 }
 
