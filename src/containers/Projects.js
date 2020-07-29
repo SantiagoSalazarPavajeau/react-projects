@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Button } from 'semantic-ui-react'
 import ProjectCard from '../components/ProjectCard';
 import { connect } from 'react-redux';
+import '../App.css'
 
 // content changes here with router
 // need Many of these
@@ -16,10 +17,20 @@ class Projects extends Component{
     render(){
         return(
             <>
-            <Button> Add project </Button>
-            <br></br>
-            <br></br>
-            {this.renderProjects()}
+                    <div class="ui grid container">
+                        <div class="eight wide column" >
+
+                        <Button> Add project </Button>
+
+                        </div>
+                    </div>
+
+                    <br></br>
+                    <br></br>
+                    <div class="ui grid container">
+                    {this.renderProjects()}
+                    </div>
+
             </>
         )
     }

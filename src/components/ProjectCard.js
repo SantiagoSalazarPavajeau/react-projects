@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 export default class ProjectCard extends Component{
     render(){
         return(
+            <div class="eight wide column" >
+
             <div class="ui card">
               <div class="image">
                 <i aria-hidden="true" class="file alternate icon left"></i>
@@ -22,6 +24,7 @@ export default class ProjectCard extends Component{
                     Tasks
                   </a>
               </div>
+            </div>
             </div>
         )
     }

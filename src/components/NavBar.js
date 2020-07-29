@@ -11,6 +11,8 @@ export default class NavBar extends Component{
                     <Link to="/login" ><a class="ui item">Login</a></Link>
                     <Link to="/signup" ><a class="ui item">Signup</a></Link>
                     <Link to="/profile" ><a class="ui item">Profile</a></Link>
+                    <a class="ui item right"> Logout </a>
+
             </div>
             
         )

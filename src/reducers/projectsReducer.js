@@ -11,6 +11,18 @@ export default function projectsReducer(
             title: 'React-Redux', 
             started: started,
             description: 'Build with project requirements'
+        }, {
+            title: 'JavaScript-Rails', 
+            started: started,
+            description: 'Build with project requirements'
+        }, {
+            title: 'Ruby on Rails', 
+            started: started,
+            description: 'Build with project requirements'
+        }, {
+            title: 'Sinatra', 
+            started: started,
+            description: 'Build with project requirements'
         }]
     }, 
     action){
