@@ -1,13 +1,11 @@
 import React from 'react';
 import './App.css';
-import SidebarExampleVisible from './components/Sidebar'
+import Layout from './components/Layout'
 
 function App() {
   return (
     <div>
-        <SidebarExampleVisible>
-
-        </SidebarExampleVisible>
+        <Layout/>
     </div>
   );
 }
