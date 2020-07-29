@@ -4,6 +4,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import "./App.css";
 
 import SideBar from './components/SideBar';
 import NavBar from './components/NavBar';
@@ -15,11 +16,14 @@ function App() {
   return (
     <>
       <Router>
-        <div class="ui segment pushable">
+        <div class="flexbox">
             <SideBar/>
-            <div class="pusher">
-              <NavBar/>
-              <div class="ui basic segment">
+
+            <div class="main">
+            <NavBar/>
+
+
+              <div class="ui container">
                   <Switch>
                     <Route path="/login">
                       <p>Login</p>
@@ -30,8 +34,8 @@ function App() {
                     <Route>
                       <Profile/>
                     </Route>
-                  </Switch>                                            
-              </div>
+                  </Switch> 
+              </div>                                           
             </div>
         </div>
       </Router>

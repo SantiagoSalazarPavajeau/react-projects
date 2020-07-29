@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
+import "../App.css";
+
 
 
 export default class SideBar extends Component{
     render(){
         return(
-            <div class="ui inverted vertical labeled icon ui push left thin visible sidebar menu">
+        <div class="sidebar">
+            <div class="ui left vertical inverted icon visible sidebar menu">
                 <Link to="/" >
                     <a class="item">
                         <i aria-hidden="true" class="home icon"></i>
@@ -24,7 +27,8 @@ export default class SideBar extends Component{
                         Calendar
                     </a>
                 </Link>
-          </div>
+            </div>
+        </div>
         )
     }
 }
