@@ -8,12 +8,12 @@ export default class ProjectCard extends Component{
                 <i aria-hidden="true" class="file alternate icon left"></i>
               </div>
               <div class="content">
-                  <a class="header">React-Redux</a>
+                  <a class="header">{this.props.title}</a>
                   <div class="meta">
-                    <span class="date">Started July 28, 2020</span>
+                    <span class="date">{this.props.started}</span>
                   </div>
                   <div class="description">
-                    Build with project requirements
+                    {this.props.description}
                   </div>
               </div>
               <div class="extra content">

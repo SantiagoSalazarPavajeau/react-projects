@@ -8,14 +8,18 @@ import { connect } from 'react-redux';
 // will become a container component
 
 class Projects extends Component{
+
+    renderProjects = () => {
+        return this.props.projects.map( project => <ProjectCard title={project.title} started={project.started} description={project.description}/> )
+    }
+
     render(){
         return(
             <>
             <Button> Add project </Button>
             <br></br>
             <br></br>
-            <ProjectCard/>
-            
+            {this.renderProjects()}
             </>
         )
     }
