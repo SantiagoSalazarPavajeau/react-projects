@@ -1,19 +1,37 @@
 import React, {Component} from 'react';
-import { Container, Header, Icon, Image, Menu, Segment, Sidebar, Button } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import ProjectCard from '../components/ProjectCard';
+import { connect } from 'react-redux';
 
 // content changes here with router
 // need Many of these
 // will become a container component
 
-export default class Projects extends Component{
+class Projects extends Component{
     render(){
         return(
             <>
-            <Button> Add project </Button><br></br><br></br>
+            <Button> Add project </Button>
+            <br></br>
+            <br></br>
             <ProjectCard/>
             
             </>
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        projects: state.projects
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addProject: () => dispatch({type: 'ADD_PROJECT'})
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Projects);
