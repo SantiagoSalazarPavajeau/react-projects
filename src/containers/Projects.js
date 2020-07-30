@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Button } from 'semantic-ui-react'
-import ProjectCard from '../components/ProjectCard';
+import ProjectCard from '../components/projects/ProjectCard';
 import { connect } from 'react-redux';
 import '../App.css'
 

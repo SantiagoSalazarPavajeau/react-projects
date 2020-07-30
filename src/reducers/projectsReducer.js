@@ -1,3 +1,6 @@
+import cuid from 'cuid';
+export const cuidFn = cuid;
+
 let date = new Date()
 let year = date.getFullYear()
 let month = date.getMonth()
