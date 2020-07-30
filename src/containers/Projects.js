@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Button } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import '../App.css'
 
@@ -21,11 +20,7 @@ class Projects extends Component{
         return this.props.projects.map( project => <ProjectCard title={project.title} started={project.started} description={project.description}/> )
     }
 
-    renderForm = () => {
-        this.setState({
-            showForm: true
-        })
-    }
+    
 
 
     render(){
@@ -33,8 +28,7 @@ class Projects extends Component{
             <>
                     <div class="ui grid container">
                         <div class="eight wide column" >
-                        {this.state.showForm ? <ProjectInput addProject={this.props.addProject}/> : <Button onClick={this.renderForm}> Add project </Button>}
-                        
+                        <ProjectInput addProject={this.props.addProject}/>
 
                         </div>
                     </div>
