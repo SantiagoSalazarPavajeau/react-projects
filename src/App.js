@@ -34,6 +34,7 @@ function App() {
                     </Route>
                     <Route>
                       <Profile/>
+                      <Projects/>
                     </Route>
                   </Switch> 
               </div>                                           

@@ -8,9 +8,9 @@ export default class NavBar extends Component{
                 <div class="header item">
                     Project Manager
                 </div>
-                    <Link to="/login" ><a class="ui item">Login</a></Link>
-                    <Link to="/signup" ><a class="ui item">Signup</a></Link>
-                    <Link to="/profile" ><a class="ui item">Profile</a></Link>
+                    <Link to="/login" className="ui item">Login</Link>
+                    <Link to="/signup" className="ui item" >Signup</Link>
+                    <Link to="/profile" className="ui item" >Profile</Link>
                     <a class="ui item right"> Logout </a>
 
             </div>

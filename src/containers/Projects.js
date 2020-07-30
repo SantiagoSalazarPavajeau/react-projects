@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import { Button } from 'semantic-ui-react'
-import ProjectCard from '../components/projects/ProjectCard';
 import { connect } from 'react-redux';
 import '../App.css'
+
+import ProjectInput from '../components/projects/ProjectInput';
+import ProjectCard from '../components/projects/ProjectCard';
+
 
 // content changes here with router
 // need Many of these
@@ -10,17 +13,28 @@ import '../App.css'
 
 class Projects extends Component{
 
+    state = {
+        showForm: false
+    }
+
     renderProjects = () => {
         return this.props.projects.map( project => <ProjectCard title={project.title} started={project.started} description={project.description}/> )
     }
+
+    renderForm = () => {
+        this.setState({
+            showForm: true
+        })
+    }
+
 
     render(){
         return(
             <>
                     <div class="ui grid container">
                         <div class="eight wide column" >
-
-                        <Button> Add project </Button>
+                        {this.state.showForm ? <ProjectInput addProject={this.props.addProject}/> : <Button onClick={this.renderForm}> Add project </Button>}
+                        
 
                         </div>
                     </div>
@@ -44,7 +58,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addProject: () => dispatch({type: 'ADD_PROJECT'})
+        addProject: (title) => dispatch({type: 'ADD_PROJECT', title})
     }
 }
 

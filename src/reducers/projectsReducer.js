@@ -30,6 +30,15 @@ export default function projectsReducer(
     }, 
     action){
         switch(action.type){
+            case 'ADD_PROJECT':
+                const project = {
+                    title: action.title,
+                    started: started,
+                    description: 'cool description'
+                }
+                return{
+                    ...state, projects: [...state.projects.concat(project)]
+                }
             default:
                 return state
         }

@@ -1,16 +1,22 @@
 {
   "name": "react-projects",
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/"
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "babel-register": "^6.26.0",
     "bootstrap": "^4.5.0",
     "chai": "^4.2.0",
     "cuid": "^2.1.8",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
+    "jsdom": "^16.3.0",
     "mocha": "^8.0.1",
     "mocha-multi": "^1.0.1",
     "react": "^16.13.1",
@@ -27,8 +33,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "mocha-test": "mocha --timeout 5000 -w test/helpers/browser.js test/*.js",
+    "test": "mocha",
+    "mocha-test": "mocha",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

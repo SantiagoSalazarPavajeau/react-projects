@@ -10,7 +10,7 @@ export default class ProjectCard extends Component{
                 <i aria-hidden="true" class="file alternate icon left"></i>
               </div>
               <div class="content">
-                  <a class="header">{this.props.title}</a>
+                  <a data-testid="text-content" class="header">{this.props.title}</a>
                   <div class="meta">
                     <span class="date">{this.props.started}</span>
                   </div>
