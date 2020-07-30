@@ -17,7 +17,7 @@ class Projects extends Component{
     }
 
     renderProjects = () => {
-        return this.props.projects.map( project => <ProjectCard title={project.title} started={project.started} description={project.description}/> )
+        return this.props.projects.map( project => <ProjectCard title={project.title} started={project.started} description={project.description} id={project.id} deleteProject={this.props.deleteProject}/> )
     }
 
     
@@ -35,8 +35,9 @@ class Projects extends Component{
 
                     <br></br>
                     <br></br>
+
                     <div class="ui grid container">
-                    {this.renderProjects()}
+                        {this.renderProjects()}
                     </div>
 
             </>
@@ -52,7 +53,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addProject: (title) => dispatch({type: 'ADD_PROJECT', title})
+        addProject: (title) => dispatch({type: 'ADD_PROJECT', title}),
+        deleteProject: (id) => dispatch({type: 'DELETE_PROJECT', id})
     }
 }
 

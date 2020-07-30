@@ -13,19 +13,23 @@ export default function projectsReducer(
         projects: [{
             title: 'React-Redux', 
             started: started,
-            description: 'Build with project requirements'
+            description: 'Build with project requirements',
+            id: cuid()
         }, {
             title: 'JavaScript-Rails', 
             started: started,
-            description: 'Build with project requirements'
+            description: 'Build with project requirements',
+            id: cuid()
         }, {
             title: 'Ruby on Rails', 
             started: started,
-            description: 'Build with project requirements'
+            description: 'Build with project requirements',
+            id: cuid()
         }, {
             title: 'Sinatra', 
             started: started,
-            description: 'Build with project requirements'
+            description: 'Build with project requirements',
+            id: cuid()
         }]
     }, 
     action){
@@ -34,10 +38,15 @@ export default function projectsReducer(
                 const project = {
                     title: action.title,
                     started: started,
-                    description: 'cool description'
+                    description: 'cool description',
+                    id: cuid()
                 }
                 return{
                     ...state, projects: [...state.projects.concat(project)]
+                }
+            case 'DELETE_PROJECT':
+                return{
+                    ...state, projects: [...state.projects.filter(project => project.id !== action.id)]
                 }
             default:
                 return state
