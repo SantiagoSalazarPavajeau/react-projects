@@ -36,9 +36,9 @@ export default function projectsReducer(
         switch(action.type){
             case 'ADD_PROJECT':
                 const project = {
-                    title: action.title,
+                    title: action.project.title,
                     started: started,
-                    description: 'cool description',
+                    description: action.project.description,
                     id: cuid()
                 }
                 return{
