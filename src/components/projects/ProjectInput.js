@@ -7,6 +7,8 @@ import { Button, Header, Image, Modal, Form } from 'semantic-ui-react'
 export default class ProjectInput extends Component{
     state = {
         title: '',
+        description: '',
+        showModal: false
     }
 
     handleOnChange = (event) => {
@@ -17,11 +19,22 @@ export default class ProjectInput extends Component{
 
     handleOnSubmit = (event) => {
         event.preventDefault()
-        this.props.addProject(this.state.title)
+        this.props.addProject(this.state)
         this.setState({
             title: '',
-            description: ''
+            description: '',
+            showModal: false
         })
+    }
+
+    openModal = () => {
+        this.setState({
+            showModal: true
+        })
+    }
+
+    closeModal = () => {
+
     }
 
 
@@ -32,7 +45,9 @@ export default class ProjectInput extends Component{
             //     <input type="text" onChange={event => this.handleOnChange(event)} value={this.state.title}/>
             //     <input type="submit"/>
             // </form>
-            <Modal trigger={<Button> <i class="add icon center"></i></Button>}>
+            <>
+            <Button onClick={this.openModal}> <i class="add icon center"></i></Button>
+            <Modal  open={this.state.showModal} >
                 <Modal.Header>Add a project</Modal.Header>
                     <Modal.Content image>
                     <Image wrapped size='medium' alt="Workbench and tools" src='https://images.unsplash.com/photo-1416339158484-9637228cc908?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80' />
@@ -42,20 +57,14 @@ export default class ProjectInput extends Component{
                                 <Form.Input type="text" onChange={event => this.handleOnChange(event)} value={this.state.title} name="title" placeholder={this.state.title}/>
                         <Header>Description:</Header>
                                 <Form.TextArea type="textarea" onChange={event => this.handleOnChange(event)} value={this.state.description} name="description" placeholder={this.state.description}/>
-                                <Form.Button onClick={(event) => this.handleOnSubmit(event)} type="submit">Submit</Form.Button>
+                                <Form.Button onClick={(event) => this.handleOnSubmit(event)} type="submit" >Submit</Form.Button>
                         </Form>
                     </Modal.Description>
                 </Modal.Content>
             </Modal>
 
-            // <div class="ui dimmer modals page transition visible active" style="display: flex !important;">
-            //     <div class="ui fullscreen modal transition visible active" style="display: block !important;">
-            //         <form class="ui form">
 
-            //             <button class="ui button" onClick={(event) => this.handleOnSubmit(event)} type="submit">Submit</button>
-            //         </form>
-            //     </div>
-            // </div>
+            </>
         )
     }
     render(){

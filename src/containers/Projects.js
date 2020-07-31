@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import '../App.css'
 
+import { Button } from 'semantic-ui-react'
+
 import ProjectInput from '../components/projects/ProjectInput';
 import ProjectCard from '../components/projects/ProjectCard';
 
@@ -20,6 +22,12 @@ class Projects extends Component{
         return this.props.projects.map( project => <ProjectCard title={project.title} started={project.started} description={project.description} id={project.id} editProject={this.props.editProject} deleteProject={this.props.deleteProject}/> )
     }
 
+    renderModal = () => {
+        this.setState({
+            showForm: true
+        })
+    }
+
     
 
 
@@ -28,8 +36,9 @@ class Projects extends Component{
             <>
                     <div class="ui grid container">
                         <div class="eight wide column" >
-                        <ProjectInput addProject={this.props.addProject}/>
-
+                            {/* {this.state.showForm ? <ProjectInput addProject={this.props.addProject}/> : null} */}
+                            <ProjectInput addProject={this.props.addProject}/>
+                            {/* <Button onClick={this.renderModal}> <i class="add icon center"></i></Button> */}
                         </div>
                     </div>
 
@@ -53,7 +62,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addProject: (title) => dispatch({type: 'ADD_PROJECT', title}),
+        addProject: (project) => dispatch({type: 'ADD_PROJECT', project}),
         deleteProject: (id) => dispatch({type: 'DELETE_PROJECT', id}),
         editProject: (project) => dispatch({type: 'EDIT_PROJECT'}, project)
     }
