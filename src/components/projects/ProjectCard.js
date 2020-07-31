@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import { Button, Confirm } from 'semantic-ui-react'
-
+// modal is to display tasks
 
 export default class ProjectCard extends Component{
     state = {
-      open: false
+      open: false,
+      edit: false
     }
 
     handleDeleteClick = (event) => {
@@ -35,7 +36,8 @@ export default class ProjectCard extends Component{
                 <i aria-hidden="true" class="file alternate icon left"></i>
               </div>
               <div class="content">
-                  <a data-testid="text-content" class="header">{this.props.title}</a>
+                  {/* <input value={this.props.title}/> */}
+                    <a data-testid="text-content" class="header">{this.props.title}</a>
                   <div class="meta">
                     <span class="date">{this.props.started}</span>
                   </div>
@@ -45,22 +47,22 @@ export default class ProjectCard extends Component{
                   <div class="ui right aligned grid">
               
                   <div class="sixteen wide column">
-                      <Button basic color='grey' icon='trash' onClick={event => this.handleDeleteClick(event)}>
-                        {/* <i aria-hidden="true" class="trash alternate icon right"></i> */}
-                      </Button>
-                      <Confirm
-                        open={this.state.open}
-                        onCancel={this.handleCancel}
-                        onConfirm={this.handleConfirm}
-                      />                     
+                                   
                   </div>
                   </div>
               </div>
               <div class="extra content">
                 <div class="left floated right aligned six wide column">
                       <a>
-                        <i class="tasks icon"></i>
-                        Tasks
+                        <Button basic icon='pencil' onClick={event => this.handleDeleteClick(event)}/>
+                        <Button basic icon='trash' onClick={event => this.handleDeleteClick(event)}>
+                        {/* <i aria-hidden="true" class="trash alternate icon right"></i> */}
+                      </Button>
+                      <Confirm
+                        open={this.state.open}
+                        onCancel={this.handleCancel}
+                        onConfirm={this.handleConfirm}
+                      />        
                       </a>
                   </div>
                 
