@@ -34,7 +34,9 @@ export default class ProjectInput extends Component{
     }
 
     closeModal = () => {
-
+        this.setState({
+            showModal: false
+        })
     }
 
 
@@ -46,8 +48,8 @@ export default class ProjectInput extends Component{
             //     <input type="submit"/>
             // </form>
             <>
-            
-            <Modal  trigger={<Button onClick={this.openModal}> <i class="add icon center"></i></Button>} closeIcon>
+            <Button onClick={this.openModal}> <i class="add icon center"></i></Button>
+            <Modal  open={this.state.showModal} >
                 <Modal.Header>Add a project</Modal.Header>
                     <Modal.Content image>
                     <Image wrapped size='medium' alt="Workbench and tools" src='https://images.unsplash.com/photo-1416339158484-9637228cc908?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80' />
@@ -58,6 +60,7 @@ export default class ProjectInput extends Component{
                         <Header>Description:</Header>
                                 <Form.TextArea type="textarea" onChange={event => this.handleOnChange(event)} value={this.state.description} name="description" placeholder={this.state.description}/>
                                 <Form.Button onClick={(event) => this.handleOnSubmit(event)} type="submit" >Submit</Form.Button>
+                                <Form.Button onClick={this.closeModal} type="submit" >Cancel</Form.Button>
                         </Form>
                     </Modal.Description>
                 </Modal.Content>
