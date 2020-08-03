@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import '../App.css'
 
-import { Button } from 'semantic-ui-react'
-
 import ProjectInput from '../components/projects/ProjectInput';
 import ProjectCard from '../components/projects/ProjectCard';
 
@@ -36,9 +34,7 @@ class Projects extends Component{
             <>
                     <div class="ui grid container">
                         <div class="eight wide column" >
-                            {/* {this.state.showForm ? <ProjectInput addProject={this.props.addProject}/> : null} */}
                             <ProjectInput addProject={this.props.addProject}/>
-                            {/* <Button onClick={this.renderModal}> <i class="add icon center"></i></Button> */}
                         </div>
                     </div>
 
