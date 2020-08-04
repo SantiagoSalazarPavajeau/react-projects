@@ -6,7 +6,7 @@ export default class NavBar extends Component{
         return(
             <div class="ui stackable menu">
                 <div class="header item">
-                    Project Manager
+                    Projects Dashboard
                 </div>
                     <Link to="/login" className="ui item">Login</Link>
                     <Link to="/signup" className="ui item" >Signup</Link>

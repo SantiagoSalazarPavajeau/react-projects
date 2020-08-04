@@ -34,7 +34,9 @@ function App() {
                     </Route>
                     <Route>
                       <Profile/>
-                      <Projects/>
+                    </Route>
+                    <Route path="/">
+                      <Profile/>
                     </Route>
                   </Switch> 
               </div>                                           
