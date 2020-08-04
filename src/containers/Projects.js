@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import '../App.css'
+import { Route } from "react-router-dom";
 
 import ProjectInput from '../components/projects/ProjectInput';
 import ProjectCard from '../components/projects/ProjectCard';
+import ProjectsList from '../components/projects/ProjectsList';
+
 
 
 // content changes here with router
@@ -17,7 +20,9 @@ class Projects extends Component{
     }
 
     renderProjects = () => {
-        return this.props.projects.map( project => <ProjectCard title={project.title} started={project.started} description={project.description} id={project.id} editProject={this.props.editProject} deleteProject={this.props.deleteProject}/> )
+        // console.log(this.props.match.url)
+        // return this.props.projects.map( (project) => { <Route path={`${this.props.match.url}/:projectId`} render={routerProps => <ProjectCard {...routerProps} title={project.title} started={project.started} description={project.description} id={project.id} editProject={this.props.editProject} deleteProject={this.props.deleteProject}/>} />})
+     
     }
 
     renderModal = () => {
@@ -42,7 +47,8 @@ class Projects extends Component{
                     <br></br>
 
                     <div class="ui grid container">
-                        {this.renderProjects()}
+                        <Route path={`${this.props.match.url}/:projectId`} render={routerProps => <ProjectCard {...routerProps} projects={this.props.projects}/>}/>
+                        <ProjectsList projects={this.props.projects}/>
                     </div>
 
             </>

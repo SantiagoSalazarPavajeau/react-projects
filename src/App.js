@@ -29,9 +29,7 @@ function App() {
                     <Route path="/login">
                       <p>Login</p>
                     </Route>
-                    <Route path="/projects">
-                      <Projects/>
-                    </Route>
+                    <Route path="/projects" render={routerProps => <Projects {...routerProps}/>}/>
                     <Route>
                       <Profile/>
                     </Route>

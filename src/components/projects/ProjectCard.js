@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Button, Confirm } from 'semantic-ui-react'
-import { Link } from 'react-router-dom';
+import {   useRouteMatch, Link } from 'react-router-dom';
 
 // modal is to display tasks
 
@@ -29,6 +29,8 @@ export default class ProjectCard extends Component{
       })
     }
 
+
+
     render(){
         return(
             <div class="eight wide column" >
@@ -39,7 +41,7 @@ export default class ProjectCard extends Component{
               </div>
               <div class="content">
                   {/* <input value={this.props.title}/> */}
-                      <Link data-testid="text-content" class="header" to={`projects/${this.props.id}`}>{this.props.title}</Link> 
+                      <Link key={this.props.id} class="header" to={`projects/${this.props.id}`}>{this.props.title}</Link> 
                       {/* this link nests deeper with every click */}
                   <div class="meta">
                     <span class="date">{this.props.started}</span>
