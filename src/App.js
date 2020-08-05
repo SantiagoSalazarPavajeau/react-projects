@@ -10,36 +10,39 @@ import SideBar from './components/SideBar';
 import NavBar from './components/NavBar';
 import Projects from './containers/Projects';
 import Profile from './components/Profile';
+import TasksModal from './components/tasks/TasksModal';
+
 
 
 function App() {
   return (
     <>
       <Router>
-        <div class="flexbox">
+        <div className="flexbox">
             <SideBar/>
 
-            <div class="main">
+            <div className="main">
             <NavBar/>
 
 
-              <div class="ui container">
+              <div className="ui container">
 
-                  <Switch>
-                    <Route path="/login">
+                  {/* <Switch> */}
+                    <Route exact path="/" render={()=> <Profile/>}>
+                    </Route>
+                    <Route exact path="/login">
                       <p>Login</p>
                     </Route>
-                    <Route path="/projects" render={routerProps => <Projects {...routerProps}/>}/>
-                    <Route>
-                      <Profile/>
-                    </Route>
-                    <Route path="/">
-                      <Profile/>
-                    </Route>
-                  </Switch> 
-              </div>                                           
+
+                    <Route exact path="/projects" render={routerProps => <Projects {...routerProps}/>}/> 
+                    {/* I sent router props to have acces to match */}
+
+                    
+                    
+                  {/* </Switch>  */}
+              </div>                                            
             </div>
-        </div>
+         </div> 
       </Router>
     </>
   );

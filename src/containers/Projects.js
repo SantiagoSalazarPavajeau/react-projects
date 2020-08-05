@@ -2,10 +2,14 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import '../App.css'
 import { Route } from "react-router-dom";
+import {   useRouteMatch } from 'react-router-dom';
+
+
 
 import ProjectInput from '../components/projects/ProjectInput';
 import ProjectCard from '../components/projects/ProjectCard';
-import ProjectsList from '../components/projects/ProjectsList';
+import TasksModal from '../components/tasks/TasksModal';
+
 
 
 
@@ -21,7 +25,7 @@ class Projects extends Component{
 
     renderProjects = () => {
         // console.log(this.props.match.url)
-        // return this.props.projects.map( (project) => { <Route path={`${this.props.match.url}/:projectId`} render={routerProps => <ProjectCard {...routerProps} title={project.title} started={project.started} description={project.description} id={project.id} editProject={this.props.editProject} deleteProject={this.props.deleteProject}/>} />})
+        return this.props.projects.map( project => <ProjectCard key={project.id} title={project.title} started={project.started} description={project.description} id={project.id} editProject={this.props.editProject} deleteProject={this.props.deleteProject}/> )
      
     }
 
@@ -37,8 +41,9 @@ class Projects extends Component{
     render(){
         return(
             <>
-                    <div class="ui grid container">
-                        <div class="eight wide column" >
+
+                    <div className="ui grid container">
+                        <div className="eight wide column" >
                             <ProjectInput addProject={this.props.addProject}/>
                         </div>
                     </div>
@@ -46,10 +51,15 @@ class Projects extends Component{
                     <br></br>
                     <br></br>
 
-                    <div class="ui grid container">
-                        <Route path={`${this.props.match.url}/:projectId`} render={routerProps => <ProjectCard {...routerProps} projects={this.props.projects}/>}/>
-                        <ProjectsList projects={this.props.projects}/>
+                    <div className="ui grid container">
+                        {/* <ProjectsList projects={this.props.projects} editProject={this.props.editProject} deleteProject={this.props.deleteProject}/> */}
+                        {this.renderProjects()}
+
                     </div>
+
+                    <Route exact path={`projects/:id`} render={routerProps => <TasksModal {...routerProps} />}>
+                      {/* <TasksModal/> */}
+                    </Route>
 
             </>
         )

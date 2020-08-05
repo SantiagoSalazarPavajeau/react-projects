@@ -48,7 +48,7 @@ export default class ProjectInput extends Component{
             //     <input type="submit"/>
             // </form>
             <>
-            <Button onClick={this.openModal}> <i class="add icon center"></i></Button>
+            <Button onClick={this.openModal}> <i className="add icon center"></i></Button>
             <Modal  open={this.state.showModal} >
                 <Modal.Header>Add a project</Modal.Header>
                     <Modal.Content image>
