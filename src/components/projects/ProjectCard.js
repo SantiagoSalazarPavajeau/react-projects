@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Button, Confirm } from 'semantic-ui-react'
-import {   useRouteMatch , Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // modal is to display tasks
 
@@ -58,7 +58,6 @@ export default class ProjectCard extends Component{
               </div>
               <div className="extra content">
                 <div className="left floated right aligned six wide column">
-                      <a>
                         <Button basic icon='pencil' onClick={event => this.handleDeleteClick(event)}/>
                         <Button basic icon='trash' onClick={event => this.handleDeleteClick(event)}>
                         {/* <i aria-hidden="true" className="trash alternate icon right"></i> */}
@@ -68,7 +67,6 @@ export default class ProjectCard extends Component{
                         onCancel={this.handleCancel}
                         onConfirm={this.handleConfirm}
                       />        
-                      </a>
                   </div>
                 
               </div>

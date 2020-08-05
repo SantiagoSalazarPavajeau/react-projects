@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Container, Header, Icon, Image, Menu, Segment, Sidebar, Button } from 'semantic-ui-react'
+import { Header, Icon} from 'semantic-ui-react'
 
 
 export default class Profile extends Component{

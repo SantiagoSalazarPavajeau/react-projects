@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import '../App.css'
 import { Route } from "react-router-dom";
-import {   useRouteMatch } from 'react-router-dom';
+// import {   useRouteMatch } from 'react-router-dom';
 
 
 
@@ -57,9 +57,7 @@ class Projects extends Component{
 
                     </div>
 
-                    <Route exact path={`projects/:id`} render={routerProps => <TasksModal {...routerProps} />}>
-                      {/* <TasksModal/> */}
-                    </Route>
+
 
             </>
         )

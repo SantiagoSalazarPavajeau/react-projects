@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
   Route
 } from "react-router-dom";
 import "./App.css";
@@ -37,7 +36,10 @@ function App() {
                     <Route exact path="/projects" render={routerProps => <Projects {...routerProps}/>}/> 
                     {/* I sent router props to have acces to match */}
 
-                    
+                    <Route exact path={`/projects/:id`} >
+                      <TasksModal/>
+                      <p>Welcome</p>
+                    </Route>
                     
                   {/* </Switch>  */}
               </div>                                            
