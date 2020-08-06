@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Header, Image, Modal, Form, Button } from 'semantic-ui-react'
+import { Header, Image, Modal, Form, Button, Divider } from 'semantic-ui-react'
 import {withRouter} from 'react-router-dom';
 import Task from './Task'
 
@@ -88,9 +88,10 @@ class TasksModal extends Component{
                                     <Image size='medium' alt="Workbench and tools" src='https://images.unsplash.com/photo-1416339158484-9637228cc908?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80' wrapped/>
                                     <Modal.Description>
                                     {this.state.edit ?  this.renderEdit() : this.renderDescription()}
-                                    <ul>
-                                        {this.renderTasks()}
-                                    </ul>   
+                                    <Divider horizontal>Tasks</Divider>
+
+                                    {this.renderTasks()}
+                                    <br></br>
                                     </Modal.Description>
                                 </Modal.Content>
 
