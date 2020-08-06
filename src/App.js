@@ -9,7 +9,6 @@ import SideBar from './components/SideBar';
 import NavBar from './components/NavBar';
 import Projects from './containers/Projects';
 import Profile from './components/Profile';
-import TasksModal from './components/tasks/TasksModal';
 import Tasks from './containers/Tasks';
 
 

@@ -49,7 +49,7 @@ export default class ProjectInput extends Component{
             // </form>
             <>
             <Button onClick={this.openModal}> <i className="add icon center"></i></Button>
-            <Modal  open={this.state.showModal} >
+            <Modal dimmer={"inverted"} open={this.state.showModal} >
                 <Modal.Header>Add a project</Modal.Header>
                     <Modal.Content image>
                     <Image wrapped size='medium' alt="Workbench and tools" src='https://images.unsplash.com/photo-1416339158484-9637228cc908?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80' />

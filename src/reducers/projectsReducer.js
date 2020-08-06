@@ -1,6 +1,5 @@
 import cuid from 'cuid';
 export const cuidFn = cuid;
-
 let date = new Date()
 let year = date.getFullYear()
 let month = date.getMonth()
@@ -39,7 +38,6 @@ export default function projectsReducer(
 
 }
 
-
 let projects = [{
     title: 'React-Redux',
     started: started,
@@ -61,3 +59,5 @@ let projects = [{
     description: 'Build with project requirements',
     id: cuid()
 }]
+
+
