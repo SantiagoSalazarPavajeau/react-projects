@@ -7,7 +7,9 @@ class TasksModal extends Component{
     // let index = this.props.projects.findIndex( project => project.id === this.props.match.params.id)
     state = {
         title: this.props.projects[this.props.index].title,
+        started: this.props.projects[this.props.index].started,
         description: this.props.projects[this.props.index].description,
+        id: this.props.projects[this.props.index].id,
         edit: false
     }
     
@@ -29,11 +31,14 @@ class TasksModal extends Component{
         event.preventDefault()
         this.props.editProject({
             title: this.state.title,
+            started: this.state.started,
+            id: this.state.id,
             description: this.state.description
         })
         this.setState({
             edit: false
         })
+        console.log(this.props.projects)
     }
 
     handleOnChange = (event) => {
