@@ -14,7 +14,10 @@ class Tasks extends Component{
 
     render(){
         return (
-            <TasksModal editProject={this.props.editProject} addTask={this.props.addTask} projects={this.props.projects}/>
+            <>
+            {console.log(this.props.match)}
+            <TasksModal match={this.props.match} index={this.props.projects.findIndex( project => project.id === this.props.match.params.id)} editProject={this.props.editProject} addTask={this.props.addTask} projects={this.props.projects}/>
+            </>
         )
     }
 }
