@@ -32,6 +32,10 @@ export default function projectsReducer(
                 return{
                     ...state, projects: [...state.projects.slice(0, index), action.project, ...state.projects.slice(index + 1)]
                 }
+            case 'ADD_TASK':
+                return{
+                    ...state, tasks: [...state.tasks.concat(action.task)]
+                }
             default:
                 return state
         }

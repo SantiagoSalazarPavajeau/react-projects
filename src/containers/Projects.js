@@ -73,8 +73,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         addProject: (project) => dispatch({type: 'ADD_PROJECT', project}),
-        deleteProject: (id) => dispatch({type: 'DELETE_PROJECT', id}),
-        editProject: (project) => dispatch({type: 'EDIT_PROJECT'}, project)
+        deleteProject: (id) => dispatch({type: 'DELETE_PROJECT', id})
     }
 }
 

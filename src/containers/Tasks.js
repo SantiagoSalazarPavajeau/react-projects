@@ -8,11 +8,13 @@ import TasksModal from '../components/tasks/TasksModal';
 // nested route for tasks needs to be here
 
 class Tasks extends Component{
-
+    state = {
+        tasks: []
+    }
 
     render(){
         return (
-            <TasksModal projects={this.props.projects}/>
+            <TasksModal editProject={this.props.editProject} addTask={this.props.addTask} projects={this.props.projects}/>
         )
     }
 }
@@ -26,7 +28,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        addTask: dispatch({type: 'ADD_TASK'})
+        addTask: dispatch({type: 'ADD_TASK'}, task),
+        editProject: (project) => dispatch({type: 'EDIT_PROJECT'}, project)
+
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps) (Tasks)
