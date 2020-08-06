@@ -28,7 +28,11 @@ export default function projectsReducer(
                 return{
                     ...state, projects: [...state.projects.filter(project => project.id !== action.id)]
                 }
-
+            case 'EDIT_PROJECT':
+                let index = state.projects.findIndex(project => project.id === action.project.id)
+                return{
+                    ...state, projects: [...state.projects.slice(0, index), action.project, ...state.projects.slice(index + 1)]
+                }
             default:
                 return state
         }
