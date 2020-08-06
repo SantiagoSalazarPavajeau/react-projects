@@ -46,17 +46,17 @@ let projects = [{
     title: 'React-Redux',
     started: started,
     description: 'Build edit and show button by linking it to the tasks modal. These links will have to be to the nested routes',
-    id: cuid()
+    id: '1'
 }, {
     title: 'JavaScript-Rails', 
     started: started,
     description: 'Build with project requirements',
-    id: cuid()
+    id: '2'
 }, {
     title: 'Ruby on Rails', 
     started: started,
     description: 'Build with project requirements',
-    id: cuid()
+    id: '3'
 }, {
     title: 'Sinatra', 
     started: started,
