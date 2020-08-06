@@ -10,6 +10,8 @@ import NavBar from './components/NavBar';
 import Projects from './containers/Projects';
 import Profile from './components/Profile';
 import TasksModal from './components/tasks/TasksModal';
+import Tasks from './containers/Tasks';
+
 
 
 
@@ -37,8 +39,7 @@ function App() {
                     {/* I sent router props to have acces to match */}
 
                     <Route exact path={`/projects/:id`} >
-                      <TasksModal/>
-                      <p>Welcome</p>
+                      <Tasks/>
                     </Route>
                     
                   {/* </Switch>  */}

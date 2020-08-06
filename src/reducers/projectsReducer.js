@@ -10,28 +10,8 @@ let started = `Started ${months[month]} ${day}, ${year}`
 
 export default function projectsReducer(
     state = {
-        projects: [{
-            title: 'React-Redux',
-            started: started,
-            description: 'Build edit and show button by linking it to the tasks modal. These links will have to be to the nested routes',
-            id: cuid()
-        }, {
-            title: 'JavaScript-Rails', 
-            started: started,
-            description: 'Build with project requirements',
-            id: cuid()
-        }, {
-            title: 'Ruby on Rails', 
-            started: started,
-            description: 'Build with project requirements',
-            id: cuid()
-        }, {
-            title: 'Sinatra', 
-            started: started,
-            description: 'Build with project requirements',
-            id: cuid()
-        }]
-    }, 
+        projects: projects
+    },
     action){
         switch(action.type){
             case 'ADD_PROJECT':
@@ -48,8 +28,32 @@ export default function projectsReducer(
                 return{
                     ...state, projects: [...state.projects.filter(project => project.id !== action.id)]
                 }
+
             default:
                 return state
         }
 
 }
+
+
+let projects = [{
+    title: 'React-Redux',
+    started: started,
+    description: 'Build edit and show button by linking it to the tasks modal. These links will have to be to the nested routes',
+    id: cuid()
+}, {
+    title: 'JavaScript-Rails', 
+    started: started,
+    description: 'Build with project requirements',
+    id: cuid()
+}, {
+    title: 'Ruby on Rails', 
+    started: started,
+    description: 'Build with project requirements',
+    id: cuid()
+}, {
+    title: 'Sinatra', 
+    started: started,
+    description: 'Build with project requirements',
+    id: cuid()
+}]
