@@ -31,7 +31,15 @@ class TasksModal extends Component{
             title: this.state.title,
             description: this.state.description
         })
+        this.setState({
+            edit: false
+        })
+    }
 
+    handleOnChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
     }
 
     renderEdit = () => {
@@ -40,8 +48,8 @@ class TasksModal extends Component{
                 <Form>
                         <Form.Input type="text" onChange={event => this.handleOnChange(event)} value={this.state.title} name="title" placeholder={this.state.title}/>
                         <Form.TextArea type="textarea" onChange={event => this.handleOnChange(event)} value={this.state.description} name="description" placeholder={this.state.description}/>
-                        <Button onClick={(event) => this.handleOnSubmit(event)}>Save</Button>
-                        <Button onClick={this.cancelEdit}>Cancel</Button>
+                        <Button icon="save" onClick={(event) => this.saveEdit(event)}></Button>
+                        <Button icon="close icon" onClick={this.cancelEdit}></Button>
                 </Form>
             </Modal.Description>
         )
@@ -55,8 +63,8 @@ class TasksModal extends Component{
                                             {/* <h3>Requested project ID: {match.params.id}</h3>
                                             <h3>Requested project ID: {index}</h3> */}
 
-                    <Button onClick={e => this.startEdit(e)} >Edit</Button>                               
-                    <Button onClick={this.props.history.goBack} >Back</Button>                               
+                    <Button icon="pencil" onClick={e => this.startEdit(e)} ></Button>                               
+                    <Button icon="close icon" onClick={this.props.history.goBack} ></Button>                               
                         {/* {console.log(props)} */}
             </Modal.Description>
         )
