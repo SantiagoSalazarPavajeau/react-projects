@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Header, Image, Modal, Form, Button } from 'semantic-ui-react'
 import {withRouter} from 'react-router-dom';
+import Task from './Task'
 
 
 class TasksModal extends Component{
@@ -10,7 +11,8 @@ class TasksModal extends Component{
         started: this.props.projects[this.props.index].started,
         description: this.props.projects[this.props.index].description,
         id: this.props.projects[this.props.index].id,
-        edit: false
+        edit: false,
+        tasks: this.props.tasks
     }
     
 
@@ -60,18 +62,18 @@ class TasksModal extends Component{
         )
     }
 
+    renderTasks = () => {
+        return this.state.tasks.map(task => <Task description={"First"} completed={true}/>)
+    }
+
     renderDescription = () => {
         return (
-            <Modal.Description>
+            <>
                 <Header>{this.state.title}</Header>
                     <p>{this.state.description}</p>
-                                            {/* <h3>Requested project ID: {match.params.id}</h3>
-                                            <h3>Requested project ID: {index}</h3> */}
-
-                    <Button icon="pencil" onClick={e => this.startEdit(e)} ></Button>                               
-                    <Button icon="close icon" onClick={this.props.history.goBack} ></Button>                               
-                        {/* {console.log(props)} */}
-            </Modal.Description>
+                    <Button content="Edit" labelPosition='right' icon="pencil" onClick={e => this.startEdit(e)} ></Button>                               
+                    <Button content="Exit" labelPosition='right' icon="close icon" onClick={this.props.history.goBack} ></Button>      
+            </>          
         )
     }
 
@@ -80,12 +82,19 @@ class TasksModal extends Component{
             <>
             <div className="ui grid container">
                         <div className="eight wide column" >
-                            <Modal dimmer={"inverted"} open={true} >
+                            <Modal size={"large"}dimmer={"inverted"} open={true} >
                                 <Modal.Header></Modal.Header>
-                                    <Modal.Content image>
-                                    <Image wrapped size='medium' alt="Workbench and tools" src='https://images.unsplash.com/photo-1416339158484-9637228cc908?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80' />
+                                    <Modal.Content image scrolling>
+                                    <Image size='medium' alt="Workbench and tools" src='https://images.unsplash.com/photo-1416339158484-9637228cc908?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80' wrapped/>
+                                    <Modal.Description>
                                     {this.state.edit ?  this.renderEdit() : this.renderDescription()}
+                                    <ul>
+                                        {this.renderTasks()}
+                                    </ul>   
+                                    </Modal.Description>
                                 </Modal.Content>
+
+
                             </Modal>
                         </div>
                     </div>

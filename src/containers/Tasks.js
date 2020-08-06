@@ -9,14 +9,14 @@ import TasksModal from '../components/tasks/TasksModal';
 
 class Tasks extends Component{
     state = {
-        tasks: []
+        tasks: ["first", "", "", "", "", "", "", "", "", "", "", ""]
     }
 
     render(){
         return (
             <>
             {console.log(this.props.match)}
-            <TasksModal match={this.props.match} index={this.props.projects.findIndex( project => project.id === this.props.match.params.id)} editProject={this.props.editProject} addTask={this.props.addTask} projects={this.props.projects}/>
+            <TasksModal tasks={this.state.tasks} match={this.props.match} index={this.props.projects.findIndex( project => project.id === this.props.match.params.id)} editProject={this.props.editProject} addTask={this.props.addTask} projects={this.props.projects}/>
             </>
         )
     }
