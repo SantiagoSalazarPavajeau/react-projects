@@ -10,6 +10,10 @@ const TasksModal = (props) => {
     let title = props.projects[index].title
     let description = props.projects[index].description
 
+    let handleSubmit = (e) => {
+        this.props.editProject(e.target.value)
+    }
+
     return( 
             <>
             <div className="ui grid container">
@@ -21,10 +25,10 @@ const TasksModal = (props) => {
                                     <Modal.Description>
                                         <Header>{title}</Header>
                                             {description}
-                                            <h3>Requested project ID: {match.params.id}</h3>
-                                            <h3>Requested project ID: {index}</h3>
-                                        
-
+                                            {/* <h3>Requested project ID: {match.params.id}</h3>
+                                            <h3>Requested project ID: {index}</h3> */}
+                                            
+                                        <Button onClick={e => handleSubmit(e)} >Submit</Button>                               
                                         <Button onClick={props.history.goBack} >Back</Button>                               
                                                 {console.log(props)}
                                     </Modal.Description>

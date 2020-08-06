@@ -28,8 +28,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        addTask: dispatch({type: 'ADD_TASK'}, task),
-        editProject: (project) => dispatch({type: 'EDIT_PROJECT'}, project)
+        addTask: task => dispatch({type: 'ADD_TASK', task}),
+        editProject: (project) => dispatch({type: 'EDIT_PROJECT', project})
 
     }
 }

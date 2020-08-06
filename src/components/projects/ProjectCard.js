@@ -58,7 +58,10 @@ export default class ProjectCard extends Component{
               </div>
               <div className="extra content">
                 <div className="left floated right aligned six wide column">
-                        <Button basic icon='pencil' onClick={event => this.handleDeleteClick(event)}/>
+                        
+                        <Link className="header" to={`/projects/${this.props.id}`}>
+                          <Button basic icon='pencil'/>
+                        </Link> 
                         <Button basic icon='trash' onClick={event => this.handleDeleteClick(event)}>
                         {/* <i aria-hidden="true" className="trash alternate icon right"></i> */}
                       </Button>
