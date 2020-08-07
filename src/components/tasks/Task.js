@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Button, Dropdown, Label } from 'semantic-ui-react';
+import { Input, Button, Dropdown, Label, TextArea, Form } from 'semantic-ui-react';
 
 
 class Task extends Component{
@@ -24,8 +24,17 @@ class Task extends Component{
         return (
             <>
             <br></br>
-            <Button onClick={this.makeCompleted} icon="check circle"></Button>  <Input value={this.props.description} placeholder={this.props.description}></Input> 
-            <Dropdown placeholder='Assign to...' search selection options={friendOptions} />
+            {/* <Form>  */}
+            <Input size="small" labelPosition='right' type='text' value={this.props.description} placeholder={this.props.description}>
+                <Label><Button onClick={this.makeCompleted} icon="check circle"></Button></Label>
+                <input />
+                <Label><Dropdown placeholder='Assign to...' search selection options={friendOptions} /></Label>
+            </Input>
+                {/* <Input size="large" label={<Button onClick={this.makeCompleted} icon="check circle"></Button>} labelPosition='left' value={this.props.description} placeholder={this.props.description}/>  */}
+            {/* </Form> */}
+            {/* <Dropdown placeholder='Assign to...' search selection options={friendOptions} /> */}
+
+            
             <br></br>
             </>
 
@@ -36,7 +45,13 @@ class Task extends Component{
         return (
             <>
             <br></br>
-            <Button onClick={this.makeInProgress} icon="redo"></Button>   <Label color='green' image>{this.props.description}</Label>
+            <Button onClick={this.makeInProgress} icon="redo"></Button>   
+            <Label color='green' image>
+            <img src='https://api.adorable.io/avatars/77/stevie@adorable.io.png' />
+                completed by Jenny
+            <Label.Detail>{this.props.description}</Label.Detail>
+
+            </Label>
             <br></br>
             </>
         )     

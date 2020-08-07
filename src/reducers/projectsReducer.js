@@ -74,8 +74,18 @@ let projects = [{
 
 
 let tasks = [{ 
-    description: "Add tasks functionality", 
+    description: "Add relationship 'task belongs to project'", 
     projectId: '1', 
+    peopleId: '1', 
+    completed: false
+},{ 
+    description: "Increase size of form field", 
+    projectId: '1', 
+    peopleId: '1', 
+    completed: false
+},{ 
+    description: "I dont belong in project 1", 
+    projectId: '2', 
     peopleId: '1', 
     completed: false
 }]
