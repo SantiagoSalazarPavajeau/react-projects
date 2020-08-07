@@ -19,6 +19,10 @@ class Task extends Component{
             toggle: false
         })
     }
+
+    handleDelete = () => {
+        this.props.deleteTask(this.props.id)
+    }
     
     renderInProgress = () => {
         return (
@@ -27,9 +31,11 @@ class Task extends Component{
             <Form> 
                 <Input size="small" labelPosition='right' type='text' value={this.props.description} placeholder={this.props.description}>
                 <Button onClick={this.makeCompleted} icon="check circle"></Button>
+                <Dropdown placeholder='Assign to...' search selection options={friendOptions} />
 
                     <input />
-                    <Dropdown placeholder='Assign to...' search selection options={friendOptions} />
+                    <Button onClick={this.handleDelete} icon="trash"></Button>
+
                 </Input>
             </Form>
 

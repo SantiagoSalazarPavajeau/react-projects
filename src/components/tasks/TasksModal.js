@@ -63,7 +63,7 @@ class TasksModal extends Component{
 
     renderTasks = () => {// filter tasks for this project only
         const projectTasks = this.props.tasks.filter(task => task.projectId === this.state.id)
-        return projectTasks.map(task => <Task description={task.description} completed={task.completed}/>)
+        return projectTasks.map(task => <Task deleteTask={this.props.deleteTask} id={task.id} description={task.description} completed={task.completed}/>)
     }
 
     renderDescription = () => {

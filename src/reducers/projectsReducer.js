@@ -36,7 +36,8 @@ export default function projectsReducer(
             case 'ADD_TASK':
                 // console.log(state.tasks)
                 let task = {
-                    description: "New task...", 
+                    description: "New task...",
+                    id: cuid(),
                     projectId: action.projectId, 
                     peopleId: null, 
                     completed: false
@@ -44,6 +45,10 @@ export default function projectsReducer(
                 // console.log(task)
                 return{
                     ...state, tasks: [...state.tasks.concat(task)]
+                }
+            case 'DELETE_TASK':
+                return{
+                    ...state, tasks: [...state.tasks.filter(task => task.id !== action.id)]
                 }
             default:
                 return state
@@ -75,17 +80,20 @@ let projects = [{
 
 
 let tasks = [{ 
-    description: "Add relationship 'task belongs to project'", 
+    description: "Add relationship 'task belongs to project'",
+    id: '1',
     projectId: '1', 
     peopleId: '1', 
     completed: false
 },{ 
     description: "Increase size of form field", 
+    id: '2',
     projectId: '1', 
     peopleId: '1', 
     completed: false
 },{ 
-    description: "I dont belong in project 1", 
+    description: "I dont belong in project 1",
+    id: '3',
     projectId: '2', 
     peopleId: '1', 
     completed: false
