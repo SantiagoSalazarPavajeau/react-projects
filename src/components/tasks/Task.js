@@ -1,7 +1,59 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Input, Button, Dropdown, Label } from 'semantic-ui-react';
 
-const friendOptions = [
+
+class Task extends Component{
+
+    state = {
+        toggle: this.props.completed
+    }
+
+    makeCompleted = () => {
+        this.setState({
+            toggle: true
+        })
+    }
+
+    makeInProgress = () => {
+        this.setState({
+            toggle: false
+        })
+    }
+    
+    renderInProgress = () => {
+        return (
+            <>
+            <br></br>
+            <Button onClick={this.makeCompleted} icon="check circle"></Button>  <Input value={this.props.description} placeholder={this.props.description}></Input> 
+            <Dropdown placeholder='Assign to...' search selection options={friendOptions} />
+            <br></br>
+            </>
+
+        )
+    }
+    
+    renderCompleted = () => {
+        return (
+            <>
+            <br></br>
+            <Button onClick={this.makeInProgress} icon="redo"></Button>   <Label color='green' image>{this.props.description}</Label>
+            <br></br>
+            </>
+        )     
+     }
+    
+    render(){
+        return (
+            <>
+            {this.state.toggle ? this.renderCompleted() : this.renderInProgress()}
+            </>
+        )
+    }
+}
+
+export default Task
+
+let friendOptions = [
     {
       key: 'Jenny Hess',
       text: 'Jenny Hess',
@@ -27,45 +79,3 @@ const friendOptions = [
       image: { avatar: true, src: 'https://api.adorable.io/avatars/77/christian@adorable.io.png' },
     }
   ]
-
-const Task = ({description, completed}) => {
-    let toggle = completed
-    const makeCompleted = () => {
-        toggle = true
-        console.log(toggle)
-    }
-
-    const makeInProgress = () => {
-        toggle = false
-        console.log(toggle)
-    }
-    
-    const renderInProgress = () => {
-        return (
-            <>
-            <br></br>
-            <Button onClick={makeCompleted} icon="check circle"></Button>  <Input value={description} placeholder={description}></Input> 
-            <Dropdown placeholder='Assign to...' search selection options={friendOptions} />
-            <br></br>
-            </>
-
-        )
-    }
-     const renderCompleted = () => {
-        return (
-            <>
-            <br></br>
-            <Button onClick={makeInProgress} icon="check circle"></Button>   <Label color='green' image>{description}</Label>
-            <br></br>
-            </>
-        )     
-     }
-    
-    return  (
-            <>
-            {toggle ? renderCompleted() : renderInProgress()}
-            </>
-    )
-}
-
-export default Task

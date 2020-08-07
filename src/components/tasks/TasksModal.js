@@ -62,7 +62,7 @@ class TasksModal extends Component{
     }
 
     renderTasks = () => {
-        return this.props.tasks.map(task => <Task description={"hello"} completed={task.completed}/>)
+        return this.props.tasks.map(task => <Task description={task.description} completed={task.completed}/>)
     }
 
     renderDescription = () => {
