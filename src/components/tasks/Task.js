@@ -63,7 +63,7 @@ const Task = ({description, completed}) => {
     
     return  (
             <>
-            {toggle ?  renderInProgress() : renderCompleted()}
+            {toggle ? renderCompleted() : renderInProgress()}
             </>
     )
 }

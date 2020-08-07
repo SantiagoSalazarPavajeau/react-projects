@@ -9,7 +9,8 @@ let started = `Started ${months[month]} ${day}, ${year}`
 
 export default function projectsReducer(
     state = {
-        projects: projects
+        projects: projects,
+        tasks: tasks
     },
     action){
         switch(action.type){
@@ -33,8 +34,15 @@ export default function projectsReducer(
                     ...state, projects: [...state.projects.slice(0, index), action.project, ...state.projects.slice(index + 1)]
                 }
             case 'ADD_TASK':
+                console.log(state.tasks)
+                let task = {
+                    description: "New task...", 
+                    projectId: action.projectId, 
+                    peopleId: null, 
+                    completed: false
+                }
                 return{
-                    ...state, tasks: [...state.tasks.concat(action.task)]
+                    ...state, tasks: [...state.tasks.concat(task)]
                 }
             default:
                 return state
@@ -61,7 +69,13 @@ let projects = [{
     title: 'Sinatra', 
     started: started,
     description: 'Build with project requirements',
-    id: cuid()
+    id: '4'
 }]
 
 
+let tasks = [{ 
+    description: "Add tasks functionality", 
+    projectId: '1', 
+    peopleId: '1', 
+    completed: false
+}]

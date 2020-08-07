@@ -11,8 +11,7 @@ class TasksModal extends Component{
         started: this.props.projects[this.props.index].started,
         description: this.props.projects[this.props.index].description,
         id: this.props.projects[this.props.index].id,
-        edit: false,
-        tasks: this.props.tasks
+        edit: false
     }
     
 
@@ -63,7 +62,7 @@ class TasksModal extends Component{
     }
 
     renderTasks = () => {
-        return this.state.tasks.map(task => <Task description={"hello"} completed={task.completed}/>)
+        return this.props.tasks.map(task => <Task description={"hello"} completed={task.completed}/>)
     }
 
     renderDescription = () => {
@@ -75,6 +74,11 @@ class TasksModal extends Component{
                     <Button content="Exit" labelPosition='right' icon="close icon" onClick={this.props.history.goBack} ></Button>      
             </>          
         )
+    }
+
+    handleAddTask = () => {
+        this.props.addTask(this.state.id)
+        console.log(this.state.id)
     }
 
     render(){
@@ -89,6 +93,7 @@ class TasksModal extends Component{
                                     <Modal.Description>
                                     {this.state.edit ?  this.renderEdit() : this.renderDescription()}
                                     <Divider horizontal>Tasks</Divider>
+                                    <Button onClick={this.handleAddTask}>Add Task</Button>
                                     <br></br>
                                     {this.renderTasks()}
 
