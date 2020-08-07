@@ -26,9 +26,10 @@ class Task extends Component{
             <br></br>
             <Form> 
                 <Input size="small" labelPosition='right' type='text' value={this.props.description} placeholder={this.props.description}>
-                    <Label><Button onClick={this.makeCompleted} icon="check circle"></Button></Label>
+                <Button onClick={this.makeCompleted} icon="check circle"></Button>
+
                     <input />
-                    <Label><Dropdown placeholder='Assign to...' search selection options={friendOptions} /></Label>
+                    <Dropdown placeholder='Assign to...' search selection options={friendOptions} />
                 </Input>
             </Form>
 
