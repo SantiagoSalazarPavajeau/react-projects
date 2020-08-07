@@ -34,13 +34,14 @@ export default function projectsReducer(
                     ...state, projects: [...state.projects.slice(0, index), action.project, ...state.projects.slice(index + 1)]
                 }
             case 'ADD_TASK':
-                console.log(state.tasks)
+                // console.log(state.tasks)
                 let task = {
                     description: "New task...", 
                     projectId: action.projectId, 
                     peopleId: null, 
                     completed: false
                 }
+                // console.log(task)
                 return{
                     ...state, tasks: [...state.tasks.concat(task)]
                 }

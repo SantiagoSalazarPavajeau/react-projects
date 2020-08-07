@@ -39,7 +39,7 @@ class TasksModal extends Component{
         this.setState({
             edit: false
         })
-        console.log(this.props.projects)
+        // console.log(this.props.projects)
     }
 
     handleOnChange = (event) => {
@@ -61,8 +61,9 @@ class TasksModal extends Component{
         )
     }
 
-    renderTasks = () => {
-        return this.props.tasks.map(task => <Task description={task.description} completed={task.completed}/>)
+    renderTasks = () => {// filter tasks for this project only
+        const projectTasks = this.props.tasks.filter(task => task.projectId === this.state.id)
+        return projectTasks.map(task => <Task description={task.description} completed={task.completed}/>)
     }
 
     renderDescription = () => {
@@ -78,7 +79,7 @@ class TasksModal extends Component{
 
     handleAddTask = () => {
         this.props.addTask(this.state.id)
-        console.log(this.state.id)
+        // console.log(this.state.id)
     }
 
     render(){

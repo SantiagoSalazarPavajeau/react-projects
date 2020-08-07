@@ -24,17 +24,16 @@ class Task extends Component{
         return (
             <>
             <br></br>
-            {/* <Form>  */}
-            <Input size="small" labelPosition='right' type='text' value={this.props.description} placeholder={this.props.description}>
-                <Label><Button onClick={this.makeCompleted} icon="check circle"></Button></Label>
-                <input />
-                <Label><Dropdown placeholder='Assign to...' search selection options={friendOptions} /></Label>
-            </Input>
-                {/* <Input size="large" label={<Button onClick={this.makeCompleted} icon="check circle"></Button>} labelPosition='left' value={this.props.description} placeholder={this.props.description}/>  */}
-            {/* </Form> */}
-            {/* <Dropdown placeholder='Assign to...' search selection options={friendOptions} /> */}
+            <Form> 
+                <Input size="small" labelPosition='right' type='text' value={this.props.description} placeholder={this.props.description}>
+                    <Label><Button onClick={this.makeCompleted} icon="check circle"></Button></Label>
+                    <input />
+                    <Label><Dropdown placeholder='Assign to...' search selection options={friendOptions} /></Label>
+                </Input>
+            </Form>
 
-            
+                {/* <Input size="large" label={<Button onClick={this.makeCompleted} icon="check circle"></Button>} labelPosition='left' value={this.props.description} placeholder={this.props.description}/>  */}
+            {/* <Dropdown placeholder='Assign to...' search selection options={friendOptions} /> */}
             <br></br>
             </>
 
