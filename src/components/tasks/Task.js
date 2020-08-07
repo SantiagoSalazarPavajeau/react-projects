@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Button, Dropdown } from 'semantic-ui-react';
+import { Input, Button, Dropdown, Label } from 'semantic-ui-react';
 
 const friendOptions = [
     {
@@ -29,16 +29,23 @@ const friendOptions = [
   ]
 
 const Task = ({description, completed}) => {
-    const handleComplete = () => {
-        completed = !completed
+    let toggle = completed
+    const makeCompleted = () => {
+        toggle = true
+        console.log(toggle)
+    }
+
+    const makeInProgress = () => {
+        toggle = false
+        console.log(toggle)
     }
     
     const renderInProgress = () => {
         return (
             <>
             <br></br>
-            <Button onClick={handleComplete} icon="check circle"></Button>  <Input value={description} placeholder={description}></Input> 
-            <Dropdown placeholder='People' search selection options={friendOptions} />
+            <Button onClick={makeCompleted} icon="check circle"></Button>  <Input value={description} placeholder={description}></Input> 
+            <Dropdown placeholder='Assign to...' search selection options={friendOptions} />
             <br></br>
             </>
 
@@ -48,8 +55,7 @@ const Task = ({description, completed}) => {
         return (
             <>
             <br></br>
-            <Button onClick={handleComplete} icon="check circle"></Button>  <Input value={description} placeholder={description}></Input> 
-            <Dropdown placeholder='People' search selection options={friendOptions} />
+            <Button onClick={makeInProgress} icon="check circle"></Button>   <Label color='green' image>{description}</Label>
             <br></br>
             </>
         )     
@@ -57,7 +63,7 @@ const Task = ({description, completed}) => {
     
     return  (
             <>
-            {completed ? renderCompleted() : renderInProgress()}
+            {toggle ?  renderInProgress() : renderCompleted()}
             </>
     )
 }

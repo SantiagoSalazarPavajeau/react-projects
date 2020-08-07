@@ -63,7 +63,7 @@ class TasksModal extends Component{
     }
 
     renderTasks = () => {
-        return this.state.tasks.map(task => <Task description={"First"} completed={true}/>)
+        return this.state.tasks.map(task => <Task description={"hello"} completed={task.completed}/>)
     }
 
     renderDescription = () => {
@@ -89,9 +89,9 @@ class TasksModal extends Component{
                                     <Modal.Description>
                                     {this.state.edit ?  this.renderEdit() : this.renderDescription()}
                                     <Divider horizontal>Tasks</Divider>
-
-                                    {this.renderTasks()}
                                     <br></br>
+                                    {this.renderTasks()}
+
                                     </Modal.Description>
                                 </Modal.Content>
 
