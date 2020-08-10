@@ -5,39 +5,56 @@ import { Input, Button, Dropdown, Label, TextArea, Form } from 'semantic-ui-reac
 class Task extends Component{
 
     state = {
-        toggle: this.props.completed
+        description: this.props.description,
+        id: this.props.id,
+        projectId: this.props.projectId,
+        completed: this.props.completed,
+        people: this.props.people,
+        peopleId: this.props.peopleId
     }
 
     makeCompleted = () => {
         this.setState({
-            toggle: true
+            completed: true
         })
     }
 
     makeInProgress = () => {
         this.setState({
-            toggle: false
+            completed: false
         })
     }
 
     handleDelete = () => {
         this.props.deleteTask(this.props.id)
     }
+
+    handleEdit = (e) => {
+        this.setState({
+            description: e.target.innerText // use onchange for dropdowns/select and innertext instead of value
+        }) // needs to send all the task in the state to set on edit in reducer in one shot
+    }
+
+    assignTo = (e) => {
+        this.setState({
+            peopleId: e.target.innerText // use onchange for dropdowns/select and innertext instead of value
+        })
+
+    }
     
     renderInProgress = () => {
         return (
             <>
             <br></br>
-            <Form> 
-                <Input size="small" labelPosition='right' type='text' value={this.props.description} placeholder={this.props.description}>
+                <Input  onBlur={ e => this.handleEdit(e)} size="small" labelPosition='right' type='text' value={this.props.description} placeholder={this.props.description}>
                 <Button onClick={this.makeCompleted} icon="check circle"></Button>
-                <Dropdown placeholder='Assign to...' search selection options={friendOptions} />
+                {/* {console.log(this.state.completed)} */}
+                <Dropdown placeholder='Assign to...' onChange={e => this.assignTo(e)} value={this.props.peopleId} search selection options={this.props.people} />
 
-                    <input />
+                    <input onChange={event => this.setState({description: event.target.value})} value={this.state.description}/>
                     <Button onClick={this.handleDelete} icon="trash"></Button>
 
                 </Input>
-            </Form>
 
                 {/* <Input size="large" label={<Button onClick={this.makeCompleted} icon="check circle"></Button>} labelPosition='left' value={this.props.description} placeholder={this.props.description}/>  */}
             {/* <Dropdown placeholder='Assign to...' search selection options={friendOptions} /> */}
@@ -53,6 +70,8 @@ class Task extends Component{
             <br></br>
             <Button onClick={this.makeInProgress} icon="redo"></Button>   
             <Label color='green' image>
+            {console.log(this.state.completed)}
+
             <img src='https://api.adorable.io/avatars/77/stevie@adorable.io.png' />
                 completed by Jenny
             <Label.Detail>{this.props.description}</Label.Detail>
@@ -66,7 +85,10 @@ class Task extends Component{
     render(){
         return (
             <>
-            {this.state.toggle ? this.renderCompleted() : this.renderInProgress()}
+            <Form onClick={this.handleEdit}> 
+            {this.state.completed ? this.renderCompleted() : this.renderInProgress()}
+            </Form>
+
             </>
         )
     }
@@ -74,29 +96,4 @@ class Task extends Component{
 
 export default Task
 
-let friendOptions = [
-    {
-      key: 'Jenny Hess',
-      text: 'Jenny Hess',
-      value: 'Jenny Hess',
-      image: { avatar: true, src: 'https://api.adorable.io/avatars/77/jenny@adorable.io.png' },
-    },
-    {
-      key: 'Elliot Fu',
-      text: 'Elliot Fu',
-      value: 'Elliot Fu',
-      image: { avatar: true, src: 'https://api.adorable.io/avatars/77/elliot@adorable.io.png' },
-    },
-    {
-      key: 'Stevie Feliciano',
-      text: 'Stevie Feliciano',
-      value: 'Stevie Feliciano',
-      image: { avatar: true, src: 'https://api.adorable.io/avatars/77/stevie@adorable.io.png' },
-    },
-    {
-      key: 'Christian',
-      text: 'Christian',
-      value: 'Christian',
-      image: { avatar: true, src: 'https://api.adorable.io/avatars/77/christian@adorable.io.png' },
-    }
-  ]
+

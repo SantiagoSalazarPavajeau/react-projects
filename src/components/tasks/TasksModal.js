@@ -63,8 +63,9 @@ class TasksModal extends Component{
 
     renderTasks = () => {// filter tasks for this project only
         const projectTasks = this.props.tasks.filter(task => task.projectId === this.state.id)
-        return projectTasks.map(task => <Task deleteTask={this.props.deleteTask} id={task.id} description={task.description} completed={task.completed}/>)
+        return projectTasks.map(task => <Task key={task.id} people={this.props.people} peopleId={task.peopleId} deleteTask={this.props.deleteTask} projectId={this.state.id} editTask={this.props.editTask} id={task.id} description={task.description} completed={task.completed}/>)
     }
+
 
     renderDescription = () => {
         return (
@@ -72,7 +73,7 @@ class TasksModal extends Component{
                 <Header>{this.state.title}</Header>
                     <p>{this.state.description}</p>
                     <Button content="Edit" labelPosition='right' icon="pencil" onClick={e => this.startEdit(e)} ></Button>                               
-                    <Button content="Exit" labelPosition='right' icon="close icon" onClick={this.props.history.goBack} ></Button>      
+                    <Button content="Exit" labelPosition='right' icon="close" onClick={this.props.history.goBack} ></Button>      
             </>          
         )
     }
@@ -97,7 +98,7 @@ class TasksModal extends Component{
                                     <Button onClick={this.handleAddTask}>Add Task</Button>
                                     <br></br>
                                     {this.renderTasks()}
-
+                                    
                                     </Modal.Description>
                                 </Modal.Content>
 
