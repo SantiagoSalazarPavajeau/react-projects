@@ -10,6 +10,8 @@ import NavBar from './components/NavBar';
 import Projects from './containers/Projects';
 import Profile from './components/Profile';
 import Tasks from './containers/Tasks';
+import People from './containers/People';
+
 
 
 
@@ -39,6 +41,10 @@ function App() {
 
                     <Route exact path={`/projects/:id`} render={routerProps => <Tasks {...routerProps}/>} >
                       {/* <Tasks/> */}
+                    </Route>
+
+                    <Route exact path={`/people`}>
+                      <People/>
                     </Route>
                     
                   {/* </Switch>  */}
