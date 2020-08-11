@@ -1,13 +1,20 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
+import Person from '../components/people/Person'
+
 class People extends Component{
+
+    renderPeople = () => {
+        return this.props.people.map(person => <Person key={person.id} name={person.name} image={person.image}/>)
+    }
     render(){
         return (
-        <h1>
+            <div className="ui grid container">
             {console.log(this.props.people)}
-            People
-        </h1>)
+            {this.renderPeople()}
+         </div>
+        )
     }
 }
 

@@ -2,22 +2,22 @@ export default function people(state = [
     {
       name: 'Jenny Hess',
       id: '1',
-      image: { avatar: true, src: 'https://api.adorable.io/avatars/77/jenny@adorable.io.png' },
+      image: { avatar: true, src: 'https://api.adorable.io/avatars/77' },
     },
     {
-      key: 'Elliot Fu',
+      name: 'Elliot Fu',
       id: '2',
-      image: { avatar: true, src: 'https://api.adorable.io/avatars/77/elliot@adorable.io.png' },
+      image: { avatar: true, src: 'https://api.adorable.io/avatars/78' },
     },
     {
-      key: 'Stevie Feliciano',
+      name: 'Stevie Feliciano',
       id: '3',
-      image: { avatar: true, src: 'https://api.adorable.io/avatars/77/stevie@adorable.io.png' },
+      image: { avatar: true, src: 'https://api.adorable.io/avatars/79' },
     },
     {
-      key: 'Christian',
+      name: 'Christian',
       id: '4',
-      image: { avatar: true, src: 'https://api.adorable.io/avatars/77/christian@adorable.io.png' },
+      image: { avatar: true, src: 'https://api.adorable.io/avatars/80' },
     }
   ], action){
     switch(action.type){

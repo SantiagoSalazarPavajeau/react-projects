@@ -41,7 +41,6 @@ class Projects extends Component{
     render(){
         return(
             <>
-
                     <div className="ui grid container">
                         <div className="eight wide column" >
                             <ProjectInput addProject={this.props.addProject}/>
