@@ -37,9 +37,8 @@ export default function projects(
                     description: action.project.description,
                     id: cuid()
                 }
-                return{
-                    ...state, projects: [...state.projects.concat(project)]
-                }
+                return [...state, project]
+                
             case 'DELETE_PROJECT':
                 return{
                     ...state, projects: [...state.projects.filter(project => project.id !== action.id)]

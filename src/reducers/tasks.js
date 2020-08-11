@@ -31,9 +31,9 @@ export default function tasks(state = [{
                     completed: false
                 }
                 // console.log(task)
-                return{
-                    ...state, tasks: [...state.tasks.concat(task)]
-                }
+                return[
+                    ...state.concat(task)
+                ]
             case 'DELETE_TASK':
                 return{
                     ...state, tasks: [...state.tasks.filter(task => task.id !== action.id)]

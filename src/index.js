@@ -8,8 +8,10 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'semantic-ui-css/semantic.min.css'
 
-export const store = createStore(reducer);
-console.log(store.getState())
+export const store = createStore(reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
+// console.log(store.getState())
 
 ReactDOM.render(
   <Provider store={store}>

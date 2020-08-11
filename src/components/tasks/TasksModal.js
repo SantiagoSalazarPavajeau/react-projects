@@ -98,6 +98,7 @@ class TasksModal extends Component{
                                     <Button onClick={this.handleAddTask}>Add Task</Button>
                                     <br></br>
                                     {this.renderTasks()}
+                                    {/* {console.log(this.props.tasks.filter(task => task.projectId === this.state.id))} */}
                                     
                                     </Modal.Description>
                                 </Modal.Content>

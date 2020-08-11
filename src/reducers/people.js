@@ -36,9 +36,7 @@ export default function people(state = [
                         id: '1',
                         image: { avatar: true, src: 'https://api.adorable.io/avatars/70' },
                 }
-                return{
-                    ...state, people: [...state, state.people.concat(person)]
-                }
+                return [...state, person]
         default:
             return state
     }

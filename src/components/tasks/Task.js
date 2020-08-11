@@ -89,7 +89,7 @@ class Task extends Component{
             {/* <Form>  */}
             {this.state.completed ? this.renderCompleted() : this.renderInProgress()}
             {/* </Form> */}
-            {console.log(this.state)}
+            {/* {console.log(this.state)} */}
             </>
         )
     }
