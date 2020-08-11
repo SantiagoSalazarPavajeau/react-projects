@@ -7,7 +7,7 @@ export default class Profile extends Component{
         return(
             <>
                 <Header as='h2' icon textAlign='center'>
-                    <i aria-hidden="true" class="users icon left"></i>
+                    <i aria-hidden="true" className="users icon left"></i>
                     <Header.Content>Projects</Header.Content>
                 </Header>
                 <Header as='h2' icon textAlign='center'>

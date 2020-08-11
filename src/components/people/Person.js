@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Card, Icon, Image } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 
 
 export default class Person extends Component{
@@ -11,12 +11,12 @@ export default class Person extends Component{
             <div className="four wide column" >
                 {/* {console.log(this.props.tasks)}  */}
                 {/* See if we are having access to the store and the tasks */}
-                {console.log(myTasks)}
+                {/* {console.log(myTasks)} */}
                  <Card
                     image={this.props.image.src}
                     header={this.props.name}
                     meta='Software Engineer'
-                    description={myTasks.map(task => <p>- {task.description}</p>)}
+                    description={<ul>{myTasks.map(task => <li key={task.id}> {task.description} {task.completed ? <p>(Completed)</p> : <p>(InProgress)</p>}</li>)}</ul>}
                 />
             </div>
         )
