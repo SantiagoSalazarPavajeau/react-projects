@@ -6,7 +6,7 @@ export default function tasks(state = [{
     id: '1',
     projectId: '1', 
     peopleId: 'Jenny Hess', 
-    completed: null
+    completed: true
 },{ 
     description: "Fix the event mess from the tasks input area", 
     id: '2',
@@ -26,9 +26,9 @@ export default function tasks(state = [{
                 const task = {
                     description: "New task...",
                     id: cuid(),
-                    projectId: action.projectId, 
-                    peopleId: null, 
-                    completed: null
+                    projectId: action.projectId,
+                    peopleId: 'Someone', 
+                    completed: false
                 }
                 // console.log(task)
                 return{

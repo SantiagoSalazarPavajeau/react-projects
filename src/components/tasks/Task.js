@@ -9,7 +9,6 @@ class Task extends Component{
         id: this.props.id,
         projectId: this.props.projectId,
         completed: this.props.completed,
-        people: this.props.people,
         peopleId: this.props.peopleId
     }
 
@@ -25,21 +24,18 @@ class Task extends Component{
         })
     }
 
-    handleDelete = () => {
-        this.props.deleteTask(this.props.id)
+    handleSave = () => {
+        this.props.editTask(this.state)
     }
 
-    handleEdit = (e) => {
-        this.setState({
-            description: e.target.innerText // use onchange for dropdowns/select and innertext instead of value
-        }) // needs to send all the task in the state to set on edit in reducer in one shot
+    handleDelete = () => {
+        this.props.deleteTask(this.props.id)
     }
 
     assignTo = (e) => {
         this.setState({
             peopleId: e.target.innerText // use onchange for dropdowns/select and innertext instead of value
         })
-
     }
     
     renderInProgress = () => {
@@ -58,11 +54,9 @@ class Task extends Component{
                 </Input>
             <br></br>
 
-                Assigned to: <Dropdown value={this.state.peopleId} onChange={e => this.assignTo(e)}  selection options={this.state.people} />
+                Assigned to: <Dropdown value={this.state.peopleId} onChange={e => this.assignTo(e)}  selection options={this.props.people} />
             <br></br>
 
-                {/* <Input size="large" label={<Button onClick={this.makeCompleted} icon="check circle"></Button>} labelPosition='left' value={this.props.description} placeholder={this.props.description}/>  */}
-            {/* <Dropdown placeholder='Assign to...' search selection options={friendOptions} /> */}
             <br></br>
             <br></br>
             <br></br>
@@ -95,7 +89,7 @@ class Task extends Component{
             {/* <Form>  */}
             {this.state.completed ? this.renderCompleted() : this.renderInProgress()}
             {/* </Form> */}
-            {console.log(this.state.completed)}
+            {console.log(this.state)}
             </>
         )
     }
