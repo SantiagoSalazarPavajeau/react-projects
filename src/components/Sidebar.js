@@ -18,8 +18,8 @@ export default class SideBar extends Component{
                         Projects
                 </Link>
                 <Link to="/calendar" className="item" >
-                        <i aria-hidden="true" className="calendar icon"></i>
-                        Calendar
+                        <i aria-hidden="true" className="users icon"></i>
+                        People
                 </Link>
             </div>
         </div>
