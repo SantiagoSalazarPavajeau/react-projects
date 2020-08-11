@@ -47,7 +47,7 @@ class Task extends Component{
                 <Input  size="small" labelPosition='right' type='text' value={this.state.description} placeholder={this.state.description}>
 
                 <TextArea onChange={event => this.setState({description: event.target.value})} value={this.state.description} rows="4" cols="70"/>
-                <Button onClick={this.makeCompleted} icon="save"></Button>
+                <Button onClick={this.handleSave} icon="save"></Button>
                 <Button onClick={this.makeCompleted} icon="check circle"></Button>
                 <Button onClick={this.handleDelete} icon="trash"></Button>
 
@@ -75,6 +75,7 @@ class Task extends Component{
             <Label.Detail>{this.props.description}</Label.Detail>
 
             </Label>
+            <Button onClick={this.handleSave} icon="save"></Button>
             <Button onClick={this.makeInProgress} icon="redo"></Button>   
             <Button onClick={this.handleDelete} icon="trash"></Button>
 
@@ -89,7 +90,7 @@ class Task extends Component{
             {/* <Form>  */}
             {this.state.completed ? this.renderCompleted() : this.renderInProgress()}
             {/* </Form> */}
-            {/* {console.log(this.state)} */}
+            {console.log(this.state)}
             </>
         )
     }

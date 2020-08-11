@@ -39,11 +39,9 @@ export default function tasks(state = [{
                     ...state, tasks: [...state.tasks.filter(task => task.id !== action.id)]
                 }
             case 'EDIT_TASK':
-                let taskIndex = state.tasks.findIndex(task => task.id === action.task.id)
+                let taskIndex = state.findIndex(task => task.id === action.task.id)
                 console.log(action.task)
-                return{
-                    ...state, tasks: [...state.tasks.slice(0, taskIndex), action.task, ...state.tasks.slice(taskIndex + 1)]
-                }
+                return[...state.slice(0, taskIndex), action.task, ...state.slice(taskIndex + 1)]
             default:
                 return state;
     }
