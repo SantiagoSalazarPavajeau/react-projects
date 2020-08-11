@@ -70,7 +70,7 @@ class Task extends Component{
             <>
             <br></br>
             <Label color='green' image>
-            <img src='https://api.adorable.io/avatars/77/stevie@adorable.io.png' />
+            <img alt="Profile Pic" src='https://api.adorable.io/avatars/77/stevie@adorable.io.png' />
                 completed by {this.state.peopleId}
             <Label.Detail>{this.props.description}</Label.Detail>
 
@@ -87,10 +87,10 @@ class Task extends Component{
     render(){
         return (
             <>
-            {/* <Form>  */}
+            <Form> 
             {this.state.completed ? this.renderCompleted() : this.renderInProgress()}
-            {/* </Form> */}
-            {console.log(this.state)}
+            </Form>
+            {/* {console.log(this.state)} */}
             </>
         )
     }

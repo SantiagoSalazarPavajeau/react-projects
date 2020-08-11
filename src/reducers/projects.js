@@ -48,6 +48,9 @@ export default function projects(
                 return{
                     ...state, projects: [...state.projects.slice(0, projectIndex), action.project, ...state.projects.slice(projectIndex + 1)]
                 }
+            case 'LOAD_PROJECTS':
+                console.log(action.projects)
+                return state
             default:
                 return state
         }

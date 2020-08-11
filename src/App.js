@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route
@@ -16,44 +16,47 @@ import People from './containers/People';
 
 
 
-function App() {
-  return (
-    <>
-      <Router>
-        <div className="flexbox">
-            <SideBar/>
+class App extends Component{
+  
+  render(){
+    return (
+      <>
+        <Router>
+          <div className="flexbox">
+              <SideBar/>
 
-            <div className="main">
-            <NavBar/>
+              <div className="main">
+              <NavBar/>
 
 
-              <div className="ui container">
+                <div className="ui container">
 
-                  {/* <Switch> */}
-                    <Route exact path="/" render={()=> <Profile/>}>
-                    </Route>
-                    <Route exact path="/login">
-                      <p>Login</p>
-                    </Route>
+                    {/* <Switch> */}
+                      <Route exact path="/" render={()=> <Profile/>}>
+                      </Route>
+                      <Route exact path="/login">
+                        <p>Login</p>
+                      </Route>
 
-                    <Route exact path="/projects" render={routerProps => <Projects {...routerProps}/>}/> 
-                    {/* I sent router props to have acces to match */}
+                      <Route exact path="/projects" render={routerProps => <Projects {...routerProps}/>}/> 
+                      {/* I sent router props to have acces to match */}
 
-                    <Route exact path={`/projects/:id`} render={routerProps => <Tasks {...routerProps}/>} >
-                      {/* <Tasks/> */}
-                    </Route>
+                      <Route exact path={`/projects/:id`} render={routerProps => <Tasks {...routerProps}/>} >
+                        {/* <Tasks/> */}
+                      </Route>
 
-                    <Route exact path={`/people`}>
-                      <People/>
-                    </Route>
-                    
-                  {/* </Switch>  */}
-              </div>                                            
-            </div>
-         </div> 
-      </Router>
-    </>
-  );
+                      <Route exact path={`/people`}>
+                        <People/>
+                      </Route>
+                      
+                    {/* </Switch>  */}
+                </div>                                            
+              </div>
+          </div> 
+        </Router>
+      </>
+    );
+  }
 }
 
 export default App;

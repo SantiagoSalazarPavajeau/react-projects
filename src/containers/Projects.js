@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import '../App.css'
-import { Route } from "react-router-dom";
+import {fetchProjects} from '../actions/projectActions'
+
+// import { Route } from "react-router-dom";
 // import {   useRouteMatch } from 'react-router-dom';
 
 
 
 import ProjectInput from '../components/projects/ProjectInput';
 import ProjectCard from '../components/projects/ProjectCard';
-import TasksModal from '../components/tasks/TasksModal';
 
 
 
@@ -36,7 +37,7 @@ class Projects extends Component{
     }
 
     componentDidMount = () => {
-        
+        this.props.fetchProjects()
     }
 
     render(){
@@ -73,7 +74,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         addProject: (project) => dispatch({type: 'ADD_PROJECT', project}),
-        deleteProject: (id) => dispatch({type: 'DELETE_PROJECT', id})
+        deleteProject: (id) => dispatch({type: 'DELETE_PROJECT', id}),
+        fetchProjects: () => dispatch(fetchProjects())
     }
 }
 
