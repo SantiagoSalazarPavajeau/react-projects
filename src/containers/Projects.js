@@ -35,8 +35,9 @@ class Projects extends Component{
         })
     }
 
-    
-
+    componentDidMount = () => {
+        
+    }
 
     render(){
         return(

@@ -2,13 +2,13 @@ import cuid from 'cuid';
 
 
 export default function tasks(state = [{ 
-    description: "Save edits on tasks through event listeners",
+    description: "Apply Redux Thunk for async connection to backend",
     id: '1',
     projectId: '1', 
     peopleId: 'Jenny Hess', 
     completed: true
 },{ 
-    description: "Fix the event mess from the tasks input area", 
+    description: "Add difficulty attribute, and other dashboard widgets", 
     id: '2',
     projectId: '1', 
     peopleId: 'Elliot Fu', 

@@ -9,7 +9,7 @@ export default function projects(
     state = [{
         title: 'React-Redux',
         started: started,
-        description: 'Build edit and show button by linking it to the tasks modal. These links will have to be to the nested routes',
+        description: 'Apply Redux Thunk for async connection to backend',
         id: '1'
     }, {
         title: 'JavaScript-Rails', 
