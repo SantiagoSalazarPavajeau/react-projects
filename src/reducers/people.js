@@ -1,21 +1,30 @@
 export default function people(state = [
     {
-      name: 'Jenny Hess',
+      key: 'Jenny Hess',
+      value: 'Jenny Hess',
+      text: 'Jenny Hess',
+
       id: '1',
       image: { avatar: true, src: 'https://api.adorable.io/avatars/77' },
     },
     {
-      name: 'Elliot Fu',
+      key: 'Elliot Fu',
+      value: 'Elliot Fu',
+      text: 'Elliot Fu',
       id: '2',
       image: { avatar: true, src: 'https://api.adorable.io/avatars/78' },
     },
     {
-      name: 'Stevie Feliciano',
+      key: 'Stevie Feliciano',
+      value: 'Stevie Feliciano',
+      text: 'Stevie Feliciano',
       id: '3',
       image: { avatar: true, src: 'https://api.adorable.io/avatars/79' },
     },
     {
-      name: 'Christian',
+      key: 'Christian',
+      value: 'Christian',
+      text: 'Christian',
       id: '4',
       image: { avatar: true, src: 'https://api.adorable.io/avatars/80' },
     }
@@ -25,7 +34,7 @@ export default function people(state = [
                 const person = {
                         name: 'Santi',
                         id: '1',
-                        image: { avatar: true, src: 'https://api.adorable.io/avatars/77/jenny@adorable.io.png' },
+                        image: { avatar: true, src: 'https://api.adorable.io/avatars/70' },
                 }
                 return{
                     ...state, people: [...state, state.people.concat(person)]

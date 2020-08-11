@@ -5,13 +5,13 @@ export default function tasks(state = [{
     description: "Save edits on tasks through event listeners",
     id: '1',
     projectId: '1', 
-    peopleId: '1', 
+    peopleId: 'Jenny Hess', 
     completed: null
 },{ 
     description: "Fix the event mess from the tasks input area", 
     id: '2',
     projectId: '1', 
-    peopleId: '2', 
+    peopleId: 'Elliot Fu', 
     completed: false
 },{ 
     description: "I dont belong in project 1",

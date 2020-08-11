@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Button, Dropdown, Label, TextArea, Form } from 'semantic-ui-react';
+import { Input, Dropdown, Label, TextArea, Button, Form } from 'semantic-ui-react';
 
 
 class Task extends Component{
@@ -46,18 +46,25 @@ class Task extends Component{
         return (
             <>
             <br></br>
-                <Input  onBlur={ e => this.handleEdit(e)} size="small" labelPosition='right' type='text' value={this.props.description} placeholder={this.props.description}>
-                <Button onClick={this.makeCompleted} icon="check circle"></Button>
-                {/* {console.log(this.state.completed)} */}
-                <Dropdown placeholder='Assign to...' onChange={e => this.assignTo(e)} value={this.props.peopleId} search selection options={this.props.people} />
 
-                    <input onChange={event => this.setState({description: event.target.value})} value={this.state.description}/>
-                    <Button onClick={this.handleDelete} icon="trash"></Button>
+
+                <Input  size="small" labelPosition='right' type='text' value={this.state.description} placeholder={this.state.description}>
+
+                <TextArea onChange={event => this.setState({description: event.target.value})} value={this.state.description} rows="4" cols="70"/>
+                <Button onClick={this.makeCompleted} icon="save"></Button>
+                <Button onClick={this.makeCompleted} icon="check circle"></Button>
+                <Button onClick={this.handleDelete} icon="trash"></Button>
 
                 </Input>
+            <br></br>
+
+                Assigned to: <Dropdown value={this.state.peopleId} onChange={e => this.assignTo(e)}  selection options={this.state.people} />
+            <br></br>
 
                 {/* <Input size="large" label={<Button onClick={this.makeCompleted} icon="check circle"></Button>} labelPosition='left' value={this.props.description} placeholder={this.props.description}/>  */}
             {/* <Dropdown placeholder='Assign to...' search selection options={friendOptions} /> */}
+            <br></br>
+            <br></br>
             <br></br>
             </>
 
@@ -68,15 +75,15 @@ class Task extends Component{
         return (
             <>
             <br></br>
-            <Button onClick={this.makeInProgress} icon="redo"></Button>   
             <Label color='green' image>
-            {console.log(this.state.completed)}
-
             <img src='https://api.adorable.io/avatars/77/stevie@adorable.io.png' />
-                completed by Jenny
+                completed by {this.state.peopleId}
             <Label.Detail>{this.props.description}</Label.Detail>
 
             </Label>
+            <Button onClick={this.makeInProgress} icon="redo"></Button>   
+            <Button onClick={this.handleDelete} icon="trash"></Button>
+
             <br></br>
             </>
         )     
@@ -85,10 +92,10 @@ class Task extends Component{
     render(){
         return (
             <>
-            <Form onClick={this.handleEdit}> 
+            {/* <Form>  */}
             {this.state.completed ? this.renderCompleted() : this.renderInProgress()}
-            </Form>
-
+            {/* </Form> */}
+            {console.log(this.state.completed)}
             </>
         )
     }
