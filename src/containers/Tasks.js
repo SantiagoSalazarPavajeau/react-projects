@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import '../App.css'
 
 import TasksModal from '../components/tasks/TasksModal';
+import { editProject } from '../actions/projectActions';
 
 
 // nested route for tasks needs to be here
@@ -32,7 +33,7 @@ const mapDispatchToProps = dispatch => {
         addTask: projectId => dispatch({type: 'ADD_TASK', projectId}),
         deleteTask: id => dispatch({type: 'DELETE_TASK', id}),
         editTask: task => dispatch({type: 'EDIT_TASK', task}),
-        editProject: (project) => dispatch({type: 'EDIT_PROJECT', project})
+        editProject: project => dispatch(editProject(project))
 
     }
 }

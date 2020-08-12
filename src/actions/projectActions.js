@@ -1,4 +1,3 @@
-import projects from "../reducers/projects"
 
 export function fetchProjects(){
     return (dispatch) => {
@@ -28,8 +27,10 @@ export function saveProject(project){
     return (dispatch) => {
         fetch('http://localhost:4000/projects', configObj)
             .then(response => {return response.json()})
-            .then(projects => {
-                dispatch({type: 'ADD_PROJECT', project}) // a project can have data that references tasks and tasks have data that references people
+            .then(project => {
+                // console.log(project)
+                const newProject = project.data.attributes // async response from server adds project
+                dispatch({type: 'ADD_PROJECT', newProject}) // a project can have data that references tasks and tasks have data that references people
             })
     }
 }
@@ -47,6 +48,29 @@ export function deleteProject(id){
             .then(response => {return response.json()})
             .then(() => {
                 dispatch({type: 'DELETE_PROJECT', id}) // a project can have data that references tasks and tasks have data that references people
+            })
+    }
+}
+
+export function editProject(project){
+    const configObj = {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+            title: project.title,
+            description: project.description
+        })
+      };
+    return (dispatch) => {
+        fetch(`http://localhost:4000/projects/${project.id}`, configObj)
+            .then(response => {return response.json()})
+            .then(editedProject => {
+                console.log(editedProject)
+                let project = editedProject.data.attributes
+                dispatch({type: 'EDIT_PROJECT', project}) // a project can have data that references tasks and tasks have data that references people
             })
     }
 }

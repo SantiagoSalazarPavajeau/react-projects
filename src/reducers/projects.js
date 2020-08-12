@@ -1,9 +1,5 @@
 import cuid from 'cuid';
 export const cuidFn = cuid;
-let date = new Date()
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-let started = `Started ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
-
 
 export default function projects(
     state = []
@@ -12,25 +8,22 @@ export default function projects(
         switch(action.type){
             case 'ADD_PROJECT':
                 const project = {
-                    title: action.project.title,
-                    started: started,
-                    description: action.project.description,
-                    id: cuid()
+                    title: action.newProject.title,
+                    started: '',
+                    description: action.newProject.description,
+                    id: action.newProject.id
                 }
                 return [...state, project]
-                
             case 'DELETE_PROJECT':
-                return[...state.filter(project => project.id !== action.id)]
+                return [...state.filter(project => project.id !== action.id)]
             case 'EDIT_PROJECT':
-                let projectIndex = state.projects.findIndex(project => project.id === action.project.id)
-                return{
-                    ...state, projects: [...state.projects.slice(0, projectIndex), action.project, ...state.projects.slice(projectIndex + 1)]
-                }
+                let projectIndex = state.findIndex(project => project.id === action.project.id) //state is empty
+                return [...state.slice(0, projectIndex), action.project, ...state.slice(projectIndex + 1)]
             case 'LOAD_PROJECTS':
                 // console.log(action.projects.data)
                 let projects = action.projects.data.map(project => project.attributes)
-                console.log(projects)
-                return projects
+                // console.log(...state, projects)
+                return [...state.concat(projects)] // this sets state to include the projects if we only return the projects hash state will be empty on other actions
             default:
                 return state
         }
