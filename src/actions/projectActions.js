@@ -5,8 +5,8 @@ export function fetchProjects(){
             fetch('http://localhost:4000/projects')
                 .then(response => {return response.json()})
                 .then(projects => {
-                    console.log(projects)
-                    dispatch({type: 'LOAD_PROJECTS', projects})
+                    // console.log(projects)
+                    dispatch({type: 'LOAD_PROJECTS', projects}) // Have to access the data structure from the rails API correctly
                 })
                 .catch(error => console.log(error.message))
     }

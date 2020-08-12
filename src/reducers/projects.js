@@ -6,27 +6,7 @@ let started = `Started ${months[date.getMonth()]} ${date.getDate()}, ${date.getF
 
 
 export default function projects(
-    state = [{
-        title: 'React-Redux',
-        started: started,
-        description: 'Apply Redux Thunk for async connection to backend',
-        id: '1'
-    }, {
-        title: 'JavaScript-Rails', 
-        started: started,
-        description: 'Build with project requirements',
-        id: '2'
-    }, {
-        title: 'Ruby on Rails', 
-        started: started,
-        description: 'Build with project requirements',
-        id: '3'
-    }, {
-        title: 'Sinatra', 
-        started: started,
-        description: 'Build with project requirements',
-        id: '4'
-    }]
+    state = []
     ,
     action){
         switch(action.type){
@@ -49,7 +29,7 @@ export default function projects(
                     ...state, projects: [...state.projects.slice(0, projectIndex), action.project, ...state.projects.slice(projectIndex + 1)]
                 }
             case 'LOAD_PROJECTS':
-                console.log(action.projects.data)
+                // console.log(action.projects.data)
                 let projects = action.projects.data.map(project => project.attributes)
                 console.log(projects)
                 return projects
