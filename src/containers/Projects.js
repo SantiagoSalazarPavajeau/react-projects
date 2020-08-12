@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import '../App.css'
-import {fetchProjects, saveProject, deleteProject} from '../actions/projectActions' //async actions imported from the actions file
+import {saveProject, deleteProject} from '../actions/projectActions' //async actions imported from the actions file
 
 import ProjectInput from '../components/projects/ProjectInput';
 import ProjectCard from '../components/projects/ProjectCard';
@@ -31,10 +31,6 @@ class Projects extends Component{
         })
     }
 
-    componentDidMount = () => {
-        this.props.fetchProjects()
-    }
-
     render(){
         return(
             <>
@@ -60,19 +56,14 @@ class Projects extends Component{
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        projects: state.projects
-    }
-}
+
 
 const mapDispatchToProps = dispatch => {
     return {
         saveProject: (project) => dispatch(saveProject(project)), // this changed from the local redux store to the redux thunk backend connection
-        deleteProject: (id) => dispatch(deleteProject(id)),
-        fetchProjects: () => dispatch(fetchProjects())
+        deleteProject: (id) => dispatch(deleteProject(id))
     }
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Projects);
+export default connect(null, mapDispatchToProps)(Projects);

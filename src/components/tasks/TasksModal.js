@@ -55,7 +55,7 @@ class TasksModal extends Component{
                         <Form.Input type="text" onChange={event => this.handleOnChange(event)} value={this.state.title} name="title" placeholder={this.state.title}/>
                         <Form.TextArea type="textarea" onChange={event => this.handleOnChange(event)} value={this.state.description} name="description" placeholder={this.state.description}/>
                         <Button icon="save" onClick={(event) => this.saveEdit(event)}></Button>
-                        <Button icon="close icon" onClick={this.cancelEdit}></Button>
+                        <Button icon="close" onClick={this.cancelEdit}></Button>
                 </Form>
             </Modal.Description>
         )

@@ -17,13 +17,13 @@ export default function projects(
             case 'DELETE_PROJECT':
                 return [...state.filter(project => project.id !== action.id)]
             case 'EDIT_PROJECT':
-                let projectIndex = state.findIndex(project => project.id === action.project.id) //state is empty
+                let projectIndex = state.findIndex(project => project.id === action.project.id) //state is empty if load projects does not include state
                 return [...state.slice(0, projectIndex), action.project, ...state.slice(projectIndex + 1)]
             case 'LOAD_PROJECTS':
                 // console.log(action.projects.data)
                 let projects = action.projects.data.map(project => project.attributes)
                 // console.log(...state, projects)
-                return [...state.concat(projects)] // this sets state to include the projects if we only return the projects hash state will be empty on other actions
+                return [...state.concat(projects)] // this sets state to include the projects. if we only return the projects object, state will be empty on other actions
             default:
                 return state
         }

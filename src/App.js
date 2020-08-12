@@ -4,6 +4,8 @@ import {
   Route
 } from "react-router-dom";
 import "./App.css";
+import { connect } from 'react-redux';
+
 
 import SideBar from './components/SideBar';
 import NavBar from './components/NavBar';
@@ -12,11 +14,16 @@ import Profile from './components/Profile';
 import Tasks from './containers/Tasks';
 import People from './containers/People';
 
+import {fetchProjects} from './actions/projectActions'
 
 
 
 
 class App extends Component{
+
+  componentDidMount(){
+    this.props.fetchProjects()
+  }
   
   render(){
     return (
@@ -38,7 +45,7 @@ class App extends Component{
                         <p>Login</p>
                       </Route>
 
-                      <Route exact path="/projects" render={routerProps => <Projects {...routerProps}/>}/> 
+                      <Route exact path="/projects" render={routerProps => <Projects {...routerProps} projects={this.props.projects}/>}/> 
                       {/* I sent router props to have acces to match */}
 
                       <Route exact path={`/projects/:id`} render={routerProps => <Tasks {...routerProps}/>} >
@@ -59,4 +66,16 @@ class App extends Component{
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return{
+    projects: state.projects
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+      fetchProjects: () => dispatch(fetchProjects())
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);
