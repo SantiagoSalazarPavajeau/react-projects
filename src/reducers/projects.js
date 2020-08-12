@@ -20,9 +20,7 @@ export default function projects(
                 return [...state, project]
                 
             case 'DELETE_PROJECT':
-                return{
-                    ...state, projects: [...state.projects.filter(project => project.id !== action.id)]
-                }
+                return[...state.filter(project => project.id !== action.id)]
             case 'EDIT_PROJECT':
                 let projectIndex = state.projects.findIndex(project => project.id === action.project.id)
                 return{

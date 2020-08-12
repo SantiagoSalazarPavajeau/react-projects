@@ -33,3 +33,20 @@ export function saveProject(project){
             })
     }
 }
+
+export function deleteProject(id){
+    const configObj = {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        }
+      };
+    return (dispatch) => {
+        fetch(`http://localhost:4000/projects/${id}`, configObj)
+            .then(response => {return response.json()})
+            .then(() => {
+                dispatch({type: 'DELETE_PROJECT', id}) // a project can have data that references tasks and tasks have data that references people
+            })
+    }
+}

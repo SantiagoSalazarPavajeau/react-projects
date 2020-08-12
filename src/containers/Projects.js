@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import '../App.css'
-import {fetchProjects, saveProject} from '../actions/projectActions' //async actions imported from the actions file
+import {fetchProjects, saveProject, deleteProject} from '../actions/projectActions' //async actions imported from the actions file
 
 import ProjectInput from '../components/projects/ProjectInput';
 import ProjectCard from '../components/projects/ProjectCard';
@@ -69,7 +69,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         saveProject: (project) => dispatch(saveProject(project)), // this changed from the local redux store to the redux thunk backend connection
-        deleteProject: (id) => dispatch({type: 'DELETE_PROJECT', id}),
+        deleteProject: (id) => dispatch(deleteProject(id)),
         fetchProjects: () => dispatch(fetchProjects())
     }
 }
