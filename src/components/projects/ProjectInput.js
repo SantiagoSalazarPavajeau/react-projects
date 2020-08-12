@@ -19,7 +19,7 @@ export default class ProjectInput extends Component{
 
     handleOnSubmit = (event) => {
         event.preventDefault()
-        this.props.addProject(this.state)
+        this.props.saveProject(this.state)
         this.setState({
             title: '',
             description: '',
@@ -43,10 +43,6 @@ export default class ProjectInput extends Component{
 
     renderForm = () => {
         return (
-            // <form onSubmit={(event) => this.handleOnSubmit(event)}>
-            //     <input type="text" onChange={event => this.handleOnChange(event)} value={this.state.title}/>
-            //     <input type="submit"/>
-            // </form>
             <>
             <Button onClick={this.openModal}> <i className="add icon center"></i></Button>
             <Modal dimmer={"inverted"} open={this.state.showModal} >

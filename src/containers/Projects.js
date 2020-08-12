@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import '../App.css'
-import {fetchProjects} from '../actions/projectActions'
-
-// import { Route } from "react-router-dom";
-// import {   useRouteMatch } from 'react-router-dom';
-
-
+import {fetchProjects, saveProject} from '../actions/projectActions' //async actions imported from the actions file
 
 import ProjectInput from '../components/projects/ProjectInput';
 import ProjectCard from '../components/projects/ProjectCard';
@@ -21,7 +16,7 @@ import ProjectCard from '../components/projects/ProjectCard';
 class Projects extends Component{
 
     state = {
-        showForm: false
+        showFormModal: false
     }
 
     renderProjects = () => {
@@ -32,7 +27,7 @@ class Projects extends Component{
 
     renderModal = () => {
         this.setState({
-            showForm: true
+            showFormModal: true
         })
     }
 
@@ -45,7 +40,7 @@ class Projects extends Component{
             <>
                     <div className="ui grid container">
                         <div className="eight wide column" >
-                            <ProjectInput addProject={this.props.addProject}/>
+                            <ProjectInput saveProject={this.props.saveProject}/>
                         </div>
                     </div>
 
@@ -73,7 +68,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addProject: (project) => dispatch({type: 'ADD_PROJECT', project}),
+        saveProject: (project) => dispatch(saveProject(project)), // this changed from the local redux store to the redux thunk backend connection
         deleteProject: (id) => dispatch({type: 'DELETE_PROJECT', id}),
         fetchProjects: () => dispatch(fetchProjects())
     }
