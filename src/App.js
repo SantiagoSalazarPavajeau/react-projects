@@ -36,11 +36,8 @@ class App extends Component{
         <Router>
           <div className="flexbox">
               <SideBar/>
-
               <div className="main">
               <NavBar/>
-
-
                 <div className="ui container">
 
                     {/* <Switch> */}

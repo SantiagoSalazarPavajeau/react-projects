@@ -8,8 +8,8 @@ export default function tasks(state = [], action){
                 const task = {
                     description: "New task...",
                     id: cuid(),
-                    projectId: action.projectId,
-                    peopleId: null, 
+                    project_id: action.project_id,
+                    people_id: null, 
                     completed: false
                 }
                 // console.log(task)

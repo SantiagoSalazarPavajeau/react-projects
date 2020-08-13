@@ -10,7 +10,8 @@ class TasksModal extends Component{
         started: this.props.project.started,
         description: this.props.project.description,
         id: this.props.project.id,
-        edit: false
+        edit: false,
+        loading: false
     }
     
 
@@ -31,8 +32,8 @@ class TasksModal extends Component{
         event.preventDefault()
         this.props.editProject({
             title: this.state.title,
-            started: this.state.started,
-            id: this.state.id,
+            started: this.props.project.started,
+            id: this.props.project.id,
             description: this.state.description
         })
         this.setState({
@@ -47,26 +48,19 @@ class TasksModal extends Component{
         })
     }
 
-    renderEdit = () => {
+    renderEdit = (project) => {
         return (
             <Modal.Description>
-                <Form>
-                        <Form.Input type="text" onChange={event => this.handleOnChange(event)} value={this.state.title} name="title" placeholder={this.state.title}/>
-                        <Form.TextArea type="textarea" onChange={event => this.handleOnChange(event)} value={this.state.description} name="description" placeholder={this.state.description}/>
-                        <Button icon="save" onClick={(event) => this.saveEdit(event)}></Button>
-                        <Button icon="close" onClick={this.cancelEdit}></Button>
+                <Form onSubmit={(event) => this.saveEdit(event)}>
+                    <Form.Input type="text" onChange={event => this.handleOnChange(event)} value={this.state.title} name="title" />
+                    <Form.TextArea type="textarea" onChange={event => this.handleOnChange(event)} value={this.state.description} name="description" />
+                    <Button icon="save" type="submit" ></Button>
+                    <Button icon="close" onClick={this.cancelEdit}></Button>
                 </Form>
             </Modal.Description>
         )
     }
-
-    renderTasks = () => {// filter tasks for this project only
-        const projectTasks = this.props.tasks.filter(task => task.project_id === this.state.id)
-        return projectTasks.map(task => <Task key={task.id} people={this.props.people} person_id={task.person_id} deleteTask={this.props.deleteTask} project_id={this.state.id} editTask={this.props.editTask} id={task.id} description={task.description} completed={task.completed}/>)
-    }
-
-
-    renderDescription = () => {
+    renderDescription = (project) => {
         return (
             <>
                 <Grid columns={3}>
@@ -81,36 +75,45 @@ class TasksModal extends Component{
                     </Grid.Column>
                     </Grid.Row>
                 </Grid> 
-                <Header>{this.state.title}</Header>
-                <p>{this.state.description}</p>
+                <Header>{project.title}</Header>
+                <p>{project.description}</p>
 
                       
             </>          
         )
     }
 
-    handleAddTask = () => {
-        this.props.addTask(this.state.id)
-        // console.log(this.state.id)
+    renderTasks = () => {// filter tasks for this project only
+        const projectTasks = this.props.tasks.filter(task => task.project_id === this.state.id)
+        return projectTasks.map(task => <Task key={task.id} people={this.props.people} person_id={task.person_id} deleteTask={this.props.deleteTask} project_id={this.state.id} editTask={this.props.editTask} id={task.id} description={task.description} completed={task.completed}/>)
     }
 
-    render(){
-        return( 
-            <>
-            <div className="ui grid container">
+    handleAddTask = () => {
+        this.props.addTask(this.state.id)
+        console.log(this.props.tasks)
+    }
+
+    renderModal = () => {
+        // console.log(this.props)
+        if(!this.props.loading){
+            const project = this.props.project
+            return(
+                <>
+                    <div className="ui grid container">
                         <div className="eight wide column" >
                             <Modal size={"large"}dimmer={"inverted"} open={true} >
                                 <Modal.Header></Modal.Header>
                                     <Modal.Content image scrolling>
                                     <Image size='medium' alt="Workbench and tools" src='https://images.unsplash.com/photo-1416339158484-9637228cc908?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80' wrapped/>
                                     <Modal.Description>
-                                    {this.state.edit ?  this.renderEdit() : this.renderDescription()}
+                                    {this.state.edit ?  this.renderEdit(project) : this.renderDescription(project)}
                                     <Divider horizontal>Tasks</Divider>
                                     <Button basic secondary onClick={this.handleAddTask}>Add Task</Button>
                                     <br></br>
                                     {this.renderTasks()}
                                     {/* {console.log(this.props.tasks.filter(task => task.projectId === this.state.id))} */}
-                                    
+                                    {/* {console.log(project)} */}
+
                                     </Modal.Description>
                                 </Modal.Content>
 
@@ -120,8 +123,32 @@ class TasksModal extends Component{
                     </div>
                 
             </>
+            )
+        }else{
+            return (
+                <>
+                    <div className="ui grid container">
+                        <div className="eight wide column" >
+                            <Modal size={"large"}dimmer={"inverted"} open={true} >
+                               <p>Loading</p> 
+
+
+                            </Modal>
+                        </div>
+                    </div>
+                </>
+                
+            )
+        }
+    }
+
+    render(){
+        return( 
+            <>
+            {this.renderModal()}
+            </>
         )
-}
+    }
     
   }
 

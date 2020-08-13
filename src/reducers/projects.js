@@ -1,6 +1,7 @@
 import cuid from 'cuid';
 export const cuidFn = cuid;
 
+
 export default function projects(
     state = []
     ,
@@ -24,6 +25,8 @@ export default function projects(
                 let projects = action.projects.data.map(project => project.attributes)
                 // console.log(...state, projects)
                 return [...state.concat(projects)] // this sets state to include the projects. if we only return the projects object, state will be empty on other actions
+            case 'LOADING_PROJECTS':
+                return [...state]
             default:
                 return state
         }
