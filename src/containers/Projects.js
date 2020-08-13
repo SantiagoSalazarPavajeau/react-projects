@@ -58,7 +58,11 @@ class Projects extends Component{
     }
 }
 
-
+const mapStateToProps = state => {
+    return {
+        projects: state.projects
+    }
+}
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -68,4 +72,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(null, mapDispatchToProps)(Projects);
+export default connect(mapStateToProps, mapDispatchToProps)(Projects);

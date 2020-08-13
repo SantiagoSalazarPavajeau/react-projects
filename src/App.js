@@ -50,15 +50,15 @@ class App extends Component{
                         <p>Login</p>
                       </Route>
 
-                      <Route exact path="/projects" render={routerProps => <Projects {...routerProps} projects={this.props.projects}/>}/> 
+                      <Route exact path="/projects" render={routerProps => <Projects {...routerProps}/>}/> 
                       {/* I sent router props to have acces to match */}
 
-                      <Route exact path={`/projects/:id`} render={routerProps => <Tasks {...routerProps} tasks={this.props.tasks}/>} >
-                        {console.log(this.props.tasks)}
+                      <Route exact path={`/projects/:id`} render={routerProps => <Tasks {...routerProps} />} >
+                        {/* {console.log(this.props.tasks)} */}
                       </Route>
 
                       <Route exact path={`/people`}>
-                        <People people={this.props.people} />
+                        <People />
                       </Route>
                       
                     {/* </Switch>  */}

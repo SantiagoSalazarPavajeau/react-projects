@@ -21,6 +21,7 @@ class People extends Component{
 
 const mapStateToProps = state => {
     return {
+        people: state.people,
         tasks: state.tasks
     }
 }
