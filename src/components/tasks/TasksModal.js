@@ -5,12 +5,11 @@ import Task from './Task'
 
 
 class TasksModal extends Component{
-    // let index = this.props.projects.findIndex( project => project.id === this.props.match.params.id)
     state = {
-        title: this.props.projects[this.props.index].title,
-        started: this.props.projects[this.props.index].started,
-        description: this.props.projects[this.props.index].description,
-        id: this.props.projects[this.props.index].id,
+        title: this.props.project.title,
+        started: this.props.project.started,
+        description: this.props.project.description,
+        id: this.props.project.id,
         edit: false
     }
     
