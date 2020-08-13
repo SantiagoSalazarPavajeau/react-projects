@@ -15,6 +15,8 @@ import Tasks from './containers/Tasks';
 import People from './containers/People';
 
 import {fetchProjects} from './actions/projectActions'
+import {fetchPeople} from './actions/peopleActions'
+
 
 
 
@@ -23,6 +25,7 @@ class App extends Component{
 
   componentDidMount(){
     this.props.fetchProjects()
+    this.props.fetchPeople()
   }
   
   render(){
@@ -53,7 +56,7 @@ class App extends Component{
                       </Route>
 
                       <Route exact path={`/people`}>
-                        <People/>
+                        <People people={this.props.people} />
                       </Route>
                       
                     {/* </Switch>  */}
@@ -68,13 +71,15 @@ class App extends Component{
 
 const mapStateToProps = state => {
   return{
-    projects: state.projects
+    projects: state.projects,
+    people: state.people
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-      fetchProjects: () => dispatch(fetchProjects())
+      fetchProjects: () => dispatch(fetchProjects()),
+      fetchPeople: () => dispatch(fetchPeople())
   }
 }
 

@@ -6,7 +6,7 @@ export default class Person extends Component{
 
     render(){
         const myTasks= this.props.tasks.filter(task => task.peopleId === this.props.name) // filter out the tasks that don't belong to the person
-        
+        const image = this.props.image
         return(
             <div className="four wide column" >
                 {/* {console.log(this.props.tasks)}  */}

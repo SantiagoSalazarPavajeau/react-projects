@@ -48,6 +48,8 @@ class Projects extends Component{
                         {this.renderProjects()}
 
                     </div>
+                    <br></br>
+                    <br></br>
 
 
 
