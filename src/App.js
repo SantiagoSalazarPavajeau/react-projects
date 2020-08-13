@@ -16,6 +16,7 @@ import People from './containers/People';
 
 import {fetchProjects} from './actions/projectActions'
 import {fetchPeople} from './actions/peopleActions'
+import {fetchTasks} from './actions/tasksActions'
 
 
 
@@ -26,6 +27,7 @@ class App extends Component{
   componentDidMount(){
     this.props.fetchProjects()
     this.props.fetchPeople()
+    this.props.fetchTasks()
   }
   
   render(){
@@ -51,8 +53,8 @@ class App extends Component{
                       <Route exact path="/projects" render={routerProps => <Projects {...routerProps} projects={this.props.projects}/>}/> 
                       {/* I sent router props to have acces to match */}
 
-                      <Route exact path={`/projects/:id`} render={routerProps => <Tasks {...routerProps}/>} >
-                        {/* <Tasks/> */}
+                      <Route exact path={`/projects/:id`} render={routerProps => <Tasks {...routerProps} tasks={this.props.tasks}/>} >
+                        {console.log(this.props.tasks)}
                       </Route>
 
                       <Route exact path={`/people`}>
@@ -72,14 +74,16 @@ class App extends Component{
 const mapStateToProps = state => {
   return{
     projects: state.projects,
-    people: state.people
+    people: state.people,
+    tasks: state.tasks
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
       fetchProjects: () => dispatch(fetchProjects()),
-      fetchPeople: () => dispatch(fetchPeople())
+      fetchPeople: () => dispatch(fetchPeople()),
+      fetchTasks: () => dispatch(fetchTasks())
   }
 }
 
