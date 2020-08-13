@@ -7,9 +7,9 @@ class Task extends Component{
     state = {
         description: this.props.description,
         id: this.props.id,
-        projectId: this.props.projectId,
+        person_id: this.props.person_id,
         completed: this.props.completed,
-        peopleId: this.props.peopleId
+        project_id: this.props.project_id
     }
 
     makeCompleted = () => {
@@ -33,17 +33,23 @@ class Task extends Component{
     }
 
     assignTo = (e) => {
+        // console.log(e.target.parentNode.id)
         this.setState({
-            peopleId: e.target.innerText // use onchange for dropdowns/select and innertext instead of value
+            person_id: e.target.parentNode.id, // use onchange for dropdowns/select and parentNode.id instead of value
+            owner: e.target.innerText
         })
     }
     
     renderInProgress = () => {
+        let owner = this.props.people.find(person => person.id === this.state.person_id) // person_id is a propery of the task and we can find the owner in the people state
         return (
+            
             <>
             <br></br>
 
-
+            {/* {console.log(owner)}
+            {console.log(this.props.people)}
+            {console.log(this.state.person_id)} */}
                 <Input  size="small" labelPosition='right' type='text' value={this.state.description} placeholder={this.state.description}>
 
                 <TextArea onChange={event => this.setState({description: event.target.value})} value={this.state.description} rows="4" cols="70"/>
@@ -54,7 +60,7 @@ class Task extends Component{
                 </Input>
             <br></br>
 
-                Assigned to: <Dropdown value={this.state.peopleId} onChange={e => this.assignTo(e)}  selection options={this.props.people} />
+                Assigned to: <Dropdown button className='icon' placeholder={owner ? owner.key : 'Yet to be assigned'} onChange={e => this.assignTo(e)} floating labeled icon='users' options={this.props.people} />
             <br></br>
 
             <br></br>
@@ -66,12 +72,13 @@ class Task extends Component{
     }
     
     renderCompleted = () => {
+        let owner = this.props.people.find(person => person.id === this.state.person_id)
         return (
             <>
             <br></br>
             <Label color='green' image>
             <img alt="Profile Pic" src='https://api.adorable.io/avatars/77/stevie@adorable.io.png' />
-                completed by {this.state.peopleId}
+                completed by {owner ? owner.key : 'Yet to be assigned'}
             <Label.Detail>{this.props.description}</Label.Detail>
 
             </Label>

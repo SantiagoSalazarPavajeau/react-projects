@@ -13,7 +13,7 @@ class Tasks extends Component{
     render(){
         return ( // the match params id is a string not an integer
             <>
-            {console.log(this.props)}
+            {/* {console.log(this.props)} */}
             <TasksModal tasks={this.props.tasks} people={this.props.people}  match={this.props.match} index={this.props.projects.findIndex( project => project.id.toString() === this.props.match.params.id)} editProject={this.props.editProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask} projects={this.props.projects}/>
             </>
         )
