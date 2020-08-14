@@ -1,21 +1,11 @@
-import cuid from 'cuid';
 
 
 export default function tasks(state = [], action){
     switch(action.type){
         case 'ADD_TASK':
-                // console.log(state.tasks)
-                const task = {
-                    description: "New task...",
-                    id: cuid(),
-                    project_id: action.project_id,
-                    people_id: null, 
-                    completed: false
-                }
-                // console.log(task)
-                return[
-                    ...state.concat(task)
-                ]
+                console.log(action.task)
+                console.log(state)
+                return[...state.concat(action.newTask)]
             case 'DELETE_TASK':
                 return{
                     ...state, tasks: [...state.tasks.filter(task => task.id !== action.id)]
