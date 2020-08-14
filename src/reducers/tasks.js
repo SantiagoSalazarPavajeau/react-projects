@@ -7,9 +7,7 @@ export default function tasks(state = [], action){
                 console.log(state)
                 return[...state.concat(action.newTask)]
             case 'DELETE_TASK':
-                return{
-                    ...state, tasks: [...state.tasks.filter(task => task.id !== action.id)]
-                }
+                return [...state.filter(task => task.id !== action.id)]
             case 'EDIT_TASK':
                 let taskIndex = state.findIndex(task => task.id === action.task.id)
                 console.log(action.task)

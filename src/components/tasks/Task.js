@@ -25,6 +25,7 @@ class Task extends Component{
     }
 
     handleSave = () => {
+        console.log(this.state.person_id)
         this.props.editTask(this.state)
     }
 
@@ -33,10 +34,9 @@ class Task extends Component{
     }
 
     assignTo = (e) => {
-        // console.log(e.target.parentNode.id)
+        const ownerIndex = this.props.people.findIndex(person => person.key === e.target.innerText)
         this.setState({
-            person_id: e.target.parentNode.id, // use onchange for dropdowns/select and parentNode.id instead of value
-            owner: e.target.innerText
+            person_id: this.props.people[ownerIndex].id // use onchange for dropdowns/select and parentNode.id instead of value
         })
     }
     

@@ -4,7 +4,7 @@ import '../App.css'
 
 import TasksModal from '../components/tasks/TasksModal';
 import { editProject } from '../actions/projectActions';
-import { addTask } from '../actions/tasksActions';
+import { addTask, deleteTask, editTask } from '../actions/tasksActions';
 
 
 
@@ -34,8 +34,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return{
         addTask: project_id => dispatch(addTask(project_id)),
-        deleteTask: id => dispatch({type: 'DELETE_TASK', id}),
-        editTask: task => dispatch({type: 'EDIT_TASK', task}),
+        deleteTask: id => dispatch(deleteTask(id)),
+        editTask: task => dispatch(editTask(task)),
         editProject: project => dispatch(editProject(project)),
     }
 }
