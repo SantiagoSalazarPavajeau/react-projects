@@ -5,7 +5,7 @@ import { Card } from 'semantic-ui-react'
 export default class Person extends Component{
 
     render(){
-        const myTasks= this.props.tasks.filter(task => task.peopleId === this.props.name) // filter out the tasks that don't belong to the person
+        const myTasks= this.props.tasks.filter(task => task.person_id === this.props.id) // filter out the tasks that don't belong to the person
         return(
             <div className="four wide column" >
                 {/* {console.log(this.props.tasks)}  */}
