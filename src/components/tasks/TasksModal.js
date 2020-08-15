@@ -32,7 +32,7 @@ class TasksModal extends Component{
             }
             percent = numberCompleted / (numberInProgress + numberCompleted)
         }
-        console.log(percent)
+        // console.log(percent)
         this.setState({
             percent: percent * 100
         })

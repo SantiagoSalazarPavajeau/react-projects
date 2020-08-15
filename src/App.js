@@ -44,7 +44,7 @@ class App extends Component{
                       <Route exact path="/" render={()=> <Profile/>}>
                       <div className="ui grid container">
                         <div className="twelve wide column" >
-                        <h1>Welcome to your Projects Dashboard </h1>
+                        <h1>Welcome to your team's Projects Dashboard </h1>
                         </div>
                       </div>
                       </Route>
