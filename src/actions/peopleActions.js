@@ -1,6 +1,8 @@
+const URL ='https://secure-shelf-48338.herokuapp.com/'
+
 export function fetchPeople(){
     return (dispatch) => {
-            fetch('http://localhost:4000/people')
+            fetch(`${URL}/people`)
                 .then(response => {return response.json()})
                 .then(people => {
                     // console.log(projects)

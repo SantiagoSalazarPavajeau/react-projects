@@ -1,6 +1,8 @@
+const URL ='https://secure-shelf-48338.herokuapp.com/'
+
 export function fetchTasks(){
     return (dispatch) => {
-            fetch('http://localhost:4000/tasks')
+            fetch(`${URL}/tasks`)
                 .then(response => {return response.json()})
                 .then(tasks => {
                     // console.log(tasks)
@@ -25,7 +27,7 @@ export function addTask(project_id){
         })
       };
     return (dispatch) => {
-        fetch('http://localhost:4000/tasks', configObj)
+        fetch(`${URL}/tasks`, configObj)
             .then(response => {return response.json()})
             .then(task => {
                 // console.log(project)
@@ -45,7 +47,7 @@ export function deleteTask(id){
         }
       };
     return (dispatch) => {
-        fetch(`http://localhost:4000/tasks/${id}`, configObj)
+        fetch(`${URL}/tasks/${id}`, configObj)
             .then(response => {return response.json()})
             .then(() => {
                 dispatch({type: 'DELETE_TASK', id})
@@ -68,7 +70,7 @@ export function editTask(task){
         })
       };
     return (dispatch) => {
-        fetch(`http://localhost:4000/tasks/${task.id}`, configObj)
+        fetch(`${URL}/tasks/${task.id}`, configObj)
             .then(response => {return response.json()})
             .then(editedTask => {
                 console.log(editedTask)

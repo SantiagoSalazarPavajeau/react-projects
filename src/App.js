@@ -42,6 +42,11 @@ class App extends Component{
 
                     {/* <Switch> */}
                       <Route exact path="/" render={()=> <Profile/>}>
+                      <div className="ui grid container">
+                        <div className="twelve wide column" >
+                        <h1>Welcome to your Projects Dashboard </h1>
+                        </div>
+                      </div>
                       </Route>
                       <Route exact path="/login">
                         <p>Login</p>

@@ -21,7 +21,7 @@ class Projects extends Component{
 
     renderProjects = () => {
         // console.log(this.props.match.url)
-        return this.props.projects.map( project => <ProjectCard key={project.id} title={project.title} started={project.started} description={project.description} id={project.id} editProject={this.props.editProject} deleteProject={this.props.deleteProject}/> )
+        return this.props.projects.map( project => <ProjectCard key={project.id} tasks={this.props.tasks} title={project.title} started={project.started} description={project.description} id={project.id} editProject={this.props.editProject} deleteProject={this.props.deleteProject}/> )
      
     }
 
@@ -60,7 +60,8 @@ class Projects extends Component{
 
 const mapStateToProps = state => {
     return {
-        projects: state.projects
+        projects: state.projects,
+        taks: state.tasks
     }
 }
 

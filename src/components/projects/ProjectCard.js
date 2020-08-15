@@ -2,12 +2,15 @@ import React, {Component} from 'react';
 import { Button, Confirm } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
+
+
 // modal is to display tasks
 
 export default class ProjectCard extends Component{
     state = {
       open: false,
-      edit: false
+      edit: false,
+      percent: 50
     }
 
     handleDeleteClick = (event) => {
@@ -29,6 +32,15 @@ export default class ProjectCard extends Component{
       })
     }
 
+    setPercent = () =>{
+      console.log(this.props)
+      // const projectTasks = this.props.tasks.filter(task => task.project_id === this.state.id)
+      let percent = 0
+      this.setState({
+        percent: percent
+      })
+    }
+
 
 
     render(){
@@ -37,7 +49,6 @@ export default class ProjectCard extends Component{
 
             <div className="ui card">
               <div className="image">
-                <i aria-hidden="true" className="file alternate icon left"></i>
               </div>
               <div className="content">
                   {/* <input value={this.props.title}/> */}

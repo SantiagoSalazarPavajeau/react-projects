@@ -1,8 +1,9 @@
+const URL ='https://secure-shelf-48338.herokuapp.com/'
 
 export function fetchProjects(){
     return (dispatch) => {
         dispatch({type: 'LOADING_PROJECTS'})
-            fetch('http://localhost:4000/projects')
+            fetch(`${URL}/projects`)
                 .then(response => {return response.json()})
                 .then(projects => {
                     // console.log(projects)
@@ -25,7 +26,7 @@ export function saveProject(project){
         })
       };
     return (dispatch) => {
-        fetch('http://localhost:4000/projects', configObj)
+        fetch(`${URL}/projects`, configObj)
             .then(response => {return response.json()})
             .then(project => {
                 // console.log(project)
@@ -44,7 +45,7 @@ export function deleteProject(id){
         }
       };
     return (dispatch) => {
-        fetch(`http://localhost:4000/projects/${id}`, configObj)
+        fetch(`${URL}/projects/${id}`, configObj)
             .then(response => {return response.json()})
             .then(() => {
                 dispatch({type: 'DELETE_PROJECT', id}) // a project can have data that references tasks and tasks have data that references people
@@ -65,7 +66,7 @@ export function editProject(project){
         })
       };
     return (dispatch) => {
-        fetch(`http://localhost:4000/projects/${project.id}`, configObj)
+        fetch(`${URL}/projects/${project.id}`, configObj)
             .then(response => {return response.json()})
             .then(editedProject => {
                 console.log(editedProject)

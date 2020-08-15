@@ -3,6 +3,9 @@ import { Header, Image, Modal, Form, Button, Divider, Grid } from 'semantic-ui-r
 import {withRouter} from 'react-router-dom';
 import Task from './Task'
 
+import { Progress } from 'react-sweet-progress';
+import "react-sweet-progress/lib/style.css";
+
 
 class TasksModal extends Component{
     state = {
@@ -14,8 +17,31 @@ class TasksModal extends Component{
         loading: false
     }
     
+    setPercent = () => {
+        const projectTasks = this.props.tasks.filter(task => task.project_id === this.state.id)
+        let percent =  0
+        let numberCompleted = 0
+        let numberInProgress = 0
+        for(let i=0; i<projectTasks.length;i++){
+            if(projectTasks[i].completed === true){
+                numberCompleted++
+                console.log(numberCompleted)
+            }else{
+                numberInProgress++
+                console.log(numberInProgress)
+            }
+            percent = numberCompleted / (numberInProgress + numberCompleted)
+        }
+        console.log(percent)
+        this.setState({
+            percent: percent * 100
+        })
+    }
 
-
+    componentDidMount(){
+        this.setPercent()
+    }
+    
     startEdit = () => {
         this.setState({
             edit: true
@@ -108,6 +134,8 @@ class TasksModal extends Component{
                                     <Image size='medium' alt="Workbench and tools" src='https://images.unsplash.com/photo-1416339158484-9637228cc908?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80' wrapped/>
                                     <Modal.Description>
                                     {this.state.edit ?  this.renderEdit(project) : this.renderDescription(project)}
+                                    {/* {this.setPercent()} */}
+                                    <Progress type="circle" width={30} percent={this.state.percent} status="success" />
                                     <Divider horizontal>Tasks</Divider>
                                     <Button basic secondary onClick={this.handleAddTask}>Add Task</Button>
                                     <br></br>
