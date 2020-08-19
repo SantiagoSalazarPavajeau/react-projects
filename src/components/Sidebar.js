@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import "../App.css";
 
 
-
+// fix import
 const SideBar = () => {
         return(
         <div className="sidebar">

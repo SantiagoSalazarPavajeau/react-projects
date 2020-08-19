@@ -7,8 +7,9 @@ import "./App.css";
 import { connect } from 'react-redux';
 
 
-import SideBar from './components/SideBar';
 import NavBar from './components/NavBar';
+import SideBar from './components/SideBar';
+
 import Projects from './containers/Projects';
 import Profile from './components/Profile';
 import Tasks from './containers/Tasks';
