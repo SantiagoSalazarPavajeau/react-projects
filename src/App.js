@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 
 import NavBar from './components/NavBar';
-import SideBar from './components/SideBar';
+import SideBar from './components/Sidebar';
 
 import Projects from './containers/Projects';
 import Profile from './components/Profile';
