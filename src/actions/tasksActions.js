@@ -13,6 +13,7 @@ export function fetchTasks(){
 }
 
 export function addTask(project_id){
+    
     const configObj = {
         method: "POST",
         headers: {
@@ -26,16 +27,21 @@ export function addTask(project_id){
             completed: false
         })
       };
+    console.log('b')
     return (dispatch) => {
+        console.log('c')
         fetch(`${URL}/tasks`, configObj)
             .then(response => {return response.json()})
             .then(task => {
                 // console.log(project)
+                console.log('d')
                 const newTask = task.data.attributes 
                 console.log(task)
                 dispatch({type: 'ADD_TASK', newTask}) 
             })
+        console.log('e')
     }
+    console.log('f')
 }
 
 export function deleteTask(id){

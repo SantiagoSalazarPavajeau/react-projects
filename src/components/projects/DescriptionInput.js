@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 // import ProjectCard from './ProjectCard';
 import { Form } from 'semantic-ui-react'
 
-export default class TitleInput extends Component{
-    render(){
+const DescriptionInput = (props) => {
         return(
-            <Form.TextArea type="text" onChange={event => this.props.handleOnChange(event)} value={this.props.description} name="description" placeholder={this.props.description}/>
+            <Form.TextArea type="text" onChange={event => props.handleOnChange(event)} value={props.description} name="description" placeholder={props.description}/>
         )
-    }
 }
+
+export default DescriptionInput;

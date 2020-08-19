@@ -6,7 +6,7 @@ import Person from '../components/people/Person'
 class People extends Component{
 
     renderPeople = () => {
-    return this.props.people.map(person => <Person projects={this.props.projects} key={person.id} id={person.id} name={person.key} image={person.image} tasks={this.props.tasks}></Person>)
+        return this.props.people.map(person => <Person projects={this.props.projects} key={person.id} id={person.id} name={person.key} image={person.image} tasks={this.props.tasks}></Person>)
     }
 
     render(){

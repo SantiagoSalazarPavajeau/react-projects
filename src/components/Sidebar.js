@@ -1,11 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import "../App.css";
 
 
 
-export default class SideBar extends Component{
-    render(){
+const SideBar = () => {
         return(
         <div className="sidebar">
             <div className="ui left vertical inverted icon visible sidebar menu">
@@ -24,5 +23,6 @@ export default class SideBar extends Component{
             </div>
         </div>
         )
-    }
 }
+
+export default SideBar;

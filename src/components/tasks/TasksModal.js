@@ -116,7 +116,9 @@ class TasksModal extends Component{
     }
 
     handleAddTask = () => {
+        console.log('a')
         this.props.addTask(this.state.id)
+        console.log('g')
         console.log(this.state.id)
     }
 
@@ -128,7 +130,7 @@ class TasksModal extends Component{
                 <>
                     <div className="ui grid container">
                         <div className="eight wide column" >
-                            <Modal size={"large"}dimmer={"inverted"} open={true} >
+                            <Modal size={"large"} dimmer={"inverted"} open={true} >
                                 <Modal.Header></Modal.Header>
                                     <Modal.Content image scrolling>
                                     <Image size='medium' alt="Workbench and tools" src='https://images.unsplash.com/photo-1416339158484-9637228cc908?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80' wrapped/>

@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 // import ProjectCard from './ProjectCard';
 import { Form } from 'semantic-ui-react'
 
-export default class CloseModal extends Component{
-    render(){
+const CloseModal = (props) => { 
         return(
-            <Form.Button onClick={this.props.closeModal} type="submit" >Cancel</Form.Button>
+            <Form.Button onClick={props.closeModal} type="submit" >Cancel</Form.Button>
         )
-    }
 }
+
+export default CloseModal;

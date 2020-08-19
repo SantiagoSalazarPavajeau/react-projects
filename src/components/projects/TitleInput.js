@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 // import ProjectCard from './ProjectCard';
 import { Form } from 'semantic-ui-react'
 
-export default class TitleInput extends Component{
-    render(){
+const TitleInput = (props) => {
         return(
-            <Form.Input type="text" onChange={event => this.props.handleOnChange(event)} value={this.props.title} name="title" placeholder={this.props.title}/>
+            <Form.Input type="text" onChange={event => props.handleOnChange(event)} value={props.title} name="title" placeholder={props.title}/>
         )
-    }
 }
+
+export default TitleInput

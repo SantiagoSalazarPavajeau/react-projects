@@ -8,8 +8,11 @@ import reducer from './reducers/index';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'semantic-ui-css/semantic.min.css'
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-export const store = createStore(reducer,
+const composeEnhancers = composeWithDevTools();
+
+export const store = createStore(reducer, 
   applyMiddleware(thunk)
   );
 // console.log(store.getState())

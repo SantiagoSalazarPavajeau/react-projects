@@ -16,13 +16,13 @@ import ProjectCard from '../components/projects/ProjectCard';
 class Projects extends Component{
 
     state = {
-        showFormModal: false
+        showFormModal: false,
+        searchTerm: ''
     }
 
     renderProjects = () => {
-        // console.log(this.props.match.url)
-        return this.props.projects.map( project => <ProjectCard key={project.id} tasks={this.props.tasks} title={project.title} started={project.started} description={project.description} id={project.id} editProject={this.props.editProject} deleteProject={this.props.deleteProject}/> )
-     
+        const searchedProjects = this.props.projects.filter(project => project.title.includes(this.state.searchTerm))
+        return searchedProjects.map( project => <ProjectCard key={project.id} tasks={this.props.tasks} title={project.title} started={project.started} description={project.description} id={project.id} editProject={this.props.editProject} deleteProject={this.props.deleteProject}/> )
     }
 
     renderModal = () => {
@@ -31,12 +31,30 @@ class Projects extends Component{
         })
     }
 
+    setSearchState = () => {
+
+    }
+
+    handleSearchProject = (event) => {
+        this.setState({
+            searchTerm: event.target.value
+        })      
+    }
+    
+
     render(){
         return(
             <>
                     <div className="ui grid container">
                         <div className="eight wide column" >
                             <ProjectInput saveProject={this.props.saveProject}/>
+                            {/* Search input */}
+                            <input onChange={e => this.handleSearchProject(e)}/>
+                            {/* {console.log(this.state.searchTerm)}
+                            {console.log(this.state.searchedProjects)} */}
+                            {/* {console.log(this.props.projects.filter(project => project.title.includes(this.state.searchTerm)))} */}
+
+                            {/* search button */}
                         </div>
                     </div>
 

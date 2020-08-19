@@ -1,8 +1,6 @@
-import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
-export default class NavBar extends Component{
-    render(){
+const NavBar = ()=>{
         return(
             <div className="ui stackable menu">
                 <div className="header item">
@@ -16,5 +14,6 @@ export default class NavBar extends Component{
             </div>
             
         )
-    }
 }
+
+export default NavBar;
