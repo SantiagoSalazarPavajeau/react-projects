@@ -8,9 +8,9 @@ import reducer from './reducers/index';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'semantic-ui-css/semantic.min.css'
-import { composeWithDevTools } from 'redux-devtools-extension';
+// import { composeWithDevTools } from 'redux-devtools-extension';
 
-const composeEnhancers = composeWithDevTools();
+// const composeEnhancers = composeWithDevTools();
 
 export const store = createStore(reducer, 
   applyMiddleware(thunk)

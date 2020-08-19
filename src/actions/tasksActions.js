@@ -41,7 +41,6 @@ export function addTask(project_id){
             })
         console.log('e')
     }
-    console.log('f')
 }
 
 export function deleteTask(id){

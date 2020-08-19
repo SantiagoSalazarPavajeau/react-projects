@@ -11,7 +11,7 @@ import NavBar from './components/NavBar';
 import SideBar from './components/Sidebar';
 
 import Projects from './containers/Projects';
-import Profile from './components/Profile';
+// import Profile from './components/Profile';
 import Tasks from './containers/Tasks';
 import People from './containers/People';
 
@@ -42,7 +42,7 @@ class App extends Component{
                 <div className="ui container">
 
                     {/* <Switch> */}
-                      <Route exact path="/" render={()=> <Profile/>}>
+                      <Route exact path="/">
                       <div className="ui grid container">
                         <div className="twelve wide column" >
                         <h1>Welcome to your team's Projects Dashboard </h1>

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 // import ProjectCard from './ProjectCard';
 import { Form } from 'semantic-ui-react'
 

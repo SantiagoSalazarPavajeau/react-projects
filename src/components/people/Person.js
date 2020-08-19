@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Card } from 'semantic-ui-react'
 
-import Task from '../tasks/Task';
+// import Task from '../tasks/Task';
 import { Link } from 'react-router-dom';
 
 
