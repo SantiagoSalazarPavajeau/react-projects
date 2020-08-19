@@ -21,18 +21,20 @@ npm start
 
 Some of the libraries and packages used in this project are:
 
- * React Router
- * Redux
- * Redux DevTools
- * Redux Tools
- * React Dom
- * Semantic UI
+ * React 16.13.1
+ * React Router Dom 5.2.0
+ * Redux 4.0.5
+ * Redux-Thunk 2.3.0
+ * Redux DevTools Extension 2.13.8
+ * React Dom 16.13.1
+ * Semantic UI 1.0.0
 
 ## Rails API
 
-The Rails server is currently deployed at: https://secure-shelf-48338.herokuapp.com/ standard REST requests for the three models (Projects, People, Tasks) are available. The repository for this API is: https://github.com/SantiagoSalazarPavajeau/rails-backend-projects.
+The Rails server is currently deployed at: https://secure-shelf-48338.herokuapp.com/. Standard REST requests for the three models (Projects, People, Tasks) are available. The repository for this API is: https://github.com/SantiagoSalazarPavajeau/rails-backend-projects.
 
 Feel free to get in contact to share any questions and ideas.
 
 Twitter: @santispavajeau
+
 LinkedIn: https://www.linkedin.com/in/santiago-salazar-pavajeau/
