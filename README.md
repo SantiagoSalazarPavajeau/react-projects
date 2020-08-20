@@ -21,13 +21,13 @@ npm start
 
 Some of the libraries and packages used in this project are:
 
- * React 16.13.1
- * React Router Dom 5.2.0
- * Redux 4.0.5
- * Redux-Thunk 2.3.0
- * Redux DevTools Extension 2.13.8
- * React Dom 16.13.1
- * Semantic UI 1.0.0
+ * [React](https://reactjs.org/) 16.13.1
+ * [React Router Dom](https://www.npmjs.com/package/react-router-dom) 5.2.0
+ * [Redux](https://redux.js.org/) 4.0.5
+ * [Redux-Thunk](https://github.com/reduxjs/redux-thunk) 2.3.0
+ * [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension) 2.13.8
+ * [React Dom](https://reactjs.org/docs/rendering-elements.html) 16.13.1
+ * [Semantic UI](https://react.semantic-ui.com/) 1.0.0
 
 ## Rails API
 
