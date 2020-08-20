@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import '../App.css'
 import {saveProject, deleteProject} from '../actions/projectActions' //async actions imported from the actions file
+import { Input } from 'semantic-ui-react';
+
 
 import ProjectInput from '../components/projects/ProjectInput';
 import ProjectCard from '../components/projects/ProjectCard';
@@ -47,9 +49,10 @@ class Projects extends Component{
             <>
                     <div className="ui grid container">
                         <div className="eight wide column" >
+                        <Input className="large"placeholder="Search" onChange={e => this.handleSearchProject(e)}/>
+                            {/* Search input */}<br></br><br></br>
+
                             <ProjectInput saveProject={this.props.saveProject}/>
-                            {/* Search input */}
-                            <input onChange={e => this.handleSearchProject(e)}/>
                             {/* {console.log(this.state.searchTerm)}
                             {console.log(this.state.searchedProjects)} */}
                             {/* {console.log(this.props.projects.filter(project => project.title.includes(this.state.searchTerm)))} */}
