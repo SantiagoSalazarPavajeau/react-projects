@@ -17,6 +17,8 @@ npm install
 npm start
 ```
 
+If you need to install [npm](https://www.npmjs.com/) first install [homebrew](https://brew.sh/) and then [node](https://nodejs.org/en/download/package-manager/) (for MacOs).
+
 ## Libraries and Packeges
 
 Some of the libraries and packages used in this project are:
