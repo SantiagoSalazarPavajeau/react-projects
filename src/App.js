@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Route
 } from "react-router-dom";
 import "./App.css";
@@ -34,7 +34,7 @@ class App extends Component{
   render(){
     return (
       <>
-        <Router basename="/">
+        <Router>
           <div className="flexbox">
               <SideBar/>
               <div className="main">
