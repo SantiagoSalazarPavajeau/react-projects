@@ -2,6 +2,8 @@
 
 This front end application is made with React.js & Redux and it connects to a Rails Backend through Redux-Thunk. It can be considered as a use case of Semantic UI-React for styling as well.
 
+<a href="https://www.loom.com/share/f63ecd1c3c524969b637680f8ab3a9b4"> <p>Video Walkthrough</p> <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/f63ecd1c3c524969b637680f8ab3a9b4-with-play.gif"> </a>
+
 ## To run it locally:
 
 Run these commands in your Terminal after doing a cd into your coding projects folder:
