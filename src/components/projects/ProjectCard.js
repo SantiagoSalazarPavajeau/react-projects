@@ -52,7 +52,7 @@ export default class ProjectCard extends Component{
               </div>
               <div className="content">
                   {/* <input value={this.props.title}/> */}
-                      <Link className="header" to={`/projects/${this.props.id}`}>{this.props.title}</Link> 
+                      <Link className="header" to={`/project-${this.props.id}`}>{this.props.title}</Link> 
                       {/* this link nests deeper with every click */}
                   <div className="meta">
                     <span className="date">{this.props.started}</span>

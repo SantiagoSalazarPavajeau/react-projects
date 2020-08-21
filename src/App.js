@@ -56,7 +56,7 @@ class App extends Component{
                       <Route exact path="/projects" render={routerProps => <Projects {...routerProps}/>}/> 
                       {/* I sent router props to have acces to match */}
 
-                      <Route exact path={`/projects/:id`} render={routerProps => <Tasks {...routerProps} />} >
+                      <Route exact path={`/${"project"}-:id`} render={routerProps => <Tasks {...routerProps} />} >
                         {/* {console.log(this.props.tasks)} */}
                       </Route>
 

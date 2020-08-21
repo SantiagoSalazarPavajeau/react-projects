@@ -13,7 +13,7 @@ export default class Person extends Component{
         const list = myTasks.map((task) => {
                         project = this.props.projects.find(project => project.id === task.project_id )
                         // console.log(project.title)
-                        return <li key={task.id}> <Link to={`projects/${project.id}`}>{project.title} Project</Link>: {task.description}  {task.completed ? <p>(Completed)</p> : <p>(InProgress)</p>}   </li>
+                        return <li key={task.id}> <Link to={`project-${project.id}`}>{project.title} Project</Link>: {task.description}  {task.completed ? <p>(Completed)</p> : <p>(InProgress)</p>}   </li>
                     })
         return <ul>{list}</ul>
     }
