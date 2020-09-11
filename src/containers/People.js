@@ -6,6 +6,9 @@ import Person from '../components/people/Person'
 import { editProject } from '../actions/projectActions' //async actions imported from the actions file
 import { addTask, deleteTask, editTask } from '../actions/tasksActions';
 
+import { Card, Grid, Segment } from 'semantic-ui-react'
+
+
 class People extends Component{
 
 
@@ -17,10 +20,15 @@ class People extends Component{
 
     render(){
         return (
-            <div className="ui grid container">
-                {/* {console.log(this.props.people[0])} */}
-                {this.renderPeople()}
-            </div>
+                <>
+                {/* <div className="ui grid container"> */}
+
+                    <Grid stackable container columns={2} >
+                    {this.renderPeople()}
+                    </Grid>
+                                 {/* </div> */}
+
+                </>
         )
     }
 }

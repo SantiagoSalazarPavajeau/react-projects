@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Card } from 'semantic-ui-react'
+import { Card, Grid, Segment } from 'semantic-ui-react'
 
 // import Task from '../tasks/Task';
 import { Link } from 'react-router-dom';
@@ -50,17 +50,20 @@ export default class Person extends Component{
             <>
             {this.state.showTasksModal ? <TasksModal handleHideTasksModal={this.handleHideTasksModal} project={project} tasks={this.props.tasks} people={this.props.people} editProject={this.props.editProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask}/> : null}
 
-            <div className="eight wide column" >
+            {/* <div className="ui stackable eight wide column" > */}
                 {/* {console.log(this.props.tasks)}  */}
                 {/* See if we are having access to the store and the tasks */}
                 {/* {console.log(myTasks)} */}
-                 <Card
-                    image={this.props.image.src}
-                    header={this.props.name}
-                    meta='Software Engineer'
-                    description={this.renderTasks}
-                />
-            </div>
+                    <Grid.Column>
+                        <Card
+                        image={this.props.image.src}
+                        header={this.props.name}
+                        meta='Software Engineer'
+                        description={this.renderTasks}
+                        />
+                    </Grid.Column>
+
+            {/* </div> */}
             </>
         )
     }
