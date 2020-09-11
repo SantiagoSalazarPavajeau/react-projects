@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Card, Grid, Segment } from 'semantic-ui-react'
+import { Card, Grid } from 'semantic-ui-react'
 
 // import Task from '../tasks/Task';
 import { Link } from 'react-router-dom';
@@ -43,9 +43,7 @@ export default class Person extends Component{
     render(){
         const myTasks= this.props.tasks.filter(task => task.person_id === this.props.id) // filter out the tasks that don't belong to the person
         let project;
-        const list = myTasks.map((task) => {
-            project = this.props.projects.find(project => project.id === task.project_id )
-        })
+        myTasks.map((task) => { return project = this.props.projects.find(project => project.id === task.project_id )})
         return(
             <>
             {this.state.showTasksModal ? <TasksModal handleHideTasksModal={this.handleHideTasksModal} project={project} tasks={this.props.tasks} people={this.props.people} editProject={this.props.editProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask}/> : null}

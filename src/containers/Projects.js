@@ -4,7 +4,7 @@ import '../App.css'
 import {saveProject, deleteProject, editProject} from '../actions/projectActions' //async actions imported from the actions file
 import { addTask, deleteTask, editTask } from '../actions/tasksActions';
 
-import { Input } from 'semantic-ui-react';
+import { Input, Grid } from 'semantic-ui-react';
 
 
 import ProjectInput from '../components/projects/ProjectInput';
@@ -66,14 +66,17 @@ class Projects extends Component{
                     <br></br>
                     <br></br>
 
-                    <div className="ui grid container">
+                    {/* <div className="ui grid container"> */}
+                    <Grid stackable container columns={2} >
+
                         {/* <ProjectsList projects={this.props.projects} editProject={this.props.editProject} deleteProject={this.props.deleteProject}/> */}
                         {this.renderProjects()}
                         
                         {/* Ptoject Card can contain Tasks Modal in the code? */}
+                    </Grid>
 
 
-                    </div>
+                    {/* </div> */}
                     <br></br>
                     <br></br>
 

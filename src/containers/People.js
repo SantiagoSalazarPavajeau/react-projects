@@ -6,7 +6,7 @@ import Person from '../components/people/Person'
 import { editProject } from '../actions/projectActions' //async actions imported from the actions file
 import { addTask, deleteTask, editTask } from '../actions/tasksActions';
 
-import { Card, Grid, Segment } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 
 
 class People extends Component{

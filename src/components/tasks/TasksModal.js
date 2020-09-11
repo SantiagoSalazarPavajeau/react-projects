@@ -28,7 +28,7 @@ class TasksModal extends Component{
                 console.log(numberCompleted)
             }else{
                 numberInProgress++
-                console.log(numberInProgress)
+                // console.log(numberInProgress)
             }
             percent = numberCompleted / (numberInProgress + numberCompleted)
         }
