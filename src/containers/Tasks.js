@@ -39,4 +39,4 @@ const mapDispatchToProps = dispatch => {
         editProject: project => dispatch(editProject(project)),
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps) (Tasks)
+export default connect(mapStateToProps, mapDispatchToProps) (Tasks)

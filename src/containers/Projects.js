@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import '../App.css'
-import {saveProject, deleteProject} from '../actions/projectActions' //async actions imported from the actions file
+import {saveProject, deleteProject, editProject} from '../actions/projectActions' //async actions imported from the actions file
+import { addTask, deleteTask, editTask } from '../actions/tasksActions';
+
 import { Input } from 'semantic-ui-react';
 
 
@@ -24,7 +26,7 @@ class Projects extends Component{
 
     renderProjects = () => {
         const searchedProjects = this.props.projects.filter(project => project.title.includes(this.state.searchTerm))
-        return searchedProjects.map( project => <ProjectCard key={project.id} tasks={this.props.tasks} title={project.title} started={project.started} description={project.description} id={project.id} editProject={this.props.editProject} deleteProject={this.props.deleteProject}/> )
+        return searchedProjects.map( project => <ProjectCard key={project.id} projects={this.props.projects} tasks={this.props.tasks} title={project.title} started={project.started} description={project.description} id={project.id} editProject={this.props.editProject} deleteProject={this.props.deleteProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask}/> )
     }
 
     renderModal = () => {
@@ -85,14 +87,18 @@ class Projects extends Component{
 const mapStateToProps = state => {
     return {
         projects: state.projects,
-        taks: state.tasks
+        tasks: state.tasks
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         saveProject: (project) => dispatch(saveProject(project)), // this changed from the local redux store to the redux thunk backend connection
-        deleteProject: (id) => dispatch(deleteProject(id))
+        deleteProject: (id) => dispatch(deleteProject(id)),
+        editProject: project => dispatch(editProject(project)),
+        addTask: project_id => dispatch(addTask(project_id)),
+        deleteTask: id => dispatch(deleteTask(id)),
+        editTask: task => dispatch(editTask(task)),
     }
 }
 

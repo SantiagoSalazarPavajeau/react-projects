@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Button, Confirm } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
+import TasksModal from '../tasks/TasksModal';
 
 
 
@@ -51,9 +52,12 @@ export default class ProjectCard extends Component{
 
 
     render(){
+      const project = this.props.projects.find(project => project.id.toString() === this.props.id)
+      // 
         return(
+          <>
+            {this.state.showTasksModal ? <TasksModal project={project} tasks={this.props.tasks} people={this.props.people}  match={this.props.match} editProject={this.props.editProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask}/> : null}
             <div className="eight wide column" >
-
             <div className="ui card">
               <div className="image">
               </div>
@@ -62,7 +66,7 @@ export default class ProjectCard extends Component{
                       {/* <Link className="header" to={`/project-${this.props.id}`}>{this.props.title}</Link>  */}
                       {/* make this link set show tasks modal to true. gotta change link to event listener and it has to go to task modal */}
                       {/* move tasks modal code to here */}
-                      <Button onClick={e => this.handleShowTasksModal(e)}>{this.props.title}</Button>
+                      <Link className="header" onClick={e => this.handleShowTasksModal(e)}>{this.props.title}</Link>
                       <div className="meta">
                     <span className="date">{this.props.started}</span>
                   </div>
@@ -95,6 +99,7 @@ export default class ProjectCard extends Component{
               </div>
             </div>
             </div>
+          </>
         )
     }
 }
