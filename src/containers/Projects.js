@@ -26,7 +26,7 @@ class Projects extends Component{
 
     renderProjects = () => {
         const searchedProjects = this.props.projects.filter(project => project.title.includes(this.state.searchTerm))
-        return searchedProjects.map( project => <ProjectCard key={project.id} projects={this.props.projects} tasks={this.props.tasks} title={project.title} started={project.started} description={project.description} id={project.id} editProject={this.props.editProject} deleteProject={this.props.deleteProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask}/> )
+        return searchedProjects.map( project => <ProjectCard key={project.id} project={project} people={this.props.people} tasks={this.props.tasks} title={project.title} started={project.started} description={project.description} id={project.id} editProject={this.props.editProject} deleteProject={this.props.deleteProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask}/> )
     }
 
     renderModal = () => {
@@ -87,7 +87,8 @@ class Projects extends Component{
 const mapStateToProps = state => {
     return {
         projects: state.projects,
-        tasks: state.tasks
+        tasks: state.tasks,
+        people: state.people
     }
 }
 

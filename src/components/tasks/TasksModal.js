@@ -97,7 +97,7 @@ class TasksModal extends Component{
                     <Grid.Column>
                     </Grid.Column>
                     <Grid.Column>
-                    <Button basic content="Exit Project Page"  onClick={this.props.history.goBack} secondary ></Button>
+                    <Button basic content="Exit Project Page"  onClick={ e => this.props.handleHideTasksModal(e)} secondary ></Button>
                     </Grid.Column>
                     </Grid.Row>
                 </Grid> 

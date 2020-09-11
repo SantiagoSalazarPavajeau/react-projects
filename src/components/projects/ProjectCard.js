@@ -49,14 +49,22 @@ export default class ProjectCard extends Component{
       })
     }
 
+    handleHideTasksModal = () => {
+      this.setState({
+        showTasksModal: false
+      })
+    }
+
 
 
     render(){
-      const project = this.props.projects.find(project => project.id.toString() === this.props.id)
-      // 
+      // const project = this.props.projects.find(project => project.id.toString() === this.props.id)
+      // console.log(this.props.project)
+      // add event listener to exit button on tasks modal to set showTasksModal to false again
         return(
           <>
-            {this.state.showTasksModal ? <TasksModal project={project} tasks={this.props.tasks} people={this.props.people}  match={this.props.match} editProject={this.props.editProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask}/> : null}
+            
+            {this.state.showTasksModal ? <TasksModal handleHideTasksModal={this.handleHideTasksModal} project={this.props.project} tasks={this.props.tasks} people={this.props.people} editProject={this.props.editProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask}/> : null}
             <div className="eight wide column" >
             <div className="ui card">
               <div className="image">
