@@ -10,7 +10,8 @@ export default class ProjectCard extends Component{
     state = {
       open: false,
       edit: false,
-      percent: 50
+      percent: 50,
+      showTasksModal: false
     }
 
     handleDeleteClick = (event) => {
@@ -41,6 +42,12 @@ export default class ProjectCard extends Component{
       })
     }
 
+    handleShowTasksModal = () => {
+      this.setState({
+        showTasksModal: true
+      })
+    }
+
 
 
     render(){
@@ -52,9 +59,11 @@ export default class ProjectCard extends Component{
               </div>
               <div className="content">
                   {/* <input value={this.props.title}/> */}
-                      <Link className="header" to={`/project-${this.props.id}`}>{this.props.title}</Link> 
-                      {/* this link nests deeper with every click */}
-                  <div className="meta">
+                      {/* <Link className="header" to={`/project-${this.props.id}`}>{this.props.title}</Link>  */}
+                      {/* make this link set show tasks modal to true. gotta change link to event listener and it has to go to task modal */}
+                      {/* move tasks modal code to here */}
+                      <Button onClick={e => this.handleShowTasksModal(e)}>{this.props.title}</Button>
+                      <div className="meta">
                     <span className="date">{this.props.started}</span>
                   </div>
                   <div className="description">

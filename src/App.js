@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route
 } from "react-router-dom";
 import "./App.css";
@@ -57,7 +57,7 @@ class App extends Component{
                       {/* I sent router props to have acces to match */}
 
                       <Route exact path={`/${"project"}-:id`} render={routerProps => <Tasks {...routerProps} />} >
-                        {/* {console.log(this.props.tasks)} */}
+                        {/* move this to the projects view and don't create a new route */}
                       </Route>
 
                       <Route exact path={`/people`}>

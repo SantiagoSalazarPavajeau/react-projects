@@ -67,6 +67,9 @@ class Projects extends Component{
                     <div className="ui grid container">
                         {/* <ProjectsList projects={this.props.projects} editProject={this.props.editProject} deleteProject={this.props.deleteProject}/> */}
                         {this.renderProjects()}
+                        
+                        {/* Ptoject Card can contain Tasks Modal in the code? */}
+
 
                     </div>
                     <br></br>
