@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Form, Grid } from 'semantic-ui-react';
-// import {userPostFetch} from '../redux/actions';
+import {createUser} from '../../actions/peopleActions';
 
 class Signup extends Component {
   state = {
@@ -17,7 +17,7 @@ class Signup extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    this.props.userPostFetch(this.state)
+    this.props.createUser(this.state)
   }
 
   render() {
@@ -29,7 +29,7 @@ class Signup extends Component {
                     <h1>Sign Up For An Account</h1>
 
                     <label>Username</label>
-                    <input
+                    <Form.Input
                     name='username'
                     placeholder='Username'
                     value={this.state.username}
@@ -37,7 +37,7 @@ class Signup extends Component {
                     /><br/>
 
                     <label>Password</label>
-                    <input
+                    <Form.Input
                     type='password'
                     name='password'
                     placeholder='Password'
@@ -56,7 +56,7 @@ class Signup extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-//   userPostFetch: userInfo => dispatch(userPostFetch(userInfo))
+  createUser: user => dispatch(createUser(user))
 })
 
 export default connect(null, mapDispatchToProps)(Signup);
