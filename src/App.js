@@ -16,7 +16,7 @@ import Tasks from './containers/Tasks';
 import People from './containers/People';
 
 import {fetchProjects} from './actions/projectActions'
-import {fetchPeople} from './actions/peopleActions'
+import {fetchPeople, loginUser} from './actions/peopleActions'
 import {fetchTasks} from './actions/tasksActions'
 import Signup from './components/people/Signup';
 import Login from './components/people/Login';
@@ -27,15 +27,40 @@ import Login from './components/people/Login';
 
 class App extends Component{
 
+  state = { auth: { currentUser: {} } };
+
   componentDidMount(){
     this.props.fetchProjects()
     this.props.fetchPeople()
     this.props.fetchTasks()
+
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      this.props.loginUser().then((user) => {
+        const currentUser = { currentUser: user };
+
+        this.setState({ auth: currentUser });
+      });
+    }
   }
+
+  handleLogin = (user) => {
+    const currentUser = { currentUser: user };
+    localStorage.setItem("token", user.token);
+
+    this.setState({ auth: currentUser });
+  };
+
+  handleLogout = () => {
+    localStorage.removeItem("token");
+    this.setState({ auth: { currentUser: {} } });
+  };
   
   render(){
     return (
       <>
+      {console.log(this.state)}
         <Router >
           <div className="flexbox">
               <SideBar/>
@@ -51,9 +76,6 @@ class App extends Component{
                         </div>
                       </div>
                       </Route>
-                      <Route exact path="/login">
-                        <p>Login</p>
-                      </Route>
 
                       <Route exact path="/projects" render={routerProps => <Projects {...routerProps}/>}/> 
                       {/* I sent router props to have acces to match */}
@@ -68,9 +90,12 @@ class App extends Component{
                       <Route exact path={`/signup`}>
                         <Signup/>
                       </Route>
-                      <Route exact path={`/login`}>
-                        <Login/>
-                      </Route>
+                      <Route exact path={`/login`} 
+                       render={(routerProps) => {
+                        return (
+                          <Login {...routerProps} handleLogin={this.handleLogin} />
+                        );
+                      }}/>
                       
                     {/* </Switch>  */}
                 </div>                                            
@@ -94,7 +119,8 @@ const mapDispatchToProps = dispatch => {
   return {
       fetchProjects: () => dispatch(fetchProjects()),
       fetchPeople: () => dispatch(fetchPeople()),
-      fetchTasks: () => dispatch(fetchTasks())
+      fetchTasks: () => dispatch(fetchTasks()),
+      loginUser: () => dispatch(loginUser())
   }
 }
 

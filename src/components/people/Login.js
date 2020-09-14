@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Form, Grid } from 'semantic-ui-react';
-import {createUser} from '../../actions/peopleActions';
+import {loginUser} from '../../actions/peopleActions';
 
 class Login extends Component {
   state = {
     username: "",
-    password: ""
+    password: "",
+    error: false
   }
 
   handleChange = event => {
@@ -17,7 +18,15 @@ class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    this.props.createUser(this.state)
+    this.props.loginUser(this.state).then((auth) => {
+      if(auth.error) {
+        console.log(auth.error.message)
+        this.setState({error: true})
+      } else {
+        this.props.handleLogin(auth)
+        this.props.history.push('/profile')
+      }
+    })
   }
 
   render() {
@@ -56,7 +65,7 @@ class Login extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  createUser: user => dispatch(createUser(user))
+  loginUser: user => dispatch(loginUser(user))
 })
 
-export default connect(null, mapDispatchToProps)(Signup);
+export default connect(null, mapDispatchToProps)(Login);
