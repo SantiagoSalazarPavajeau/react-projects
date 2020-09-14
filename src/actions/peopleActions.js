@@ -11,3 +11,4 @@ export function fetchPeople(){
                 .catch(error => console.log(error.message))
     }
 }
+

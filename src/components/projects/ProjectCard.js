@@ -95,13 +95,13 @@ export default class ProjectCard extends Component{
                           <Button basic icon='pencil'/>
                         </Link> 
                         <Button basic icon='trash' onClick={event => this.handleDeleteClick(event)}>
-                        {/* <i aria-hidden="true" className="trash alternate icon right"></i> */}
-                      </Button>
+                          {/* <i aria-hidden="true" className="trash alternate icon right"></i> */}
+                        </Button>
                       <Confirm
                         open={this.state.open}
                         onCancel={this.handleCancel}
                         onConfirm={this.handleConfirm}
-                      />        
+                      />
                   </div>
                 
               </div>

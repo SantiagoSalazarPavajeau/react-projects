@@ -18,6 +18,7 @@ import People from './containers/People';
 import {fetchProjects} from './actions/projectActions'
 import {fetchPeople} from './actions/peopleActions'
 import {fetchTasks} from './actions/tasksActions'
+import Signup from './components/people/Signup';
 
 
 
@@ -62,6 +63,9 @@ class App extends Component{
 
                       <Route exact path={`/people`}>
                         <People />
+                      </Route>
+                      <Route exact path={`/signup`}>
+                        <Signup/>
                       </Route>
                       
                     {/* </Switch>  */}
