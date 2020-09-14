@@ -1,4 +1,5 @@
-const URL ='https://secure-shelf-48338.herokuapp.com/'
+// const URL ='https://secure-shelf-48338.herokuapp.com/'
+const URL ='http://localhost:3001'
 
 export function fetchPeople(){
     return (dispatch) => {
@@ -30,7 +31,7 @@ export const createUser = user => {
             // 'message' if there is an error with creating the user, i.e. invalid username
           } else {
             localStorage.setItem("token", data.token)
-            dispatch({type: 'LOGIN_USER', userObj})
+            dispatch({type: 'LOGIN_USER', userObj: data.payload})
           }
         })
     }

@@ -13,7 +13,7 @@ class People extends Component{
 
 
     renderPeople = () => {
-        return this.props.people.map(person => <Person editProject={this.props.editProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask} people={this.props.people} projects={this.props.projects} key={person.id} id={person.id} name={person.key} image={person.image} tasks={this.props.tasks}></Person>)
+        return this.props.people.map(person => <Person editProject={this.props.editProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask} people={this.props.people} projects={this.props.projects} key={person.id} id={person.id} username={person.username} image={person.image} tasks={this.props.tasks}></Person>)
     }
 
 

@@ -54,9 +54,9 @@ export default class Person extends Component{
                 {/* {console.log(myTasks)} */}
                     <Grid.Column>
                         <Card
-                        image={this.props.image.src}
-                        header={this.props.name}
-                        meta='Software Engineer'
+                        image={this.props.image}
+                        header={this.props.username}
+                        // meta='Software Engineer'
                         description={this.renderTasks}
                         />
                     </Grid.Column>
