@@ -15,9 +15,10 @@ import Projects from './containers/Projects';
 import Tasks from './containers/Tasks';
 import People from './containers/People';
 
-import {fetchProjects} from './actions/projectActions'
+import {fetchProjects, editProject} from './actions/projectActions'
 import {fetchPeople, loginUser, deletePerson} from './actions/peopleActions'
-import {fetchTasks} from './actions/tasksActions'
+import {fetchTasks, addTask, deleteTask, editTask} from './actions/tasksActions'
+
 import Signup from './components/people/Signup';
 import Login from './components/people/Login';
 import Profile from './components/people/Profile';
@@ -26,9 +27,10 @@ import Profile from './components/people/Profile';
 
 
 
+
 class App extends Component{
 
-  state = { auth: { currentUser: {} } };
+  state = { auth: { currentUser: {} }, showTasksModal: false };
 
   componentDidMount(){
     this.props.fetchProjects()
@@ -57,6 +59,11 @@ class App extends Component{
     localStorage.removeItem("token");
     this.setState({ auth: { currentUser: {} } });
   };
+
+
+  handleHideTasksModal = () => {
+    this.setState({ showTasksModal: false})
+  }
   
   render(){
     return (
@@ -73,7 +80,7 @@ class App extends Component{
                     {/* <Switch> */}
                       <Route exact path="/" render={(routerProps) => {
                         return (
-                          this.state.auth.currentUser.error ? <Login {...routerProps} handleLogin={this.handleLogin} /> : <Profile {...routerProps} people={this.props.people} tasks={this.props.tasks} projects={this.props.projects} deletePerson={this.props.deletePerson}currentUser={this.state.auth.currentUser}/>
+                          this.state.auth.currentUser.error ? <Login {...routerProps} handleLogin={this.handleLogin} /> : <Profile {...routerProps} people={this.props.people} tasks={this.props.tasks} projects={this.props.projects} deletePerson={this.props.deletePerson}currentUser={this.state.auth.currentUser}editProject={this.props.editProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask}/>
                         );
                       }}/>
 
@@ -120,6 +127,10 @@ class App extends Component{
                           projects={this.props.projects}
                           deletePerson={this.props.deletePerson}
                           currentUser={this.state.auth.currentUser}
+                          editProject={this.props.editProject} 
+                          addTask={this.props.addTask} 
+                          deleteTask={this.props.deleteTask} 
+                          editTask={this.props.editTask}
                           />
                         );
                       }}/>
@@ -150,7 +161,11 @@ const mapDispatchToProps = dispatch => {
       fetchPeople: () => dispatch(fetchPeople()),
       fetchTasks: () => dispatch(fetchTasks()),
       loginUser: () => dispatch(loginUser()),
-      deletePerson: () => dispatch(deletePerson())
+      deletePerson: () => dispatch(deletePerson()),
+      editProject: project => dispatch(editProject(project)),
+      addTask: project_id => dispatch(addTask(project_id)),
+      deleteTask: id => dispatch(deleteTask(id)),
+      editTask: task => dispatch(editTask(task))
   }
 }
 

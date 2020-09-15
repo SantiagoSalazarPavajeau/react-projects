@@ -7,18 +7,18 @@ import { Link } from 'react-router-dom';
 
 
 import TasksModal from '../tasks/TasksModal';
-import Login from './Login';
 
 
 
 export default class Profile extends Component{
+
     state = {
         showTasksModal: false
     }
 
     renderTasks = () => {
         const myTasks= this.props.tasks.filter(task => task.person_id === this.props.currentUser.id) // filter out the tasks that don't belong to the person
-        console.log(myTasks)
+        // console.log(myTasks)
         let project;
         const list = myTasks.map((task) => {
                         project = this.props.projects.find(project => project.id === task.project_id )
@@ -26,6 +26,7 @@ export default class Profile extends Component{
                         // return <li key={task.id}> <Link to={`project-${project.id}`}>{project.title} Project</Link>: {task.description}  {task.completed ? <p>(Completed)</p> : <p>(InProgress)</p>}   </li>
                         return <li key={task.id}> <Link onClick={this.handleShowTasksModal}>{project.title} Project</Link>: {task.description}  {task.completed ? <p>(Completed)</p> : <p>(InProgress)</p>}   </li>
                     })
+        console.log(project)
         return <ul>{list}</ul>
     }
 
@@ -43,11 +44,11 @@ export default class Profile extends Component{
 
     renderProfile = () => {
         if(this.props.currentUser.username){
-            const person = this.props.people.find(person => person.username == this.props.currentUser.username)
-            const myTasks= this.props.tasks.filter(task => task.person_id === this.props.id) // filter out the tasks that don't belong to the person
+            const person = this.props.people.find(person => person.username === this.props.currentUser.username)
+            const myTasks= this.props.tasks.filter(task => task.person_id === this.props.currentUser.id) // filter out the tasks that don't belong to the person
             let project;
             myTasks.map((task) => { return project = this.props.projects.find(project => project.id === task.project_id )})
-            
+            // console.log(project)
             return (
                 <div>
 
