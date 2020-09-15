@@ -13,7 +13,8 @@ import TasksModal from '../tasks/TasksModal';
 export default class Profile extends Component{
 
     state = {
-        showTasksModal: false
+        showTasksModal: false,
+
     }
 
     renderTasks = () => {
@@ -26,7 +27,6 @@ export default class Profile extends Component{
                         // return <li key={task.id}> <Link to={`project-${project.id}`}>{project.title} Project</Link>: {task.description}  {task.completed ? <p>(Completed)</p> : <p>(InProgress)</p>}   </li>
                         return <li key={task.id}> <Link onClick={this.handleShowTasksModal}>{project.title} Project</Link>: {task.description}  {task.completed ? <p>(Completed)</p> : <p>(InProgress)</p>}   </li>
                     })
-        console.log(project)
         return <ul>{list}</ul>
     }
 
@@ -41,6 +41,11 @@ export default class Profile extends Component{
           showTasksModal: false
         })
       }
+    handleDeletePerson = (e) => {
+        // console.log(e.target.id)
+        this.props.deletePerson(e.target.id)
+        this.props.history.push('/signup')
+    }
 
     renderProfile = () => {
         if(this.props.currentUser.username){
@@ -56,13 +61,13 @@ export default class Profile extends Component{
                     <Grid stackable container columns={2} >
 
                         <Grid.Column>
-                            {console.log(this.props.people)}
+                            {/* {console.log(person)} */}
                             <Card
                             image={person.image}
                             header={person.username}
                             // meta='Software Engineer'
                             />
-                            <Button onClick={this.props.deletePerson(person.id)}>Delete my Account</Button>
+                            <Button id={person.id} onClick={e => this.handleDeletePerson(e)}>Delete my Account</Button>
                         </Grid.Column>
                         <Grid.Column>
 

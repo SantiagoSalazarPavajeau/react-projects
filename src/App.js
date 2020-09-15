@@ -161,7 +161,7 @@ const mapDispatchToProps = dispatch => {
       fetchPeople: () => dispatch(fetchPeople()),
       fetchTasks: () => dispatch(fetchTasks()),
       loginUser: () => dispatch(loginUser()),
-      deletePerson: () => dispatch(deletePerson()),
+      deletePerson: (id) => dispatch(deletePerson(id)),
       editProject: project => dispatch(editProject(project)),
       addTask: project_id => dispatch(addTask(project_id)),
       deleteTask: id => dispatch(deleteTask(id)),
