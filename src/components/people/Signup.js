@@ -6,7 +6,9 @@ import {createUser} from '../../actions/peopleActions';
 class Signup extends Component {
   state = {
     username: "",
-    password: ""
+    password: "",
+    showSucces: false,
+    error: false
   }
 
   handleChange = event => {
@@ -17,16 +19,12 @@ class Signup extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    this.props.createUser(this.state)
-    this.props.history.push('/profile')
+    return this.props.createUser({username: this.state.username, password: this.state.password}) ? this.setState({showSucces: true}) : this.setState({error: true}) 
   }
 
-  render() {
-    return (
-        <Grid stackable container columns={1} >
-
-            <Grid.Column>
-                <Form onSubmit={this.handleSubmit}>
+  renderForm = () => {
+    if (!this.state.showSucces){
+      return (<Form onSubmit={this.handleSubmit}>
                     <h1>Sign Up For An Account</h1>
 
                     <label>Username</label>
@@ -48,8 +46,18 @@ class Signup extends Component {
                     <br/>
 
                     <input type='submit'/>
-            </Form>
-        </Grid.Column>
+            </Form>)
+    } else {
+      return <p>User Successfully created</p>
+    }
+  }
+
+  render() {
+    return (
+        <Grid stackable container columns={1} >
+            <Grid.Column>
+                {this.renderForm()}
+            </Grid.Column>
       </Grid>
 
     )

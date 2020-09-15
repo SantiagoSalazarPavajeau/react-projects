@@ -16,10 +16,11 @@ import Tasks from './containers/Tasks';
 import People from './containers/People';
 
 import {fetchProjects} from './actions/projectActions'
-import {fetchPeople, loginUser} from './actions/peopleActions'
+import {fetchPeople, loginUser, deletePerson} from './actions/peopleActions'
 import {fetchTasks} from './actions/tasksActions'
 import Signup from './components/people/Signup';
 import Login from './components/people/Login';
+import Profile from './components/people/Profile';
 
 
 
@@ -47,7 +48,7 @@ class App extends Component{
 
   handleLogin = (user) => {
     const currentUser = { currentUser: user };
-    localStorage.setItem("token", user.token);
+    // localStorage.setItem("token", user.token);
 
     this.setState({ auth: currentUser });
   };
@@ -72,7 +73,7 @@ class App extends Component{
                     {/* <Switch> */}
                       <Route exact path="/" render={(routerProps) => {
                         return (
-                          this.state.auth.currentUser.error ? <Login {...routerProps} handleLogin={this.handleLogin} /> : "Profile"
+                          this.state.auth.currentUser.error ? <Login {...routerProps} handleLogin={this.handleLogin} /> : <Profile {...routerProps} people={this.props.people} tasks={this.props.tasks} projects={this.props.projects} deletePerson={this.props.deletePerson}currentUser={this.state.auth.currentUser}/>
                         );
                       }}/>
 
@@ -99,7 +100,7 @@ class App extends Component{
                       <Route exact path={`/signup`}
                        render={(routerProps) => {
                         return (
-                          <Signup {...routerProps} handleLogin={this.handleLogin} />
+                          <Signup {...routerProps} />
                         );
                       }}/>
 
@@ -109,6 +110,21 @@ class App extends Component{
                           <Login {...routerProps} handleLogin={this.handleLogin} />
                         );
                       }}/>
+
+                      <Route exact path={`/profile`} 
+                       render={(routerProps) => {
+                        return (
+                          <Profile {...routerProps} 
+                          people={this.props.people}
+                          tasks={this.props.tasks}
+                          projects={this.props.projects}
+                          deletePerson={this.props.deletePerson}
+                          currentUser={this.state.auth.currentUser}
+                          />
+                        );
+                      }}/>
+
+
                       
                     {/* </Switch>  */}
                 </div>                                            
@@ -133,7 +149,8 @@ const mapDispatchToProps = dispatch => {
       fetchProjects: () => dispatch(fetchProjects()),
       fetchPeople: () => dispatch(fetchPeople()),
       fetchTasks: () => dispatch(fetchTasks()),
-      loginUser: () => dispatch(loginUser())
+      loginUser: () => dispatch(loginUser()),
+      deletePerson: () => dispatch(deletePerson())
   }
 }
 

@@ -20,7 +20,7 @@ export const store = createStore(reducer,
 ReactDOM.render(
   <Provider store={store}>
     <App />
-    {console.log(store)}
+    {/* {console.log(store)} */}
   </Provider>,
   document.getElementById('root')
 );

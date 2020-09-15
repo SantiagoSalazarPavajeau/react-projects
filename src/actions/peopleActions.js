@@ -58,5 +58,19 @@ export const createUser = user => {
     }
   }
 
-
+  export function deletePerson(id){
+    const configObj = {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        }
+      };
+    return (dispatch) => {
+        fetch(`${URL}/people/${id}`, configObj)
+            .then(response => {return response.json()})
+            .then(() => {
+                dispatch({type: 'DELETE_PERSON', id})
+            })
+    }
 }
