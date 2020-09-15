@@ -8,7 +8,7 @@ const NavBar = (props)=>{
                 <div className="header item">
                     Projects Dashboard
                 </div>
-                    {console.log(props.currentUser)}
+                    {/* {console.log(props.currentUser)} */}
                     {props.currentUser.error ? <Link to="/login" className="ui item">Login</Link> : null}
                     {props.currentUser.error ? <Link to="/signup" className="ui item" >Signup</Link> : null}
                     {props.currentUser.error ? null : <Link to="/profile" className="ui item" >Profile</Link>  }

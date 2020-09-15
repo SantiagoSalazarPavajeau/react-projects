@@ -70,13 +70,11 @@ class App extends Component{
                 <div className="ui container">
 
                     {/* <Switch> */}
-                      <Route exact path="/">
-                      <div className="ui grid container">
-                        <div className="twelve wide column" >
-                        <h1>Welcome to your team's Projects Dashboard </h1>
-                        </div>
-                      </div>
-                      </Route>
+                      <Route exact path="/" render={(routerProps) => {
+                        return (
+                          this.state.auth.currentUser.error ? <Login {...routerProps} handleLogin={this.handleLogin} /> : "Profile"
+                        );
+                      }}/>
 
                       <Route exact path="/projects" 
                        render={routerProps => {
@@ -98,9 +96,12 @@ class App extends Component{
                         <People />
                       </Route>
 
-                      <Route exact path={`/signup`}>
-                        <Signup/>
-                      </Route>
+                      <Route exact path={`/signup`}
+                       render={(routerProps) => {
+                        return (
+                          <Signup {...routerProps} handleLogin={this.handleLogin} />
+                        );
+                      }}/>
 
                       <Route exact path={`/login`} 
                        render={(routerProps) => {
