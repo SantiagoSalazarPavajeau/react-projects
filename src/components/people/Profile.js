@@ -56,7 +56,7 @@ export default class Profile extends Component{
                     <Grid stackable container columns={2} >
 
                         <Grid.Column>
-                            {/* {console.log(myTasks)} */}
+                            {console.log(this.props.people)}
                             <Card
                             image={person.image}
                             header={person.username}

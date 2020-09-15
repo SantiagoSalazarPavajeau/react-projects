@@ -34,14 +34,16 @@ class Task extends Component{
     }
 
     assignTo = (e) => {
-        const ownerIndex = this.props.people.findIndex(person => person.key === e.target.innerText)
+        const ownerIndex = this.props.people.findIndex(person => person.username === e.target.innerText)
         this.setState({
             person_id: this.props.people[ownerIndex].id // use onchange for dropdowns/select and parentNode.id instead of value
         })
     }
     
     renderInProgress = () => {
-        let owner = this.props.people.find(person => person.id === this.state.person_id) // person_id is a propery of the task and we can find the owner in the people state
+        let dropdownFormat = []
+        this.props.people.map(person => dropdownFormat.push({key: person.username, text: person.username, value: person.username, image: { avatar: true, src: person.image } }))
+        let owner = dropdownFormat.find(person => person.id === this.state.person_id) // person_id is a propery of the task and we can find the owner in the people state
         return (
             
             <>
@@ -60,7 +62,7 @@ class Task extends Component{
                 </Input>
             <br></br>
 
-                Assigned to: <Dropdown button className='icon' placeholder={owner ? owner.key : 'Yet to be assigned'} onChange={e => this.assignTo(e)} floating labeled icon='users' options={this.props.people} />
+                Assigned to: <Dropdown button className='icon' placeholder={owner ? owner.key : 'Yet to be assigned'} onChange={e => this.assignTo(e)} floating labeled icon='users' options={dropdownFormat} />
             <br></br>
 
             <br></br>
