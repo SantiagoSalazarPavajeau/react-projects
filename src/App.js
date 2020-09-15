@@ -60,12 +60,13 @@ class App extends Component{
   render(){
     return (
       <>
-      {console.log(this.state)}
+      {/* {console.log(this.state)} */}
         <Router >
           <div className="flexbox">
               <SideBar/>
               <div className="main">
-              <NavBar/>
+              <NavBar currentUser={this.state.auth.currentUser}/> 
+              {/* send the current user to navbar to show or hide navbar buttons */}
                 <div className="ui container">
 
                     {/* <Switch> */}
@@ -77,19 +78,30 @@ class App extends Component{
                       </div>
                       </Route>
 
-                      <Route exact path="/projects" render={routerProps => <Projects {...routerProps}/>}/> 
+                      <Route exact path="/projects" 
+                       render={routerProps => {
+                         return (
+                       <Projects {...routerProps}/>)
+                      }}/> 
+                      
                       {/* I sent router props to have acces to match */}
 
-                      <Route exact path={`/${"project"}-:id`} render={routerProps => <Tasks {...routerProps} />} >
+                      <Route exact path={`/${"project"}-:id`} 
+                       render={routerProps => {
+                        return (
+                       <Tasks {...routerProps} />)
+                       }} >
                         {/* move this to the projects view and don't create a new route */}
                       </Route>
 
                       <Route exact path={`/people`}>
                         <People />
                       </Route>
+
                       <Route exact path={`/signup`}>
                         <Signup/>
                       </Route>
+
                       <Route exact path={`/login`} 
                        render={(routerProps) => {
                         return (
