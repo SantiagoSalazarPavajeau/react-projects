@@ -9,10 +9,10 @@ const NavBar = (props)=>{
                     Projects Dashboard
                 </div>
                     {/* {console.log(props.currentUser)} */}
-                    {props.currentUser.error ? <Link to="/login" className="ui item">Login</Link> : null}
-                    {props.currentUser.error ? <Link to="/signup" className="ui item" >Signup</Link> : null}
-                    {props.currentUser.error ? null : <Link to="/profile" className="ui item" >Profile</Link>  }
-                    {props.currentUser.error ? null : <Link to="/logout" className="ui item right"> Logout </Link>}
+                    {props.currentUser.token ? null : <Link to="/login" className="ui item">Login</Link>}
+                    {props.currentUser.token ? null : <Link to="/signup" className="ui item" >Signup</Link>}
+                    {props.currentUser.token ? <Link to="/profile" className="ui item" >Profile</Link> : null }
+                    {props.currentUser.token ? <Link className="ui item right" onClick={e => props.handleLogout(e)}> Logout </Link> : null}
 
             </div>
             

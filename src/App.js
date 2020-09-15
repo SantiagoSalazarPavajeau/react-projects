@@ -66,7 +66,7 @@ class App extends Component{
           <div className="flexbox">
               <SideBar/>
               <div className="main">
-              <NavBar currentUser={this.state.auth.currentUser}/> 
+              <NavBar currentUser={this.state.auth.currentUser} handleLogout={this.handleLogout}/> 
               {/* send the current user to navbar to show or hide navbar buttons */}
                 <div className="ui container">
 
