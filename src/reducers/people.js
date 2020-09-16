@@ -11,8 +11,8 @@ export default function people(state = [], action){
                 console.log(action.id)
                 let deletedPerson;
                 state.map(person => person.id !== action.id ? deletedPerson = person : null)
-                console.log(deletedPerson)
-                console.log(state.filter(person => person.username !== deletedPerson.username))
+                // console.log(deletedPerson)
+                // console.log(state.filter(person => person.username !== deletedPerson.username))
                 return [...state.filter(person => person.username !== deletedPerson.username)]
         case 'LOAD_PEOPLE':
                 const people = action.people.data.map(person => person.attributes)

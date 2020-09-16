@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { Form, Grid } from 'semantic-ui-react';
+import { Form, Grid, Message } from 'semantic-ui-react';
 import {loginUser} from '../../actions/peopleActions';
 
 class Login extends Component {
@@ -20,7 +20,7 @@ class Login extends Component {
     event.preventDefault()
     this.props.loginUser(this.state).then((auth) => {
       if(auth.error) {
-        console.log(auth.error.message)
+        console.log(auth.error)
         this.setState({error: true})
       } else {
         this.props.handleLogin(auth)
@@ -34,7 +34,7 @@ class Login extends Component {
         <Grid stackable container columns={1} >
 
             <Grid.Column>
-                <Form onSubmit={this.handleSubmit}>
+                <Form onSubmit={this.handleSubmit} error >
                     <h1>Login into your account</h1>
 
                     <label>Username</label>
@@ -43,7 +43,8 @@ class Login extends Component {
                     placeholder='Username'
                     value={this.state.username}
                     onChange={this.handleChange}
-                    /><br/>
+                    />
+                    <br/>
 
                     <label>Password</label>
                     <Form.Input
@@ -53,6 +54,8 @@ class Login extends Component {
                     value={this.state.password}
                     onChange={this.handleChange}
                     /><br/>
+                    {this.state.error ? <Message error content="Wrong username or password"/> : null}
+
                     <br/>
 
                     <input type='submit'/>

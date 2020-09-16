@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { Form, Grid } from 'semantic-ui-react';
+import { Form, Grid, Message } from 'semantic-ui-react';
 import {createUser} from '../../actions/peopleActions';
 
 class Signup extends Component {
@@ -48,7 +48,7 @@ class Signup extends Component {
                     <input type='submit'/>
             </Form>)
     } else {
-      return <p>User Successfully created</p>
+      return <Message success>User Successfully created</Message>
     }
   }
 

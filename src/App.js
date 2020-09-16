@@ -80,7 +80,7 @@ class App extends Component{
                     {/* <Switch> */}
                       <Route exact path="/" render={(routerProps) => {
                         return (
-                          this.state.auth.currentUser.username ?  <Profile {...routerProps} people={this.props.people} tasks={this.props.tasks} projects={this.props.projects} deletePerson={this.props.deletePerson}currentUser={this.state.auth.currentUser}editProject={this.props.editProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask}/> : <Login {...routerProps} handleLogin={this.handleLogin} />
+                          localStorage.token ?  <Profile {...routerProps} people={this.props.people} tasks={this.props.tasks} projects={this.props.projects} deletePerson={this.props.deletePerson}currentUser={this.state.auth.currentUser}editProject={this.props.editProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask}/> : <Login {...routerProps} handleLogin={this.handleLogin} />
                         );
                       }}/>
 

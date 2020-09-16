@@ -44,6 +44,7 @@ export default class Profile extends Component{
     handleDeletePerson = (e) => {
         // console.log(e.target.id)
         this.props.deletePerson(e.target.id)
+        localStorage.removeItem("token");
         this.props.history.push('/signup')
     }
 
