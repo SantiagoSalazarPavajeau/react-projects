@@ -1,5 +1,4 @@
-// const URL ='https://secure-shelf-48338.herokuapp.com/'
-const URL ='http://localhost:3001'
+// const URL ='http://localhost:3001'
 
 export function fetchProjects(){
     return (dispatch) => {

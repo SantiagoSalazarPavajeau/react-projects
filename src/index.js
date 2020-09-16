@@ -17,6 +17,10 @@ export const store = createStore(reducer,
   );
 // console.log(store.getState())
 
+export const URL ='https://secure-shelf-48338.herokuapp.com/'
+// export const URL ='http://localhost:3001'
+
+
 ReactDOM.render(
   <Provider store={store}>
     <App />
