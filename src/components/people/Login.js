@@ -20,7 +20,7 @@ class Login extends Component {
     event.preventDefault()
     this.props.loginUser(this.state).then((auth) => {
       if(auth.error) {
-        console.log(auth.error)
+        // console.log(auth.error)
         this.setState({error: true})
       } else {
         this.props.handleLogin(auth)

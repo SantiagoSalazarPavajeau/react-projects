@@ -25,7 +25,7 @@ class Task extends Component{
     }
 
     handleSave = () => {
-        console.log(this.state.person_id)
+        // console.log(this.state.person_id)
         this.props.editTask(this.state)
     }
 

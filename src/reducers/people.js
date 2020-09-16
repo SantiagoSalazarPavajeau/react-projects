@@ -8,7 +8,7 @@ export default function people(state = [], action){
                     }
                 return [...state, person]
         case 'DELETE_PERSON':
-                console.log(action.id)
+                // console.log(action.id)
                 let deletedPerson;
                 state.map(person => person.id !== action.id ? deletedPerson = person : null)
                 // console.log(deletedPerson)

@@ -1,5 +1,4 @@
-// const URL ='https://secure-shelf-48338.herokuapp.com/'
-// const URL ='http://localhost:3001'
+import { URL } from '../index.js'
 
 export function fetchTasks(){
     return (dispatch) => {
@@ -28,19 +27,19 @@ export function addTask(project_id){
             completed: false
         })
       };
-    console.log('b')
+    // console.log('b')
     return (dispatch) => {
-        console.log('c')
+        // console.log('c')
         fetch(`${URL}/tasks`, configObj)
             .then(response => {return response.json()})
             .then(task => {
                 // console.log(project)
-                console.log('d')
+                // console.log('d')
                 const newTask = task.data.attributes 
-                console.log(task)
+                // console.log(task)
                 dispatch({type: 'ADD_TASK', newTask}) 
             })
-        console.log('e')
+        // console.log('e')
     }
 }
 

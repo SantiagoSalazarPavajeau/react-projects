@@ -30,7 +30,7 @@ import Profile from './components/people/Profile';
 
 class App extends Component{
 
-  state = { auth: { currentUser: {} }, showTasksModal: false };
+  state = { auth: { currentUser: {} }, showTasksModal: false, loggedIn: false };
 
   componentDidMount(){
     this.props.fetchProjects()
@@ -52,12 +52,12 @@ class App extends Component{
     const currentUser = { currentUser: user };
     // localStorage.setItem("token", user.token);
 
-    this.setState({ auth: currentUser });
+    this.setState({ auth: currentUser, loggedIn: true });
   };
 
   handleLogout = () => {
     localStorage.removeItem("token");
-    this.setState({ auth: { currentUser: {} } });
+    this.setState({ auth: { currentUser: {} }, loggedIn: false });
   };
 
 
@@ -73,14 +73,15 @@ class App extends Component{
           <div className="flexbox">
               <SideBar/>
               <div className="main">
-              <NavBar currentUser={this.state.auth.currentUser} handleLogout={this.handleLogout}/> 
+              <NavBar currentUser={this.state.auth.currentUser} handleLogout={this.handleLogout} loggedIn={this.state.loggedIn}/> 
               {/* send the current user to navbar to show or hide navbar buttons */}
                 <div className="ui container">
 
                     {/* <Switch> */}
                       <Route exact path="/" render={(routerProps) => {
+                        // console.log(this.state.loggedIn)
                         return (
-                          localStorage.token ?  <Profile {...routerProps} people={this.props.people} tasks={this.props.tasks} projects={this.props.projects} deletePerson={this.props.deletePerson}currentUser={this.state.auth.currentUser}editProject={this.props.editProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask}/> : <Login {...routerProps} handleLogin={this.handleLogin} />
+                          this.state.loggedIn ?  <Profile {...routerProps} people={this.props.people} tasks={this.props.tasks} projects={this.props.projects} deletePerson={this.props.deletePerson}currentUser={this.state.auth.currentUser}editProject={this.props.editProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask}/> : <Login {...routerProps} handleLogin={this.handleLogin} />
                         );
                       }}/>
 
@@ -131,6 +132,7 @@ class App extends Component{
                           addTask={this.props.addTask} 
                           deleteTask={this.props.deleteTask} 
                           editTask={this.props.editTask}
+                          handleLogout={this.handleLogout}
                           />
                         );
                       }}/>

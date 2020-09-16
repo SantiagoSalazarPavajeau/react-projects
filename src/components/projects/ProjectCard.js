@@ -35,7 +35,7 @@ export default class ProjectCard extends Component{
     }
 
     setPercent = () =>{
-      console.log(this.props)
+      // console.log(this.props)
       // const projectTasks = this.props.tasks.filter(task => task.project_id === this.state.id)
       let percent = 0
       this.setState({

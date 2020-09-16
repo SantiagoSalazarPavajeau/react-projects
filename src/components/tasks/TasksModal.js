@@ -25,7 +25,7 @@ class TasksModal extends Component{
         for(let i=0; i<projectTasks.length;i++){
             if(projectTasks[i].completed === true){
                 numberCompleted++
-                console.log(numberCompleted)
+                // console.log(numberCompleted)
             }else{
                 numberInProgress++
                 // console.log(numberInProgress)
@@ -116,10 +116,10 @@ class TasksModal extends Component{
     }
 
     handleAddTask = () => {
-        console.log('a')
+        // console.log('a')
         this.props.addTask(this.state.id)
-        console.log('g')
-        console.log(this.state.id)
+        // console.log('g')
+        // console.log(this.state.id)
     }
 
     renderModal = () => {

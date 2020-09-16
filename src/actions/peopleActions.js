@@ -1,4 +1,4 @@
-import { URL } from '../index'
+import { URL } from '../index.js'
 // const URL ='https://secure-shelf-48338.herokuapp.com/'
 // const URL ='http://localhost:3001'
 
@@ -7,7 +7,8 @@ export function fetchPeople(){
             fetch(`${URL}/people`)
                 .then(response => {return response.json()})
                 .then(people => {
-                    // console.log(projects)
+                    // console.log(people)
+
                     dispatch({type: 'LOAD_PEOPLE', people}) // Have to access the data structure from the rails API correctly
                 })
                 .catch(error => console.log(error.message))

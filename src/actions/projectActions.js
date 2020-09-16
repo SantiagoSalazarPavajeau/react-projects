@@ -1,4 +1,4 @@
-// const URL ='http://localhost:3001'
+import { URL } from '../index.js'
 
 export function fetchProjects(){
     return (dispatch) => {
@@ -9,7 +9,7 @@ export function fetchProjects(){
                     // console.log(projects)
                     dispatch({type: 'LOAD_PROJECTS', projects}) // Have to access the data structure from the rails API correctly
                 })
-                .catch(error => console.log(error.message))
+                .catch(error => console.log(error))
     }
 }
 
@@ -69,7 +69,7 @@ export function editProject(project){
         fetch(`${URL}/projects/${project.id}`, configObj)
             .then(response => {return response.json()})
             .then(editedProject => {
-                console.log(editedProject)
+                // console.log(editedProject)
                 let project = editedProject.data.attributes
                 dispatch({type: 'EDIT_PROJECT', project}) // a project can have data that references tasks and tasks have data that references people
             })
