@@ -8,11 +8,10 @@ const NavBar = (props)=>{
                 <div className="header item">
                     Projects Dashboard
                 </div>
-                    {/* {console.log(props.currentUser)} */}
-                    {props.currentUser.token ? null : <Link to="/login" className="ui item">Login</Link>}
-                    {props.currentUser.token ? null : <Link to="/signup" className="ui item" >Signup</Link>}
-                    {props.currentUser.token ? <Link to="/profile" className="ui item" >Profile</Link> : null }
-                    {props.currentUser.token ? <Link className="ui item right" onClick={e => props.handleLogout(e)}> Logout </Link> : null}
+                    {localStorage.token ? null : <Link to="/login" className="ui item">Login</Link>}
+                    {localStorage.token ? null : <Link to="/signup" className="ui item" >Signup</Link>}
+                    {localStorage.token ? <Link to="/profile" className="ui item" >Profile</Link> : null }
+                    {localStorage.token ? <Link className="ui item right" onClick={e => props.handleLogout(e)}> Logout </Link> : null}
 
             </div>
             
