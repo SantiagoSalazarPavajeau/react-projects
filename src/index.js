@@ -12,6 +12,8 @@ import 'semantic-ui-css/semantic.min.css'
 
 // const composeEnhancers = composeWithDevTools();
 
+// use context for local and global state
+
 export const store = createStore(reducer, 
   applyMiddleware(thunk)
   );

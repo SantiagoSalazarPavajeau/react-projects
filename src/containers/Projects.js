@@ -35,10 +35,6 @@ class Projects extends Component{
         })
     }
 
-    setSearchState = () => {
-
-    }
-
     handleSearchProject = (event) => {
         this.setState({
             searchTerm: event.target.value
@@ -51,15 +47,14 @@ class Projects extends Component{
             <>
                     <div className="ui grid container">
                         <div className="eight wide column" >
-                        <Input className="large"placeholder="Search" onChange={e => this.handleSearchProject(e)}/>
-                            {/* Search input */}<br></br><br></br>
+
+                            <Input className="large" placeholder="Search" onChange={e => this.handleSearchProject(e)}/>
+                            
+                            <br></br>
+                            <br></br>
 
                             <ProjectInput saveProject={this.props.saveProject}/>
-                            {/* {console.log(this.state.searchTerm)}
-                            {console.log(this.state.searchedProjects)} */}
-                            {/* {console.log(this.props.projects.filter(project => project.title.includes(this.state.searchTerm)))} */}
-
-                            {/* search button */}
+                           
                         </div>
                     </div>
 
