@@ -25,7 +25,7 @@ class Projects extends Component{
     }
 
     renderProjects = () => {
-        const searchedProjects = this.props.projects.filter(project => project.title.includes(this.state.searchTerm))
+        const searchedProjects = this.props.projects.filter(project => project.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
         return searchedProjects.map( project => <ProjectCard key={project.id} project={project} people={this.props.people} tasks={this.props.tasks} title={project.title} started={project.started} description={project.description} id={project.id} editProject={this.props.editProject} deleteProject={this.props.deleteProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask}/> )
     }
 
