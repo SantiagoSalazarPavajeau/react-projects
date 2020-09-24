@@ -12,7 +12,7 @@ import SideBar from './components/Sidebar';
 
 import Projects from './containers/Projects';
 // import Profile from './components/Profile';
-import Tasks from './containers/Tasks';
+// import Tasks from './containers/Tasks';
 import People from './containers/People';
 
 import {fetchProjects, editProject} from './actions/projectActions'
@@ -71,15 +71,16 @@ class App extends Component{
       {/* {console.log(this.state)} */}
         <Router >
           <div className="flexbox">
+
               <SideBar/>
+
               <div className="main">
-              <NavBar currentUser={this.state.auth.currentUser} handleLogout={this.handleLogout} loggedIn={this.state.loggedIn}/> 
-              {/* send the current user to navbar to show or hide navbar buttons */}
+
+                <NavBar currentUser={this.state.auth.currentUser} handleLogout={this.handleLogout} loggedIn={this.state.loggedIn}/> 
+              {/* send the current user and loggedin state to navbar to show or hide navbar buttons */}
                 <div className="ui container">
 
-                    {/* <Switch> */}
                       <Route exact path="/" render={(routerProps) => {
-                        // console.log(this.state.loggedIn)
                         return (
                           this.state.loggedIn ?  <Profile {...routerProps} people={this.props.people} tasks={this.props.tasks} projects={this.props.projects} deletePerson={this.props.deletePerson}currentUser={this.state.auth.currentUser}editProject={this.props.editProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask}/> : <Login {...routerProps} handleLogin={this.handleLogin} />
                         );
@@ -93,13 +94,13 @@ class App extends Component{
                       
                       {/* I sent router props to have acces to match */}
 
-                      <Route exact path={`/${"project"}-:id`} 
+                      {/* <Route exact path={`/${"project"}-:id`} 
                        render={routerProps => {
                         return (
                        <Tasks {...routerProps} />)
-                       }} >
+                       }} > */}
                         {/* move this to the projects view and don't create a new route */}
-                      </Route>
+                      {/* </Route> */}
 
                       <Route exact path={`/people`}>
                         <People />
