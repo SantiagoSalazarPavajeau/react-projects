@@ -13,7 +13,6 @@ import 'semantic-ui-css/semantic.min.css'
 // const composeEnhancers = composeWithDevTools();
 
 // use context for local and global state
-
 // https://www.freecodecamp.org/news/how-to-use-redux-in-your-react-typescript-app/ 
 //merge to typescript
 
