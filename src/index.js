@@ -14,6 +14,15 @@ import 'semantic-ui-css/semantic.min.css'
 
 // use context for local and global state
 
+// https://www.freecodecamp.org/news/how-to-use-redux-in-your-react-typescript-app/ 
+//merge to typescript
+
+// https://www.freecodecamp.org/news/how-to-integrate-react-hooks-into-your-project-without-changing-your-redux-code-974e6f70f0b0/ 
+// refactor to use react hooks
+
+// https://dev.to/jamland/react-context-hooks-vs-redux-hooks-3g91
+// newer redux hooks useSelector
+
 export const store = createStore(reducer, 
   applyMiddleware(thunk)
   );
