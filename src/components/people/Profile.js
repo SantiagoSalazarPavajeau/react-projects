@@ -18,7 +18,7 @@ export default class Profile extends Component{
     }
 
     renderTasks = () => {
-        const myTasks= this.props.tasks.filter(task => task.person_id === this.props.currentUser.id) // filter out the tasks that don't belong to the person
+        const myTasks= this.props.tasks.filter(task => task.person_id === this.props.currentUser.id) 
         // console.log(myTasks)
         let project;
         const list = myTasks.map((task) => {
@@ -51,7 +51,7 @@ export default class Profile extends Component{
 
     renderProfile = () => {
         if(this.props.currentUser.username){
-            const person = this.props.people.find(person => person.username === this.props.currentUser.username)
+            const person = this.props.people.find(person => person.username === this.props.currentUser.username) // find person that logged in
             const myTasks= this.props.tasks.filter(task => task.person_id === this.props.currentUser.id) // filter out the tasks that don't belong to the person
             let project;
             myTasks.map((task) => { return project = this.props.projects.find(project => project.id === task.project_id )})
