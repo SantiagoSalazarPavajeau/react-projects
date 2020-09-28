@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import {
   HashRouter as Router,
   Route
 } from "react-router-dom";
 import "./App.css";
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 
 
 import NavBar from './components/NavBar';
@@ -28,61 +28,68 @@ import Profile from './components/people/Profile';
 
 
 
-class App extends Component{
+const App = () => {
+  const [state, setState] = useState({ auth: { currentUser: {} }, showTasksModal: false, loggedIn: false, loading: true })
+  // state = { auth: { currentUser: {} }, showTasksModal: false, loggedIn: false, loading: true };
 
-  state = { auth: { currentUser: {} }, showTasksModal: false, loggedIn: false };
+  const dispatch = useDispatch()
 
-  componentDidMount(){
-    this.props.fetchProjects()
-    this.props.fetchPeople()
-    this.props.fetchTasks()
+  const props = useSelector(state => state)
 
-    const token = localStorage.getItem("token");
+  useEffect( 
+    () => {
+      dispatch(fetchProjects())
+      dispatch(fetchPeople())
+      dispatch(fetchTasks())
 
-    if (token) {
-      this.props.loginUser().then((user) => {
-        const currentUser = { currentUser: user };
 
-        this.setState({ auth: currentUser });
-      });
-    }
-  }
+      const token = localStorage.getItem("token");
+      
+      if (token) {
+        dispatch(loginUser()).then((user) => {
+          const currentUser = { currentUser: user };
 
-  handleLogin = (user) => {
+          setState({...state,  auth: currentUser });
+        });
+      }
+    }, []
+  )
+
+  const handleLogin = (user) => {
     const currentUser = { currentUser: user };
     // localStorage.setItem("token", user.token);
 
-    this.setState({ auth: currentUser, loggedIn: true });
+    setState({ ...state, auth: currentUser, loggedIn: true });
   };
 
-  handleLogout = () => {
+  const handleLogout = () => {
     localStorage.removeItem("token");
-    this.setState({ auth: { currentUser: {} }, loggedIn: false });
+    setState({...state, auth: { currentUser: {} }, loggedIn: false });
   };
 
 
-  handleHideTasksModal = () => {
-    this.setState({ showTasksModal: false})
+  const handleHideTasksModal = () => {
+    setState({...state, showTasksModal: false})
   }
+
   
-  render(){
     return (
       <>
-      {/* {console.log(this.state)} */}
         <Router >
+          {console.log(props)}
           <div className="flexbox">
 
               <SideBar/>
 
               <div className="main">
 
-                <NavBar currentUser={this.state.auth.currentUser} handleLogout={this.handleLogout} loggedIn={this.state.loggedIn}/> 
+                <NavBar currentUser={state.auth.currentUser} handleLogout={handleLogout} loggedIn={state.loggedIn}/> 
               {/* send the current user and loggedin state to navbar to show or hide navbar buttons */}
                 <div className="ui container">
 
                       <Route exact path="/" render={(routerProps) => {
                         return (
-                          this.state.loggedIn ?  <Profile {...routerProps} people={this.props.people} tasks={this.props.tasks} projects={this.props.projects} deletePerson={this.props.deletePerson}currentUser={this.state.auth.currentUser}editProject={this.props.editProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask}/> : <Login {...routerProps} handleLogin={this.handleLogin} />
+                          state.loggedIn ?  <Profile {...routerProps} people={props.people} tasks={props.tasks} projects={props.projects} deletePerson={props.deletePerson}currentUser={state.auth.currentUser}editProject={props.editProject} addTask={props.addTask} deleteTask={props.deleteTask} editTask={props.editTask}/> : <Login {...routerProps} handleLogin={handleLogin} />
                         );
                       }}/>
 
@@ -116,7 +123,7 @@ class App extends Component{
                       <Route exact path={`/login`} 
                        render={(routerProps) => {
                         return (
-                          <Login {...routerProps} handleLogin={this.handleLogin} />
+                          <Login {...routerProps} handleLogin={handleLogin} />
                         );
                       }}/>
 
@@ -124,16 +131,16 @@ class App extends Component{
                        render={(routerProps) => {
                         return (
                           <Profile {...routerProps} 
-                          people={this.props.people}
-                          tasks={this.props.tasks}
-                          projects={this.props.projects}
-                          deletePerson={this.props.deletePerson}
-                          currentUser={this.state.auth.currentUser}
-                          editProject={this.props.editProject} 
-                          addTask={this.props.addTask} 
-                          deleteTask={this.props.deleteTask} 
-                          editTask={this.props.editTask}
-                          handleLogout={this.handleLogout}
+                          people={props.people}
+                          tasks={props.tasks}
+                          projects={props.projects}
+                          deletePerson={props.deletePerson}
+                          currentUser={state.auth.currentUser}
+                          editProject={props.editProject} 
+                          addTask={props.addTask} 
+                          deleteTask={props.deleteTask} 
+                          editTask={props.editTask}
+                          handleLogout={handleLogout}
                           />
                         );
                       }}/>
@@ -147,29 +154,30 @@ class App extends Component{
         </Router>
       </>
     );
-  }
 }
 
-const mapStateToProps = state => {
-  return{
-    projects: state.projects,
-    people: state.people,
-    tasks: state.tasks
-  }
-}
+// const mapStateToProps = state => {
+//   return{
+//     projects: state.projects,
+//     people: state.people,
+//     tasks: state.tasks
+//   }
+// }
 
-const mapDispatchToProps = dispatch => {
-  return {
-      fetchProjects: () => dispatch(fetchProjects()),
-      fetchPeople: () => dispatch(fetchPeople()),
-      fetchTasks: () => dispatch(fetchTasks()),
-      loginUser: () => dispatch(loginUser()),
-      deletePerson: (id) => dispatch(deletePerson(id)),
-      editProject: project => dispatch(editProject(project)),
-      addTask: project_id => dispatch(addTask(project_id)),
-      deleteTask: id => dispatch(deleteTask(id)),
-      editTask: task => dispatch(editTask(task))
-  }
-}
+// const mapDispatchToProps = dispatch => {
+//   return {
+//       fetchProjects: () => dispatch(fetchProjects()),
+//       fetchPeople: () => dispatch(fetchPeople()),
+//       fetchTasks: () => dispatch(fetchTasks()),
+//       loginUser: () => dispatch(loginUser()),
+//       deletePerson: (id) => dispatch(deletePerson(id)),
+//       editProject: project => dispatch(editProject(project)),
+//       addTask: project_id => dispatch(addTask(project_id)),
+//       deleteTask: id => dispatch(deleteTask(id)),
+//       editTask: task => dispatch(editTask(task))
+//   }
+// }
 
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+// export default connect(mapStateToProps,mapDispatchToProps)(App);
+
+export default App
