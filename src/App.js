@@ -129,20 +129,26 @@ const App = () => {
 
                       <Route exact path={`/profile`} 
                        render={(routerProps) => {
-                        return (
-                          <Profile {...routerProps} 
-                          people={props.people}
-                          tasks={props.tasks}
-                          projects={props.projects}
-                          deletePerson={props.deletePerson}
-                          currentUser={state.auth.currentUser}
-                          editProject={props.editProject} 
-                          addTask={props.addTask} 
-                          deleteTask={props.deleteTask} 
-                          editTask={props.editTask}
-                          handleLogout={handleLogout}
-                          />
-                        );
+                          if(state.auth.currentUser){
+                            return (                        
+                              <Profile {...routerProps} 
+                              // people={props.people}
+                              // tasks={props.tasks}
+                              // projects={props.projects}
+                              deletePerson={props.deletePerson}
+                              currentUser={state.auth.currentUser}
+                              editProject={props.editProject} 
+                              addTask={props.addTask} 
+                              deleteTask={props.deleteTask} 
+                              editTask={props.editTask}
+                              handleLogout={handleLogout}
+                              />
+                            )
+                          } else{
+                            return (
+                              <Login/>
+                            )
+                          }
                       }}/>
 
 
