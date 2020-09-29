@@ -1,68 +1,77 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Input, Dropdown, Label, TextArea, Button, Form } from 'semantic-ui-react';
 
+import {deleteTask, editTask} from '../../actions/tasksActions'
 
-class Task extends Component{
 
-    state = {
-        description: this.props.description,
-        id: this.props.id,
-        person_id: this.props.person_id,
-        completed: this.props.completed,
-        project_id: this.props.project_id
+
+const Task = (props) => {
+
+
+    const [task, setTask] = useState(props.task)
+    const [owner, setOwner] = useState(null)
+    const [dropdown, setDropDown] = useState(null)
+
+    const people = useSelector(state => state.people)
+
+    const dispatch = useDispatch()
+
+    useEffect(
+        ()=> {
+        let dropdownFormat = []
+        people.map(person => dropdownFormat.push({id: person.id, key: person.username, text: person.username, value: person.username, image: { avatar: true, src: person.image } }))
+        setDropDown(dropdownFormat)
+        setOwner(dropdownFormat.find(person => person.id === task.person_id))
+        
+        },[]
+    )
+
+    
+
+    const makeCompleted = () => {
+        setTask({...task, completed: true})
     }
 
-    makeCompleted = () => {
-        this.setState({
-            completed: true
-        })
+    const makeInProgress = () => {
+        setTask({...task, completed: false})
     }
 
-    makeInProgress = () => {
-        this.setState({
-            completed: false
-        })
+    const handleSave = () => {
+        dispatch(editTask(task))
     }
 
-    handleSave = () => {
-        // console.log(this.state.person_id)
-        this.props.editTask(this.state)
+    const handleDelete = () => {
+        dispatch(deleteTask(task.id))
     }
 
-    handleDelete = () => {
-        this.props.deleteTask(this.props.id)
-    }
-
-    assignTo = (e) => {
-        const ownerIndex = this.props.people.findIndex(person => person.username === e.target.innerText)
-        this.setState({
-            person_id: this.props.people[ownerIndex].id // use onchange for dropdowns/select and parentNode.id instead of value
+    const assignTo = (e) => {
+        const ownerIndex = people.findIndex(person => person.username === e.target.innerText)
+        setTask({
+            ...task,
+            person_id: people[ownerIndex].id // use onchange for dropdowns/select and parentNode.id instead of value
         })
     }
     
-    renderInProgress = () => {
-        let dropdownFormat = []
-        this.props.people.map(person => dropdownFormat.push({key: person.username, text: person.username, value: person.username, image: { avatar: true, src: person.image } }))
-        let owner = dropdownFormat.find(person => person.id === this.state.person_id) // person_id is a propery of the task and we can find the owner in the people state
+    const renderInProgress = () => {
+        
         return (
             
             <>
             <br></br>
 
-            {/* {console.log(owner)}
-            {console.log(this.props.people)}
-            {console.log(this.state.person_id)} */}
-                <Input  size="small" labelPosition='right' type='text' value={this.state.description} placeholder={this.state.description}>
+                <Input  size="small" labelPosition='right' type='text' value={task.description} placeholder={task.description}>
 
-                <TextArea onChange={event => this.setState({description: event.target.value})} value={this.state.description} rows="4" cols="70"/>
-                <Button onClick={this.handleSave} icon="save"></Button>
-                <Button onClick={this.makeCompleted} icon="check circle"></Button>
-                <Button onClick={this.handleDelete} icon="trash"></Button>
+                <TextArea onChange={event => setTask({...task, description: event.target.value})} value={task.description} rows="4" cols="70"/>
+
+                <Button onClick={handleSave} icon="save"></Button>
+                <Button onClick={makeCompleted} icon="check circle"></Button>
+                <Button onClick={handleDelete} icon="trash"></Button>
 
                 </Input>
             <br></br>
 
-                Assigned to: <Dropdown button className='icon' placeholder={owner ? owner.key : 'Yet to be assigned'} onChange={e => this.assignTo(e)} floating labeled icon='users' options={dropdownFormat} />
+                Assigned to: <Dropdown button className='icon' placeholder={owner ? owner.key : 'Yet to be assigned'} onChange={e => assignTo(e)} floating labeled icon='users' options={dropdown} />
             <br></br>
 
             <br></br>
@@ -73,38 +82,32 @@ class Task extends Component{
         )
     }
     
-    renderCompleted = () => {
-        let owner = this.props.people.find(person => person.id === this.state.person_id)
+    const renderCompleted = () => {
         return (
             <>
             <br></br>
             <Label color='green' image>
             <img alt="Profile Pic" src='https://api.adorable.io/avatars/77/stevie@adorable.io.png' />
                 completed by {owner ? owner.key : 'Yet to be assigned'}
-            <Label.Detail>{this.props.description}</Label.Detail>
-
+            <Label.Detail>{task.description}</Label.Detail>
             </Label>
-            <Button onClick={this.handleSave} icon="save"></Button>
-            <Button onClick={this.makeInProgress} icon="redo"></Button>   
-            <Button onClick={this.handleDelete} icon="trash"></Button>
-
+            <Button onClick={handleSave} icon="save"></Button>
+            <Button onClick={makeInProgress} icon="redo"></Button>
+            <Button onClick={handleDelete} icon="trash"></Button>
             <br></br>
             </>
         )     
      }
     
-    render(){
-        return (
-            <>
-            <Form> 
-            {this.state.completed ? this.renderCompleted() : this.renderInProgress()}
-            </Form>
-            {/* {console.log(this.state)} */}
-            </>
-        )
-    }
+    return (
+        <>
+        <Form> 
+            {task.completed ? renderCompleted() : renderInProgress()}
+        </Form>
+        </>
+    )
 }
 
-export default Task
+export default Task;
 
 

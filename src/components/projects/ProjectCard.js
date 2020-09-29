@@ -64,7 +64,7 @@ export default class ProjectCard extends Component{
         return(
           <>
             
-            {this.state.showTasksModal ? <TasksModal handleHideTasksModal={this.handleHideTasksModal} project={this.props.project} tasks={this.props.tasks} people={this.props.people} editProject={this.props.editProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask}/> : null}
+            {this.state.showTasksModal ? <TasksModal handleHideTasksModal={this.handleHideTasksModal} project_id={this.props.project.id} project={this.props.project} tasks={this.props.tasks} people={this.props.people} editProject={this.props.editProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask}/> : null}
             <div className="eight wide column" >
             <div className="ui card">
               <div className="image">

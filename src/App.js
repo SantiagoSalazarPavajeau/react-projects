@@ -76,7 +76,6 @@ const App = () => {
     return (
       <>
         <Router >
-          {console.log(props)}
           <div className="flexbox">
 
               <SideBar/>

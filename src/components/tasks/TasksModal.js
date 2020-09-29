@@ -31,24 +31,26 @@ const TasksModal = (props) => {
             setLoading(false)
         }, []
     )
-    
+    useEffect(
+        () => {
+           calculatePercent() 
+        }, [projectTasks]
+    )
     const calculatePercent = () => {
-        let percent =  0
-        let numberCompleted = 0
-        let numberInProgress = 0
-        for(let i=0; i<projectTasks.length;i++){
-            if(projectTasks[i].completed === true){
-                numberCompleted++
-                // console.log(numberCompleted)
-            }else{
-                numberInProgress++
-                // console.log(numberInProgress)
-            }
-            percent = numberCompleted / (numberInProgress + numberCompleted)
+            if (projectTasks){
+                let numberCompleted = 0
+                let numberInProgress = 0
+                for(let i=0; i<projectTasks.length;i++){
+                    if(projectTasks[i].completed === true){
+                        numberCompleted++
+                    }else{
+                        numberInProgress++
+                    }
+                    setPercent((numberCompleted / (numberInProgress + numberCompleted))*100)
+                }
         }
-        // console.log(percent)
-        setPercent(percent * 100)
     }
+
     
     const startEdit = () => {
         setEdit(true)
@@ -88,7 +90,6 @@ const TasksModal = (props) => {
             <>
                 <Grid columns={3}>
                 <Grid.Row>
-                    {console.log(project)}
                     <Grid.Column>
                     <Button basic secondary content="Edit Project" labelPosition='right' icon="pencil" onClick={e => startEdit(e)} ></Button>                               
                     </Grid.Column>
@@ -101,7 +102,6 @@ const TasksModal = (props) => {
                 </Grid> 
                 <Header>{project.title}</Header>
                 <p>{project.description}</p>
-
                       
             </>          
         )
@@ -109,7 +109,7 @@ const TasksModal = (props) => {
 
     const renderTasks = () => {// filter tasks for current project only
         const projectTasks = tasks.filter(task => task.project_id === project.id)
-        return projectTasks.map(task => <Task key={task.id} people={people} person_id={task.person_id} deleteTask={deleteTask} project_id={project.id} editTask={editTask} id={task.id} description={task.description} completed={task.completed}/>)
+        return projectTasks.map(task => <Task key={task.id} task={task} people={people} deleteTask={deleteTask} project_id={project.id} editTask={editTask} id={task.id} description={task.description} completed={task.completed}/>)
     }
 
     const handleAddTask = () => {
@@ -154,13 +154,8 @@ const TasksModal = (props) => {
                         <div className="eight wide column" >
                             <Modal size={"large"}dimmer={"inverted"} open={true} >
                                <p>Loading</p>
-                               {console.log(project)}
-                               {console.log(props.project_id)}
                                
-                               {console.log(tasks.filter(task => task.project_id === parseInt(props.project_id)))}
 
-                               {/* {console.log(project)}
-                               {console.log(projectTasks)} */}
                             </Modal>
                         </div>
                     </div>

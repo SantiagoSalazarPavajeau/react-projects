@@ -78,7 +78,6 @@ export function editTask(task){
         fetch(`${URL}/tasks/${task.id}`, configObj)
             .then(response => {return response.json()})
             .then(editedTask => {
-                console.log(editedTask)
                 let task = editedTask.data.attributes
                 dispatch({type: 'EDIT_TASK', task}) // a task can have data that references tasks and tasks have data that references people
             })
