@@ -9,6 +9,9 @@ import { Link } from 'react-router-dom';
 import TasksModal from '../tasks/TasksModal';
 import { useSelector } from 'react-redux';
 
+import {editProject} from '../../actions/projectActions'
+import {addTask, deleteTask, editTask} from '../../actions/tasksActions'
+
 
 
 const Profile = (props) => {
@@ -59,7 +62,7 @@ const Profile = (props) => {
                             
                         )
                     })
-        return <><ul>{list}</ul>{state.showTasksModal ? <TasksModal handleHideTasksModal={handleHideTasksModal} project={project} tasks={tasks} people={people} editProject={props.editProject} addTask={props.addTask} deleteTask={props.deleteTask} editTask={props.editTask}/> : null}</>
+        return <><ul>{list}</ul>{state.showTasksModal ? <TasksModal handleHideTasksModal={handleHideTasksModal} project={project} tasks={tasks} people={people} editProject={editProject} addTask={addTask} deleteTask={deleteTask} editTask={editTask}/> : null}</>
 
     }
     

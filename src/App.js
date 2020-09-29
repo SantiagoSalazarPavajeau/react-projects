@@ -129,7 +129,7 @@ const App = () => {
 
                       <Route exact path={`/profile`} 
                        render={(routerProps) => {
-                          if(state.auth.currentUser){
+                          if(state.loggedIn){
                             return (                        
                               <Profile {...routerProps} 
                               // people={props.people}
@@ -146,8 +146,8 @@ const App = () => {
                             )
                           } else{
                             return (
-                              <Login/>
-                            )
+                              <Login {...routerProps} handleLogin={handleLogin} />
+                              )
                           }
                       }}/>
 

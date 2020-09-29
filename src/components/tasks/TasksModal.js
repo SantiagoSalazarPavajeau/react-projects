@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import { Header, Image, Modal, Form, Button, Divider, Grid } from 'semantic-ui-react'
 import {withRouter} from 'react-router-dom';
 import Task from './Task'
@@ -6,19 +6,27 @@ import Task from './Task'
 import { Progress } from 'react-sweet-progress';
 import "react-sweet-progress/lib/style.css";
 
+import {editProject} from '../../actions/projectActions'
+import {loginUser, deletePerson} from '../../actions/peopleActions'
+import {addTask, deleteTask, editTask} from '../../actions/tasksActions'
+import { useDispatch, useSelector } from 'react-redux';
 
-class TasksModal extends Component{
-    state = {
-        title: this.props.project.title,
-        started: this.props.project.started,
-        description: this.props.project.description,
-        id: this.props.project.id,
-        edit: false,
-        loading: false
-    }
+
+const TasksModal = (props) => {
     
-    setPercent = () => {
-        const projectTasks = this.props.tasks.filter(task => task.project_id === this.state.id)
+    const [project, setProject] = useState(props.project)
+    const [edit, setEdit] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [percent, setPercent] = useState(0)
+
+    const people = useSelector(state => state.people)
+    const projects = useSelector(state => state.projects)
+    const tasks = useSelector(state => state.tasks)
+
+    const dispatch = useDispatch()
+    
+    const calculatePercent = () => {
+        const projectTasks = tasks.filter(task => task.project_id === project.id)
         let percent =  0
         let numberCompleted = 0
         let numberInProgress = 0
@@ -33,71 +41,60 @@ class TasksModal extends Component{
             percent = numberCompleted / (numberInProgress + numberCompleted)
         }
         // console.log(percent)
-        this.setState({
-            percent: percent * 100
-        })
+        setPercent(percent * 100)
     }
 
-    componentDidMount(){
-        this.setPercent()
-    }
+    useEffect(
+        () => {
+            calculatePercent()
+        }, []
+    )
     
-    startEdit = () => {
-        this.setState({
-            edit: true
-        })
+    const startEdit = () => {
+        setEdit(true)
     }
 
-    cancelEdit = () => {
-        this.setState({
-            edit: false
-        })
+    const cancelEdit = () => {
+        setEdit(false)
     }
 
-    saveEdit = (event) => {
+    const saveEdit = (event) => {
         event.preventDefault()
-        this.props.editProject({
-            title: this.state.title,
-            started: this.props.project.started,
-            id: this.props.project.id,
-            description: this.state.description
-        })
-        this.setState({
-            edit: false
-        })
-        // console.log(this.props.projects)
+        dispatch(editProject(project))
+        setEdit(false)
     }
 
-    handleOnChange = (event) => {
-        this.setState({
+    const handleOnChange = (event) => {
+        setProject({
+            ...project,
             [event.target.name]: event.target.value
         })
     }
 
-    renderEdit = (project) => {
+    const renderEdit = (project) => {
         return (
             <Modal.Description>
-                <Form onSubmit={(event) => this.saveEdit(event)}>
-                    <Form.Input type="text" onChange={event => this.handleOnChange(event)} value={this.state.title} name="title" />
-                    <Form.TextArea type="textarea" onChange={event => this.handleOnChange(event)} value={this.state.description} name="description" />
+                <Form onSubmit={(event) => saveEdit(event)}>
+                    <Form.Input type="text" onChange={event => handleOnChange(event)} value={project.title} name="title" />
+                    <Form.TextArea type="textarea" onChange={event => handleOnChange(event)} value={project.description} name="description" />
                     <Button icon="save" type="submit" ></Button>
-                    <Button icon="close" onClick={this.cancelEdit}></Button>
+                    <Button icon="close" onClick={cancelEdit}></Button>
                 </Form>
             </Modal.Description>
         )
     }
-    renderDescription = (project) => {
+    const renderDescription = (project) => {
         return (
             <>
                 <Grid columns={3}>
                 <Grid.Row>
                     <Grid.Column>
-                    <Button basic secondary content="Edit Project" labelPosition='right' icon="pencil" onClick={e => this.startEdit(e)} ></Button>                               
+                    <Button basic secondary content="Edit Project" labelPosition='right' icon="pencil" onClick={e => startEdit(e)} ></Button>                               
                     </Grid.Column>
                     <Grid.Column>
                     </Grid.Column>
                     <Grid.Column>
-                    <Button basic content="Exit Project Page"  onClick={ e => this.props.handleHideTasksModal(e)} secondary ></Button>
+                    <Button basic content="Exit Project Page"  onClick={ e => props.handleHideTasksModal(e)} secondary ></Button>
                     </Grid.Column>
                     </Grid.Row>
                 </Grid> 
@@ -109,23 +106,19 @@ class TasksModal extends Component{
         )
     }
 
-    renderTasks = () => {// filter tasks for this project only
-        // console.log(this.props.tasks)
-        const projectTasks = this.props.tasks.filter(task => task.project_id === this.state.id)
-        return projectTasks.map(task => <Task key={task.id} people={this.props.people} person_id={task.person_id} deleteTask={this.props.deleteTask} project_id={this.state.id} editTask={this.props.editTask} id={task.id} description={task.description} completed={task.completed}/>)
+    const renderTasks = () => {// filter tasks for current project only
+        const projectTasks = tasks.filter(task => task.project_id === project.id)
+        return projectTasks.map(task => <Task key={task.id} people={people} person_id={task.person_id} deleteTask={deleteTask} project_id={project.id} editTask={editTask} id={task.id} description={task.description} completed={task.completed}/>)
     }
 
-    handleAddTask = () => {
+    const handleAddTask = () => {
         // console.log('a')
-        this.props.addTask(this.state.id)
+        dispatch(addTask(project.id))
         // console.log('g')
-        // console.log(this.state.id)
     }
 
-    renderModal = () => {
-        // console.log(this.props)
-        if(!this.props.loading){
-            const project = this.props.project
+    const renderModal = () => {
+        if(!loading){
             return(
                 <>
                     <div className="ui grid container">
@@ -135,15 +128,13 @@ class TasksModal extends Component{
                                     <Modal.Content image scrolling>
                                     <Image size='medium' alt="Workbench and tools" src='https://images.unsplash.com/photo-1416339158484-9637228cc908?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80' wrapped/>
                                     <Modal.Description>
-                                    {this.state.edit ?  this.renderEdit(project) : this.renderDescription(project)}
-                                    {/* {this.setPercent()} */}
-                                    <Progress type="circle" width={30} percent={this.state.percent} status="success" />
+                                    {edit ?  renderEdit(project) : renderDescription(project)}
+                                    <Progress type="circle" width={30} percent={percent} status="success" />
                                     <Divider horizontal>Tasks</Divider>
-                                    <Button basic secondary onClick={this.handleAddTask}>Add Task</Button>
+                                    <Button basic secondary onClick={handleAddTask}>Add Task</Button>
                                     <br></br>
-                                    {this.renderTasks()}
-                                    {/* {console.log(this.props.tasks.filter(task => task.projectId === this.state.id))} */}
-                                    {/* {console.log(project)} */}
+                                    {renderTasks()}
+
 
                                     </Modal.Description>
                                 </Modal.Content>
@@ -173,13 +164,11 @@ class TasksModal extends Component{
         }
     }
 
-    render(){
-        return( 
-            <>
-            {this.renderModal()}
-            </>
-        )
-    }
+    return( 
+        <>
+        {renderModal()}
+        </>
+    )
     
   }
 
