@@ -1,32 +1,38 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import { Header, Image, Modal, Form, Button, Divider, Grid } from 'semantic-ui-react'
-import {withRouter} from 'react-router-dom';
 import Task from './Task'
 
 import { Progress } from 'react-sweet-progress';
 import "react-sweet-progress/lib/style.css";
 
 import {editProject} from '../../actions/projectActions'
-import {loginUser, deletePerson} from '../../actions/peopleActions'
 import {addTask, deleteTask, editTask} from '../../actions/tasksActions'
 import { useDispatch, useSelector } from 'react-redux';
 
 
 const TasksModal = (props) => {
-    
-    const [project, setProject] = useState(props.project)
-    const [edit, setEdit] = useState(false)
-    const [loading, setLoading] = useState(false)
-    const [percent, setPercent] = useState(0)
 
     const people = useSelector(state => state.people)
     const projects = useSelector(state => state.projects)
     const tasks = useSelector(state => state.tasks)
+    
+    const [project, setProject] = useState(null)
+    const [projectTasks, setProjectTasks] = useState(null)
+    const [edit, setEdit] = useState(false)
+    const [loading, setLoading] = useState(true)
+    const [percent, setPercent] = useState(0)
 
     const dispatch = useDispatch()
+
+    useEffect(
+        () => {
+            setProject(projects.find(project => project.id === parseInt(props.project_id)))
+            setProjectTasks(tasks.filter(task => task.project_id === parseInt(props.project_id)))
+            setLoading(false)
+        }, []
+    )
     
     const calculatePercent = () => {
-        const projectTasks = tasks.filter(task => task.project_id === project.id)
         let percent =  0
         let numberCompleted = 0
         let numberInProgress = 0
@@ -43,12 +49,6 @@ const TasksModal = (props) => {
         // console.log(percent)
         setPercent(percent * 100)
     }
-
-    useEffect(
-        () => {
-            calculatePercent()
-        }, []
-    )
     
     const startEdit = () => {
         setEdit(true)
@@ -88,6 +88,7 @@ const TasksModal = (props) => {
             <>
                 <Grid columns={3}>
                 <Grid.Row>
+                    {console.log(project)}
                     <Grid.Column>
                     <Button basic secondary content="Edit Project" labelPosition='right' icon="pencil" onClick={e => startEdit(e)} ></Button>                               
                     </Grid.Column>
@@ -152,9 +153,14 @@ const TasksModal = (props) => {
                     <div className="ui grid container">
                         <div className="eight wide column" >
                             <Modal size={"large"}dimmer={"inverted"} open={true} >
-                               <p>Loading</p> 
+                               <p>Loading</p>
+                               {console.log(project)}
+                               {console.log(props.project_id)}
+                               
+                               {console.log(tasks.filter(task => task.project_id === parseInt(props.project_id)))}
 
-
+                               {/* {console.log(project)}
+                               {console.log(projectTasks)} */}
                             </Modal>
                         </div>
                     </div>
@@ -172,4 +178,4 @@ const TasksModal = (props) => {
     
   }
 
-export default withRouter(TasksModal)
+export default TasksModal;
