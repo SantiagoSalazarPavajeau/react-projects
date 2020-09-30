@@ -3,8 +3,6 @@ import { Card, Grid } from 'semantic-ui-react'
 
 import { Link } from 'react-router-dom';
 
-
-
 import TasksModal from '../tasks/TasksModal';
 
 

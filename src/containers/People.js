@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 
 import Person from '../components/people/Person'
 
-import { editProject } from '../actions/projectActions' //async actions imported from the actions file
-import { addTask, deleteTask, editTask } from '../actions/tasksActions';
+// import { editProject } from '../actions/projectActions' //async actions imported from the actions file
+// import { addTask, deleteTask, editTask } from '../actions/tasksActions';
 
 import { Grid } from 'semantic-ui-react'
 
@@ -23,12 +23,10 @@ function People(){
 
     return (
             <>
-            {/* <div className="ui grid container"> */}
 
                 <Grid stackable container columns={2} >
                 {renderPeople()}
                 </Grid>
-                                {/* </div> */}
 
             </>
     )

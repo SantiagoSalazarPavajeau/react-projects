@@ -185,4 +185,4 @@ const App = () => {
 
 // export default connect(mapStateToProps,mapDispatchToProps)(App);
 
-export default App
+export default App;
