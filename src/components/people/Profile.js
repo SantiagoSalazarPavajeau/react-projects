@@ -1,99 +1,91 @@
-import React, {Component} from 'react';
+import React, { useState} from 'react';
 import { Card, Grid, Button } from 'semantic-ui-react'
 
-// import Task from '../tasks/Task';
-import { Link } from 'react-router-dom';
 
 
 
 import TasksModal from '../tasks/TasksModal';
+import { useSelector } from 'react-redux';
 
 
 
-export default class Profile extends Component{
+const Profile = (props) => {
 
-    state = {
-        showTasksModal: false,
+    // state = {
+    //     showTasksModal: false,
 
+    // }
+
+    const [showTasksModal, setShowTasksModal] = useState(false)
+    const [projectId, setProjectId] = useState(null)
+
+    const people = useSelector(state => state.people)
+    const projects = useSelector(state => state.projects)
+    const tasks = useSelector(state => state.tasks)
+
+    const handleShowTasksModal = (e) => {
+        setProjectId(e.target.id)
+        setShowTasksModal(true)
+      }
+  
+    const handleHideTasksModal = () => {
+        setShowTasksModal(false)
+      }
+
+    const handleDeletePerson = (e) => {
+        // console.log(e.target.id)
+        props.deletePerson(e.target.id)
+        // localStorage.removeItem("token");
+        props.handleLogout()
+        props.history.push('/signup')
     }
 
-    renderTasks = () => {
-        const myTasks= this.props.tasks.filter(task => task.person_id === this.props.currentUser.id) 
+
+    const renderTasks = () => {
+        const myTasks= tasks.filter(task => task.person_id === props.currentUser.id) //still send current user as a prop
         // console.log(myTasks)
         let project;
         const list = myTasks.map((task) => {
-                        project = this.props.projects.find(project => project.id === task.project_id )
-                        // console.log(project.title)
-                        // return <li key={task.id}> <Link to={`project-${project.id}`}>{project.title} Project</Link>: {task.description}  {task.completed ? <p>(Completed)</p> : <p>(InProgress)</p>}   </li>
-                        return <li key={task.id}> <Link onClick={this.handleShowTasksModal}>{project.title} Project</Link>: {task.description}  {task.completed ? <p>(Completed)</p> : <p>(InProgress)</p>}   </li>
+                        project = projects.find(project => project.id === task.project_id )
+                        return (
+                            <li key={task.id}> 
+                                <a onClick={e => handleShowTasksModal(e)} id={project.id}>{project.title} Project</a>: {task.description}  {task.completed ? <p>(Completed)</p> : <p>(InProgress)</p>}
+                            </li>
+                            
+                        )
                     })
-        return <ul>{list}</ul>
+        return <><ul>{list}</ul></>
+
     }
-
-    handleShowTasksModal = () => {
-        this.setState({
-          showTasksModal: true
-        })
-      }
-  
-    handleHideTasksModal = () => {
-        this.setState({
-          showTasksModal: false
-        })
-      }
-    handleDeletePerson = (e) => {
-        // console.log(e.target.id)
-        this.props.deletePerson(e.target.id)
-        // localStorage.removeItem("token");
-        this.props.handleLogout()
-        this.props.history.push('/signup')
-    }
-
-    renderProfile = () => {
-        if(this.props.currentUser.username){
-            const person = this.props.people.find(person => person.username === this.props.currentUser.username) // find person that logged in
-            const myTasks= this.props.tasks.filter(task => task.person_id === this.props.currentUser.id) // filter out the tasks that don't belong to the person
-            let project;
-            myTasks.map((task) => { return project = this.props.projects.find(project => project.id === task.project_id )})
-            // console.log(project)
-            return (
-                <div>
-
-                {this.state.showTasksModal ? <TasksModal handleHideTasksModal={this.handleHideTasksModal} project={project} tasks={this.props.tasks} people={this.props.people} editProject={this.props.editProject} addTask={this.props.addTask} deleteTask={this.props.deleteTask} editTask={this.props.editTask}/> : null}
-                    <Grid stackable container columns={2} >
-
-                        <Grid.Column>
-                            {/* {console.log(person)} */}
-                            <Card
-                            image={person.image}
-                            header={person.username}
-                            // meta='Software Engineer'
-                            />
-                            <Button id={person.id} onClick={e => this.handleDeletePerson(e)}>Delete my Account</Button>
-                        </Grid.Column>
-                        <Grid.Column>
-
-                            <Card
-                            header={"Tasks"}
-                            // meta='Software Engineer'
-                            description={this.renderTasks}
-                            />
-                        </Grid.Column>
-
-                    </Grid>
     
-                </div>
-                
-            )
-        }
-    }
+    const person = people.find(person => person.username === props.currentUser.username) // find person that logged in
 
-    render(){    
-        return(
-            <>
-            {/* {console.log(this.props.currentUser)} */}
-           {this.renderProfile()}
-           </>
+    return (
+        <div>
+            {showTasksModal ? <TasksModal handleHideTasksModal={handleHideTasksModal} project_id={projectId} /> : null}
+            <Grid stackable container columns={2} >
+
+                <Grid.Column>
+                    <Card
+                    image={person.image}
+                    header={person.username}
+                    />
+                    <Button id={person.id} onClick={e => handleDeletePerson(e)}>Delete my Account</Button>
+                </Grid.Column>
+                <Grid.Column>
+
+                    <Card
+                    header={"Todos:"}
+                    description={renderTasks}
+                    />
+                </Grid.Column>
+
+            </Grid>
+
+        </div>
+        
         )
-    }
+        
 }
+
+export default Profile;
