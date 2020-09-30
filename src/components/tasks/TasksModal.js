@@ -113,9 +113,7 @@ const TasksModal = (props) => {
     }
 
     const handleAddTask = () => {
-        // console.log('a')
         dispatch(addTask(project.id))
-        // console.log('g')
     }
 
     const renderModal = () => {

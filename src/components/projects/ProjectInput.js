@@ -55,13 +55,12 @@ const ProjectInput = (props) => {
                         <Image wrapped size='medium' alt="Workbench and tools" src='https://images.unsplash.com/photo-1416339158484-9637228cc908?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80' />
                         <Modal.Description>
                             <Form>
-                            <Header>Title:</Header>
+                                <Header>Title:</Header>
                                     <TitleInput handleOnChange={handleOnChange} title={project.title}/>
-                            <Header>Description:</Header>
+                                <Header>Description:</Header>
                                     <DescriptionInput handleOnChange={handleOnChange} description={project.description}/>
-
-                                    <Form.Button onClick={(event) => handleOnSubmit(event)} type="submit" >Submit</Form.Button>
-                                    <CloseModal closeModal={closeModal}/>
+                                <Form.Button onClick={(event) => handleOnSubmit(event)} type="submit" >Submit</Form.Button>
+                                <CloseModal closeModal={closeModal}/>
                             </Form>                        
                         </Modal.Description>
                     </Modal.Content>

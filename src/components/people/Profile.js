@@ -62,23 +62,20 @@ const Profile = (props) => {
                             
                         )
                     })
-        return <><ul>{list}</ul>{state.showTasksModal ? <TasksModal handleHideTasksModal={handleHideTasksModal} project={project} tasks={tasks} people={people} editProject={editProject} addTask={addTask} deleteTask={deleteTask} editTask={editTask}/> : null}</>
+        return <><ul>{list}</ul>{state.showTasksModal ? <TasksModal handleHideTasksModal={handleHideTasksModal} project_id={project.id} /> : null}</>
 
     }
     
     const person = people.find(person => person.username === props.currentUser.username) // find person that logged in
-    console.log(person)
     return (
         <div>
 
             <Grid stackable container columns={2} >
 
                 <Grid.Column>
-                    {/* {console.log(person)} */}
                     <Card
                     image={person.image}
                     header={person.username}
-                    // meta='Software Engineer'
                     />
                     <Button id={person.id} onClick={e => handleDeletePerson(e)}>Delete my Account</Button>
                 </Grid.Column>
@@ -86,7 +83,6 @@ const Profile = (props) => {
 
                     <Card
                     header={"Todos:"}
-                    // meta='Software Engineer'
                     description={renderTasks}
                     />
                 </Grid.Column>

@@ -27,7 +27,7 @@ const ProjectCard = (props) => {
     }
 
     const handleConfirm = () => {
-      props.deleteProject(props.id)
+      props.deleteProjectCallback(props.id)
       setOpen(false)
     }
 
@@ -39,11 +39,10 @@ const ProjectCard = (props) => {
       setShowTasksModal(false)
     }
 
-
     return(
       <>
         
-      {showTasksModal ? <TasksModal handleHideTasksModal={handleHideTasksModal} project_id={props.project.id} project={props.project} tasks={props.tasks} people={props.people} editProject={props.editProject} addTask={props.addTask} deleteTask={props.deleteTask} editTask={props.editTask}/> : null}
+      {showTasksModal ? <TasksModal handleHideTasksModal={handleHideTasksModal} project_id={props.project.id} /> : null}
         
         <div className="eight wide column" >
           <div className="ui card">

@@ -47,9 +47,13 @@ function Projects(){
         dispatch(saveProject(project))
     }
 
+    const deleteProjectCallback = (id) => {
+        dispatch(deleteProject(id))
+    }
+
     const renderProjects = () => {
         const searchedProjects = projects.filter(project => project.title.toLowerCase().includes(searchTerm.toLowerCase()))
-        return searchedProjects.map( project => <ProjectCard key={project.id} project={project} people={people} tasks={tasks} title={project.title} started={project.started} description={project.description} id={project.id} editProject={editProject} deleteProject={deleteProject} addTask={addTask} deleteTask={deleteTask} editTask={editTask}/> )
+        return searchedProjects.map( project => <ProjectCard key={project.id} project={project} people={people} tasks={tasks} title={project.title} started={project.started} description={project.description} id={project.id} editProject={editProject} deleteProjectCallback={deleteProjectCallback} addTask={addTask} deleteTask={deleteTask} editTask={editTask}/> )
     }
 
     return(
