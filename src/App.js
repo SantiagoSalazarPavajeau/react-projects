@@ -16,7 +16,7 @@ import Projects from './containers/Projects';
 import People from './containers/People';
 
 import {fetchProjects} from './actions/projectActions'
-import {fetchPeople, loginUser} from './actions/peopleActions'
+import {deletePerson, fetchPeople, loginUser} from './actions/peopleActions'
 import {fetchTasks} from './actions/tasksActions'
 
 import Signup from './components/people/Signup';
@@ -66,6 +66,10 @@ const App = () => {
     localStorage.removeItem("token");
     setState({...state, auth: { currentUser: {} }, loggedIn: false });
   };
+
+  const deletePersonCallback = (id) => {
+    dispatch(deletePerson(id))
+  }
 
   
     return (
@@ -120,7 +124,7 @@ const App = () => {
                               // people={props.people}
                               // tasks={props.tasks}
                               // projects={props.projects}
-                              deletePerson={props.deletePerson}
+                              deletePersonCallback={deletePersonCallback}
                               currentUser={state.auth.currentUser}
                               editProject={props.editProject} 
                               addTask={props.addTask} 

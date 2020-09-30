@@ -4,7 +4,7 @@ import '../App.css'
 import {saveProject, deleteProject, editProject} from '../actions/projectActions' //async actions imported from the actions file
 import { addTask, deleteTask, editTask } from '../actions/tasksActions';
 
-import { Input, Grid } from 'semantic-ui-react';
+import { Input, Grid, Loader } from 'semantic-ui-react';
 
 
 import ProjectInput from '../components/projects/ProjectInput';
@@ -58,6 +58,8 @@ function Projects(){
 
     return(
         <>
+            {(projects[0]) ? null : <Loader active>Loading</Loader>}
+
             <div className="ui grid container">
                 <div className="eight wide column" >
 

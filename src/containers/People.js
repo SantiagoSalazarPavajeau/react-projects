@@ -6,7 +6,7 @@ import Person from '../components/people/Person'
 // import { editProject } from '../actions/projectActions' //async actions imported from the actions file
 // import { addTask, deleteTask, editTask } from '../actions/tasksActions';
 
-import { Grid } from 'semantic-ui-react'
+import { Grid, Loader } from 'semantic-ui-react'
 
 
 function People(){
@@ -25,6 +25,8 @@ function People(){
             <>
 
                 <Grid stackable container columns={2} >
+                {(people[0]) ? null : <Loader active>Loading</Loader>}
+                
                 {renderPeople()}
                 </Grid>
 

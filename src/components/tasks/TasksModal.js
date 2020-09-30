@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from 'react';
-import { Header, Image, Modal, Form, Button, Divider, Grid } from 'semantic-ui-react'
+import { Header, Image, Modal, Form, Button, Divider, Grid, Loader } from 'semantic-ui-react'
 import Task from './Task'
 
 import { Progress } from 'react-sweet-progress';
@@ -165,6 +165,7 @@ const TasksModal = (props) => {
 
     return( 
         <>
+        {(tasks[0]) ? null : <Loader active>Loading</Loader>}
         {renderModal()}
         </>
     )

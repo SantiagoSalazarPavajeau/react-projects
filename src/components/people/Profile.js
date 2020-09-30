@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import { Card, Grid, Button } from 'semantic-ui-react'
+import { Card, Grid, Button, Loader } from 'semantic-ui-react'
 
 
 
@@ -34,7 +34,7 @@ const Profile = (props) => {
 
     const handleDeletePerson = (e) => {
         // console.log(e.target.id)
-        props.deletePerson(e.target.id)
+        props.deletePersonCallback(e.target.id)
         // localStorage.removeItem("token");
         props.handleLogout()
         props.history.push('/signup')
@@ -62,6 +62,7 @@ const Profile = (props) => {
 
     return (
         <div>
+            {(tasks[0]) ? null : <Loader active>Loading</Loader>}
             {showTasksModal ? <TasksModal handleHideTasksModal={handleHideTasksModal} project_id={projectId} /> : null}
             <Grid stackable container columns={2} >
 
