@@ -42,7 +42,11 @@ function Projects(){
     const handleSearchProject = (event) => {
         setSearchTerm(event.target.value)     
     }
-    
+
+    const createNewProject = (project) => {
+        dispatch(saveProject(project))
+    }
+
     const renderProjects = () => {
         const searchedProjects = projects.filter(project => project.title.toLowerCase().includes(searchTerm.toLowerCase()))
         return searchedProjects.map( project => <ProjectCard key={project.id} project={project} people={people} tasks={tasks} title={project.title} started={project.started} description={project.description} id={project.id} editProject={editProject} deleteProject={deleteProject} addTask={addTask} deleteTask={deleteTask} editTask={editTask}/> )
@@ -58,7 +62,7 @@ function Projects(){
                     <br></br>
                     <br></br>
 
-                    <ProjectInput saveProject={saveProject}/>
+                    <ProjectInput createNewProject={createNewProject}/>
                     
                 </div>
             </div>
