@@ -1,16 +1,11 @@
-import React, {Component, useState} from 'react';
+import React, { useState} from 'react';
 import { Card, Grid, Button } from 'semantic-ui-react'
 
-// import Task from '../tasks/Task';
-import { Link } from 'react-router-dom';
 
 
 
 import TasksModal from '../tasks/TasksModal';
 import { useSelector } from 'react-redux';
-
-import {editProject} from '../../actions/projectActions'
-import {addTask, deleteTask, editTask} from '../../actions/tasksActions'
 
 
 
@@ -21,23 +16,22 @@ const Profile = (props) => {
 
     // }
 
-    const [state, setState] = useState({showTasksModal: false})
+    const [showTasksModal, setShowTasksModal] = useState(false)
+    const [projectId, setProjectId] = useState(null)
 
     const people = useSelector(state => state.people)
     const projects = useSelector(state => state.projects)
     const tasks = useSelector(state => state.tasks)
 
-    const handleShowTasksModal = () => {
-        setState({
-          showTasksModal: true
-        })
+    const handleShowTasksModal = (e) => {
+        setProjectId(e.target.id)
+        setShowTasksModal(true)
       }
   
     const handleHideTasksModal = () => {
-        setState({
-          showTasksModal: false
-        })
+        setShowTasksModal(false)
       }
+
     const handleDeletePerson = (e) => {
         // console.log(e.target.id)
         props.deletePerson(e.target.id)
@@ -53,23 +47,22 @@ const Profile = (props) => {
         let project;
         const list = myTasks.map((task) => {
                         project = projects.find(project => project.id === task.project_id )
-                        // console.log(project.title)
-                        // return <li key={task.id}> <Link to={`project-${project.id}`}>{project.title} Project</Link>: {task.description}  {task.completed ? <p>(Completed)</p> : <p>(InProgress)</p>}   </li>
                         return (
                             <li key={task.id}> 
-                                <Link onClick={handleShowTasksModal}>{project.title} Project</Link>: {task.description}  {task.completed ? <p>(Completed)</p> : <p>(InProgress)</p>}
+                                <a onClick={e => handleShowTasksModal(e)} id={project.id}>{project.title} Project</a>: {task.description}  {task.completed ? <p>(Completed)</p> : <p>(InProgress)</p>}
                             </li>
                             
                         )
                     })
-        return <><ul>{list}</ul>{state.showTasksModal ? <TasksModal handleHideTasksModal={handleHideTasksModal} project_id={project.id} /> : null}</>
+        return <><ul>{list}</ul></>
 
     }
     
     const person = people.find(person => person.username === props.currentUser.username) // find person that logged in
+
     return (
         <div>
-
+            {showTasksModal ? <TasksModal handleHideTasksModal={handleHideTasksModal} project_id={projectId} /> : null}
             <Grid stackable container columns={2} >
 
                 <Grid.Column>

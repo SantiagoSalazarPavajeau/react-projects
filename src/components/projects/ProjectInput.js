@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {useState} from 'react';
 // import ProjectCard from './ProjectCard';
 import { Button, Header, Image, Modal, Form } from 'semantic-ui-react'
 import CloseModal from './CloseModal';

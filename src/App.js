@@ -1,10 +1,10 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   HashRouter as Router,
   Route
 } from "react-router-dom";
 import "./App.css";
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 import NavBar from './components/NavBar';
@@ -15,9 +15,9 @@ import Projects from './containers/Projects';
 // import Tasks from './containers/Tasks';
 import People from './containers/People';
 
-import {fetchProjects, editProject} from './actions/projectActions'
-import {fetchPeople, loginUser, deletePerson} from './actions/peopleActions'
-import {fetchTasks, addTask, deleteTask, editTask} from './actions/tasksActions'
+import {fetchProjects} from './actions/projectActions'
+import {fetchPeople, loginUser} from './actions/peopleActions'
+import {fetchTasks} from './actions/tasksActions'
 
 import Signup from './components/people/Signup';
 import Login from './components/people/Login';
@@ -29,7 +29,7 @@ import Profile from './components/people/Profile';
 
 
 const App = () => {
-  const [state, setState] = useState({ auth: { currentUser: {} }, showTasksModal: false, loggedIn: false, loading: true })
+  const [state, setState] = useState({ auth: { currentUser: {} }, loggedIn: false, loading: true })
   // state = { auth: { currentUser: {} }, showTasksModal: false, loggedIn: false, loading: true };
 
   const dispatch = useDispatch()
@@ -67,11 +67,6 @@ const App = () => {
     setState({...state, auth: { currentUser: {} }, loggedIn: false });
   };
 
-
-  const handleHideTasksModal = () => {
-    setState({...state, showTasksModal: false})
-  }
-
   
     return (
       <>
@@ -97,16 +92,7 @@ const App = () => {
                          return (
                        <Projects {...routerProps}/>)
                       }}/> 
-                      
-                      {/* I sent router props to have acces to match */}
-
-                      {/* <Route exact path={`/${"project"}-:id`} 
-                       render={routerProps => {
-                        return (
-                       <Tasks {...routerProps} />)
-                       }} > */}
-                        {/* move this to the projects view and don't create a new route */}
-                      {/* </Route> */}
+                  
 
                       <Route exact path={`/people`}>
                         <People />

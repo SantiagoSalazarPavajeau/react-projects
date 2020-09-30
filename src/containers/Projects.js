@@ -1,5 +1,5 @@
-import React, {Component, useState} from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import React, { useState} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import '../App.css'
 import {saveProject, deleteProject, editProject} from '../actions/projectActions' //async actions imported from the actions file
 import { addTask, deleteTask, editTask } from '../actions/tasksActions';
