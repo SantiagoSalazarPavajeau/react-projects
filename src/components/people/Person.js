@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import { Card, Grid } from 'semantic-ui-react'
 
-// import Task from '../tasks/Task';
 import { Link } from 'react-router-dom';
 
 
@@ -41,13 +40,12 @@ const Person = (props) => {
 
     return(
         <>
-        {showTasksModal ? <TasksModal handleHideTasksModal={handleHideTasksModal} project_id={projectId} project={project} tasks={props.tasks} people={props.people} editProject={props.editProject} addTask={props.addTask} deleteTask={props.deleteTask} editTask={props.editTask}/> : null}
+        {showTasksModal ? <TasksModal handleHideTasksModal={handleHideTasksModal} project_id={projectId} /> : null}
 
                 <Grid.Column>
                     <Card
                     image={props.image}
                     header={props.username}
-                    // meta='Software Engineer'
                     description={renderTasks}
                     />
                 </Grid.Column>
