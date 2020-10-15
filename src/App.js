@@ -43,8 +43,11 @@ const App = () => {
       dispatch(fetchProjects())
       dispatch(fetchPeople())
       dispatch(fetchTasks())
+    }, []
+  )
 
-
+  useEffect( 
+    () => {
       const token = localStorage.getItem("token");
       
       if (token) {
@@ -54,7 +57,7 @@ const App = () => {
           setAuth(currentUser);
         });
       }
-    }, []
+    }, [loggedIn]
   )
 
   const handleLogin = (user) => {
