@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Button, Confirm } from 'semantic-ui-react'
-import TasksModal from '../tasks/TasksModal';
+import Tasks from '../../containers/Tasks';
+
 
 
 
@@ -42,7 +43,7 @@ const ProjectCard = (props) => {
     return(
       <>
         
-      {showTasksModal ? <TasksModal handleHideTasksModal={handleHideTasksModal} project_id={props.project.id} /> : null}
+      {showTasksModal ? <Tasks handleHideTasksModal={handleHideTasksModal} project_id={props.project.id} /> : null}
         
         <div className="eight wide column" >
           <div className="ui card">
