@@ -29,8 +29,10 @@ import Profile from './components/people/Profile';
 
 
 const App = () => {
-  const [state, setState] = useState({ auth: { currentUser: {} }, loggedIn: false, loading: true })
-  // state = { auth: { currentUser: {} }, showTasksModal: false, loggedIn: false, loading: true };
+  // const [state, setState] = useState({ auth: { currentUser: {} }, loggedIn: false, loading: true })
+  const [auth, setAuth] = useState({ currentUser: {} })
+  const [loggedIn, setLoggedIn] = useState(false)
+  // const [loading, setLoading] = useState(true)
 
   const dispatch = useDispatch()
 
@@ -49,7 +51,7 @@ const App = () => {
         dispatch(loginUser()).then((user) => {
           const currentUser = { currentUser: user };
 
-          setState({...state,  auth: currentUser });
+          setAuth(currentUser);
         });
       }
     }, []
@@ -59,12 +61,14 @@ const App = () => {
     const currentUser = { currentUser: user };
     // localStorage.setItem("token", user.token);
 
-    setState({ ...state, auth: currentUser, loggedIn: true });
+    setAuth(currentUser);
+    setLoggedIn(true);
   };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    setState({...state, auth: { currentUser: {} }, loggedIn: false });
+    setAuth({});
+    setLoggedIn(false);
   };
 
   const deletePersonCallback = (id) => {
@@ -81,13 +85,13 @@ const App = () => {
 
               <div className="main">
 
-                <NavBar currentUser={state.auth.currentUser} handleLogout={handleLogout} loggedIn={state.loggedIn}/> 
+                <NavBar currentUser={auth.currentUser} handleLogout={handleLogout} loggedIn={loggedIn}/> 
               {/* send the current user and loggedin state to navbar to show or hide navbar buttons */}
                 <div className="ui container">
 
                       <Route exact path="/" render={(routerProps) => {
                         return (
-                          state.loggedIn ?  <Profile {...routerProps} people={props.people} tasks={props.tasks} projects={props.projects} deletePerson={props.deletePerson}currentUser={state.auth.currentUser}editProject={props.editProject} addTask={props.addTask} deleteTask={props.deleteTask} editTask={props.editTask}/> : <Login {...routerProps} handleLogin={handleLogin} />
+                          loggedIn ?  <Profile {...routerProps} people={props.people} tasks={props.tasks} projects={props.projects} deletePerson={props.deletePerson}currentUser={auth.currentUser}editProject={props.editProject} addTask={props.addTask} deleteTask={props.deleteTask} editTask={props.editTask}/> : <Login {...routerProps} handleLogin={handleLogin} />
                         );
                       }}/>
 
@@ -118,14 +122,11 @@ const App = () => {
 
                       <Route exact path={`/profile`} 
                        render={(routerProps) => {
-                          if(state.loggedIn){
+                          if(loggedIn){
                             return (                        
                               <Profile {...routerProps} 
-                              // people={props.people}
-                              // tasks={props.tasks}
-                              // projects={props.projects}
                               deletePersonCallback={deletePersonCallback}
-                              currentUser={state.auth.currentUser}
+                              currentUser={auth.currentUser}
                               editProject={props.editProject} 
                               addTask={props.addTask} 
                               deleteTask={props.deleteTask} 
@@ -142,7 +143,6 @@ const App = () => {
 
 
                       
-                    {/* </Switch>  */}
                 </div>                                            
               </div>
           </div> 
@@ -150,29 +150,5 @@ const App = () => {
       </>
     );
 }
-
-// const mapStateToProps = state => {
-//   return{
-//     projects: state.projects,
-//     people: state.people,
-//     tasks: state.tasks
-//   }
-// }
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//       fetchProjects: () => dispatch(fetchProjects()),
-//       fetchPeople: () => dispatch(fetchPeople()),
-//       fetchTasks: () => dispatch(fetchTasks()),
-//       loginUser: () => dispatch(loginUser()),
-//       deletePerson: (id) => dispatch(deletePerson(id)),
-//       editProject: project => dispatch(editProject(project)),
-//       addTask: project_id => dispatch(addTask(project_id)),
-//       deleteTask: id => dispatch(deleteTask(id)),
-//       editTask: task => dispatch(editTask(task))
-//   }
-// }
-
-// export default connect(mapStateToProps,mapDispatchToProps)(App);
 
 export default App;
