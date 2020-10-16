@@ -1,53 +1,75 @@
-import React, {useState} from 'react';
-import { Card, Grid } from 'semantic-ui-react'
+import { render } from 'enzyme';
+import React, {useEffect, useState} from 'react';
+import { Grid, Loader, Dimmer } from 'semantic-ui-react'
 
-import { Link } from 'react-router-dom';
+import Tasks from '../../containers/Tasks';
 
-import TasksModal from '../tasks/TasksModal';
 
 
 
 const Person = (props) => {
 
     const [showTasksModal, setShowTasksModal] = useState(false)
-    const [projectId, setProjectId] = useState(null)
+    const [myProjects, setMyProjects] = useState([])
 
+    useEffect(()=>{
+        let foundProjects = []
+        props.myTasks.map((task) => {
+            for(let project of props.projects){
+                if(project.id === task.project_id){
+                    foundProjects.push(project)
+                }
+            }
+        })
+        const uniqProjects = [ ...new Set(foundProjects) ]
+        console.log(foundProjects)
+        setMyProjects(uniqProjects)
+    }, [showTasksModal])
 
 
     const handleShowTasksModal = (e) => {
-        setProjectId(e.target.id)
+        e.preventDefault()
         setShowTasksModal(true)
-        }
-  
+    }
+
     const handleHideTasksModal = () => {
         setShowTasksModal(false)
       }
 
-    
-    const myTasks= props.tasks.filter(task => task.person_id === props.id) // filter out the tasks that don't belong to the person
-    let project;
-    myTasks.map((task) => { return project = props.projects.find(project => project.id === task.project_id )})
-
-    const renderTasks = () => {
-        const myTasks= props.tasks.filter(task => task.person_id === props.id) // filter out the tasks that don't belong to the person
-        let project;
-        const list = myTasks.map((task) => {
-                        project = props.projects.find(project => project.id === task.project_id )
-                        return <li key={task.id} > <a id={project.id} onClick={(e) => handleShowTasksModal(e)}> {project.title} Project</a>: {task.description}  {task.completed ? <p>(Completed)</p> : <p>(InProgress)</p>}   </li>
-                    })
-        return <ul>{list}</ul>
-    }
-
     return(
         <>
-        {showTasksModal ? <TasksModal handleHideTasksModal={handleHideTasksModal} project_id={projectId} /> : null}
-
                 <Grid.Column>
-                    <Card
-                    image={props.image}
-                    header={props.username}
-                    description={renderTasks}
-                    />
+                <div className="ui card">
+                    <div className="content">
+                        <p className="header">{props.person.username}</p>
+                    <div className="meta">
+                        <span className="date">{"Projects:"}</span>
+                    </div>
+                    <div className="description">
+                        {myProjects[0] ? 
+                        myProjects.map(project => { 
+                            return(
+                                <li key={project.id}> 
+                                    <Tasks 
+                                    project={project} 
+                                    showTasksModal={showTasksModal}
+                                    handleHideTasksModal={handleHideTasksModal}
+                                    />
+                                    {project.title}
+                                </li>
+                            ) 
+                        })
+                        : 
+                        "Loading..."
+                        }
+                    </div>
+                    </div>
+                
+                    <div className="extra content">
+                
+                    </div>
+                </div>
+                    
                 </Grid.Column>
 
         </>

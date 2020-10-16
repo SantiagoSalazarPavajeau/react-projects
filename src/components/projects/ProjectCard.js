@@ -7,17 +7,9 @@ import Tasks from '../../containers/Tasks';
 
 
 const ProjectCard = (props) => {
-    // state = {
-    //   open: false,
-    //   edit: false,
-    //   percent: 50,
-    //   showTasksModal: false
-    // }
 
     const [open, setOpen] = useState(false)
     const [showTasksModal, setShowTasksModal] = useState(false)
-
-
 
     const handleDeleteClick = () => {
       setOpen(true)
@@ -28,7 +20,7 @@ const ProjectCard = (props) => {
     }
 
     const handleConfirm = () => {
-      props.deleteProjectCallback(props.id)
+      props.deleteProjectCallback(props.project.id)
       setOpen(false)
     }
 
@@ -42,18 +34,21 @@ const ProjectCard = (props) => {
 
     return(
       <>
-        
-      {showTasksModal ? <Tasks handleHideTasksModal={handleHideTasksModal} project_id={props.project.id} /> : null}
-        
+      <Tasks 
+      project={props.project} 
+      showTasksModal={showTasksModal} 
+      handleHideTasksModal={handleHideTasksModal}
+      />
+
         <div className="eight wide column" >
           <div className="ui card">
             <div className="content">
-                <a className="header" onClick={e => handleShowTasksModal(e)}>{props.title}</a>
+                <a className="header" onClick={e => handleShowTasksModal(e)}>{props.project.title}</a>
               <div className="meta">
-                <span className="date">{props.started}</span>
+                <span className="date">{props.project.started}</span>
               </div>
               <div className="description">
-                {props.description}
+                {props.project.description}
               </div>
             </div>
           

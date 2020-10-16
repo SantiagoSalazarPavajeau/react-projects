@@ -4,27 +4,22 @@ import { Card, Grid, Button, Loader } from 'semantic-ui-react'
 
 
 
-import TasksModal from '../tasks/TasksModal';
+import Tasks from '../../containers/Tasks';
 import { useSelector } from 'react-redux';
 
 
 
 const Profile = (props) => {
 
-    // state = {
-    //     showTasksModal: false,
-
-    // }
-
     const [showTasksModal, setShowTasksModal] = useState(false)
-    const [projectId, setProjectId] = useState(null)
+    const [project, setProject] = useState(null)
 
     const people = useSelector(state => state.people)
     const projects = useSelector(state => state.projects)
     const tasks = useSelector(state => state.tasks)
 
     const handleShowTasksModal = (e) => {
-        setProjectId(e.target.id)
+        setProject(projects.find(project => project.id === e.target.id))
         setShowTasksModal(true)
       }
   
@@ -43,13 +38,12 @@ const Profile = (props) => {
 
     const renderTasks = () => {
         const myTasks= tasks.filter(task => task.person_id === props.currentUser.id) //still send current user as a prop
-        // console.log(myTasks)
         let project;
         const list = myTasks.map((task) => {
                         project = projects.find(project => project.id === task.project_id )
                         return (
                             <li key={task.id}> 
-                                <a onClick={e => handleShowTasksModal(e)} id={project.id}>{project.title} Project</a>: {task.description}  {task.completed ? <p>(Completed)</p> : <p>(InProgress)</p>}
+                                <a onClick={e => handleShowTasksModal(e)} id={project}>{project.title} Project</a>: {task.description}  {task.completed ? <p>(Completed)</p> : <p>(InProgress)</p>}
                             </li>
                             
                         )
@@ -63,7 +57,7 @@ const Profile = (props) => {
     return (
         <div>
             {(tasks[0]) ? null : <Loader active>Loading</Loader>}
-            {showTasksModal ? <TasksModal handleHideTasksModal={handleHideTasksModal} project_id={projectId} /> : null}
+            {project ? <Tasks project={project} showTasksModal={showTasksModal} handleHideTasksModal={handleHideTasksModal}/> : null}
             <Grid stackable container columns={2} >
 
                 <Grid.Column>
