@@ -63,7 +63,7 @@ const Profile = (props) => {
                 <Grid.Column>
                     <Card
                     image={person.image}
-                    header={person.username}
+                    header={<h3 class='profile-card' value={person.username}>{person.username}</h3>}
                     />
                     <Button id={person.id} onClick={e => handleDeletePerson(e)}>Delete my Account</Button>
                 </Grid.Column>

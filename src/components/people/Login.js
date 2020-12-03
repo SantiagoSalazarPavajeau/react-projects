@@ -43,6 +43,9 @@ class Login extends Component {
                     placeholder='Username'
                     value={this.state.username}
                     onChange={this.handleChange}
+                    className='username-login'
+                    id='username-login'
+                    autoFocus
                     />
                     <br/>
 
@@ -53,8 +56,9 @@ class Login extends Component {
                     placeholder='Password'
                     value={this.state.password}
                     onChange={this.handleChange}
+                    id='password-login'
                     /><br/>
-                    {this.state.error ? <Message error content="Wrong username or password"/> : null}
+                    {this.state.error ? <Message error id="login-error" content="Wrong username or password"/> : null}
 
                     <br/>
 
