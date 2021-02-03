@@ -13,6 +13,7 @@ import {addTask, deleteTask, editTask} from '../actions/tasksActions'
 // nested route for tasks needs to be here
 
 function Tasks(props){
+
     const tasks =  useSelector(state => state.tasks)
     const projects =  useSelector(state => state.projects)
     const people =  useSelector(state => state.people)
@@ -75,7 +76,8 @@ function Tasks(props){
     }
 
     const renderTasks = () => {// filter tasks for current project only
-        const projectTasks = tasks.filter(task => task.project_id === props.project.id)
+        // const projectTasks = tasks.filter(task => task.project_id === props.project.id)
+
         return projectTasks.map(task => <Task key={task.id} task={task} people={props.people} deleteTask={deleteTask} project_id={project.id} editTask={editTask} id={task.id} description={task.description} completed={task.completed}/>)
     }
 

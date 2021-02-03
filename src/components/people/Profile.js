@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import { Card, Grid, Button, Loader } from 'semantic-ui-react'
 
 
@@ -6,6 +6,7 @@ import { Card, Grid, Button, Loader } from 'semantic-ui-react'
 
 import Tasks from '../../containers/Tasks';
 import { useSelector } from 'react-redux';
+import Person from './Person';
 
 
 
@@ -13,10 +14,15 @@ const Profile = (props) => {
 
     const [showTasksModal, setShowTasksModal] = useState(false)
     const [project, setProject] = useState(null)
+    const [myTasks, setMyTasks] = useState()
 
     const people = useSelector(state => state.people)
     const projects = useSelector(state => state.projects)
     const tasks = useSelector(state => state.tasks)
+
+    useEffect(()=>{
+        setMyTasks(tasks.filter(task => task.person_id === props.currentUser.id))
+    },[])
 
     const handleShowTasksModal = (e) => {
         setProject(projects.find(project => project.id === e.target.id))
@@ -37,9 +43,9 @@ const Profile = (props) => {
 
 
     const renderTasks = () => {
-        const myTasks= tasks.filter(task => task.person_id === props.currentUser.id) //still send current user as a prop
+        // const myTasks= tasks.filter(task => task.person_id === props.currentUser.id) //still send current user as a prop
         let project;
-        const list = myTasks.map((task) => {
+        const list = myTasks ? myTasks.map((task) => {
                         project = projects.find(project => project.id === task.project_id )
                         return (
                             <li key={task.id}> 
@@ -47,7 +53,7 @@ const Profile = (props) => {
                             </li>
                             
                         )
-                    })
+                    }) : 'loading...'
         return <><ul>{list}</ul></>
 
     }
@@ -61,16 +67,16 @@ const Profile = (props) => {
             <Grid stackable container columns={2} >
 
                 <Grid.Column>
-                    <Card
-                    image={person.image}
-                    header={<h3 class='profile-card' value={person.username}>{person.username}</h3>}
+                    <Person
+                    person={person}
+                    myTasks={myTasks ? myTasks : []}
                     />
                     <Button id={person.id} onClick={e => handleDeletePerson(e)}>Delete my Account</Button>
                 </Grid.Column>
                 <Grid.Column>
 
                     <Card
-                    header={"Todos:"}
+                    header={"All Todos:"}
                     description={renderTasks}
                     />
                 </Grid.Column>

@@ -3,27 +3,38 @@ import React, {useEffect, useState} from 'react';
 import { Grid, Loader, Dimmer } from 'semantic-ui-react'
 
 import Tasks from '../../containers/Tasks';
+import {priorityTasks, PriorityQueue} from '../../services/priorityHeap';
+import Task from '../tasks/Task';
 
 
 
 
-const Person = (props) => {
+const Person = ({myTasks, person}) => {
 
     const [showTasksModal, setShowTasksModal] = useState(false)
     const [myProjects, setMyProjects] = useState([])
+    const [urgentTodo, setUrgentTodo] = useState()
 
     useEffect(()=>{
-        let foundProjects = []
-        props.myTasks.map((task) => {
-            for(let project of props.projects){
-                if(project.id === task.project_id){
-                    foundProjects.push(project)
-                }
-            }
-        })
-        const uniqProjects = [ ...new Set(foundProjects) ]
-        console.log(foundProjects)
-        setMyProjects(uniqProjects)
+        let todo = priorityTasks(myTasks).dequeue().val
+        setUrgentTodo(todo)
+        // console.log(priorityTasks(myTasks))
+        // let priorities = priorityTasks(myTasks)
+        // for(let task of priorityTasks(myTasks).values){
+        //     console.log(priorities.dequeue().val)
+        // }
+
+        // myTasks.map((task) => {
+        //     for(let project of projects){
+        //         if(project.id === task.project_id){
+        //             foundProjects.push(project)
+        //         }
+        //     }
+        // })
+
+        // const uniqProjects = [ ...new Set(foundProjects) ]
+        // setMyProjects(uniqProjects)
+
     }, [showTasksModal])
 
 
@@ -36,32 +47,33 @@ const Person = (props) => {
         setShowTasksModal(false)
       }
 
+
+
     return(
         <>
                 <Grid.Column>
-                <div className="ui card">
+                <div className="ui card" style={{width:'90%'}}>
                     <div className="content">
-                        <p className="header">{props.person.username}</p>
+                        <p className="header">{person.username}</p>
                     <div className="meta">
-                        <span className="date">{"Projects:"}</span>
+                        <span className="date">Most important tasks:</span>
                     </div>
                     <div className="description">
-                        {myProjects[0] ? 
-                        myProjects.map(project => { 
-                            return(
-                                <li key={project.id}> 
-                                    <Tasks 
-                                    project={project} 
-                                    showTasksModal={showTasksModal}
-                                    handleHideTasksModal={handleHideTasksModal}
+                        {console.log(urgentTodo)}
+                        {urgentTodo ? 
+                        // urgentTodos.slice(0,3).map(task => { 
+                            // return(
+                                <div key={urgentTodo.id}> 
+                                    <Task 
+                                    task={urgentTodo} 
                                     />
-                                    {project.title}
-                                </li>
-                            ) 
-                        })
+                                </div>
+                            // ) 
+                        // })
                         : 
                         "Loading..."
                         }
+
                     </div>
                     </div>
                 

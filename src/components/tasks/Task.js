@@ -20,7 +20,7 @@ const Task = (props) => {
     useEffect(
         ()=> {
         let dropdownFormat = []
-        people.map(person => dropdownFormat.push({id: person.id, key: person.username, text: person.username, value: person.username, image: { avatar: true, src: person.image } }))
+        people.map(person => dropdownFormat.push({id: person.id, key: person.username, text: person.username, value: person.username, image: { avatar: true, src: "https://source.unsplash.com/random/200x200" } }))
         setDropDown(dropdownFormat)
         setOwner(dropdownFormat.find(person => person.id === task.person_id))
         
@@ -87,8 +87,9 @@ const Task = (props) => {
             <>
             <br></br>
             <Label color='green' image>
-            <img alt="Profile Pic" src='https://api.adorable.io/avatars/77/stevie@adorable.io.png' />
+            <img alt="Profile Pic" src='https://source.unsplash.com/random/200x200' />
                 completed by {owner ? owner.key : 'Yet to be assigned'}
+                {console.log(task)}
             <Label.Detail>{task.description}</Label.Detail>
             </Label>
             <Button onClick={handleSave} icon="save"></Button>
