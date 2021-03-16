@@ -1,78 +1,88 @@
-export class PriorityQueue {
+export class MinBinaryHeap{
     constructor(){
-        this.values = [];
+        this.heapArray = []
     }
-    enqueue(val, priority){
-        let newNode = new Node(val, priority);
-        this.values.push(newNode);
-        this.bubbleUp();
-    }
-    bubbleUp(){
-        let idx = this.values.length - 1;
-        const element = this.values[idx];
-        while(idx > 0){
-            let parentIdx = Math.floor((idx - 1)/2);
-            let parent = this.values[parentIdx];
-            if(element.priority >= parent.priority) break;
-            this.values[parentIdx] = element;
-            this.values[idx] = parent;
-            idx = parentIdx;
-        }
-    }
-    dequeue(){
-        const min = this.values[0];
-        const end = this.values.pop();
-        if(this.values.length > 0){
-            this.values[0] = end;
-            this.sinkDown();
-        }
-        return min;
-    }
-    sinkDown(){
-        let idx = 0;
-        const length = this.values.length;
-        const element = this.values[0];
-        while(true){
-            let leftChildIdx = 2 * idx + 1;
-            let rightChildIdx = 2 * idx + 2;
-            let leftChild,rightChild;
-            let swap = null;
 
-            if(leftChildIdx < length){
-                leftChild = this.values[leftChildIdx];
-                if(leftChild.priority < element.priority) {
-                    swap = leftChildIdx;
-                }
+    getTop(){
+        return this.heapArray[0]
+    }
+
+    insertElement(element){
+        let newElement = new Node(element, element.priority)
+        this.heapArray.push(newElement)
+
+        let newElementId = this.heapArray.length - 1 
+
+        while(newElementId > 0){ // while this id is still in the bounds of the heap array
+            let newElementParentId = Math.floor((newElementId -1) /2)
+            let newElementParent = this.heapArray[newElementParentId]
+
+            if(newElementParent > newElement.priority){
+                this.swapHelper(newElementParentId, newElementId) // swap elements (found by id on this.heapArray)
+                newElementId = newElementParentId // swap ids in this while loop scope
+                // console.log(this.heapArray)
+            }else{
+                break
             }
-            if(rightChildIdx < length){
-                rightChild = this.values[rightChildIdx];
-                if(
-                    (swap === null && rightChild.priority < element.priority) || 
-                    (swap !== null && rightChild.priority < leftChild.priority)
-                ) {
-                   swap = rightChildIdx;
-                }
-            }
-            if(swap === null) break;
-            this.values[idx] = this.values[swap];
-            this.values[swap] = element;
-            idx = swap;
         }
+    }
+
+    pullTopElementAndReorder(){
+        let topElement = this.heapArray[0]
+
+        if(this.heapArray.length < 1) return null
+
+        this.heapArray[0] = this.heapArray[this.heapArray.length - 1]
+        this.heapArray.pop()
+
+        this.reorderHelper()
+
+        return topElement
+    }
+
+    reorderHelper(){
+        let parentId = 0
+        let leftLeafId = (parentId * 2) + 1
+        let rightLeafId =  (parentId * 2) +2
+        let leftLeaf = this.heapArray[leftLeafId]
+        let rightLeaf = this.heapArray[rightLeafId]
+        let parent = this.heapArray[parentId]
+
+        while(!!leftLeaf && !!rightLeaf || !!leftLeaf){ //while both leaves exist or only the left leaf
+
+
+            let minLeaf = Math.min(leftLeaf, rightLeaf)
+            if( minLeaf < parent){ // if either one of the two leaves is less than parent swapHelper
+
+                if(minLeaf === leftLeaf){
+                    this.swapHelper(parentId, leftLeafId) // swapHelper values
+                    parentId = leftLeafId // swap ids to move on down the heap
+                }
+
+                if(minLeaf === rightLeaf) {
+                    this.swapHelper(parentId,rightLeafId)
+                    parentId = rightLeafId
+                }
+            } else break
+
+            leftLeafId = (parentId * 2) + 1
+            rightLeafId =  (parentId * 2 ) + 2
+
+            leftLeaf = this.heapArray[leftLeafId]
+            rightLeaf = this.heapArray[rightLeafId]
+            parent = this.heapArray[parentId]
+        }
+    }
+
+    swapHelper(parentId, leafId){
+        [this.heapArray[parentId], this.heapArray[leafId]] = [this.heapArray[leafId], this.heapArray[parentId]]
     }
 }
+
 
 class Node {
     constructor(val, priority){
         this.val = val;
         this.priority = priority;
     }
-}
-
-export function priorityTasks(tasks){
-    let prioritize = new PriorityQueue()
-
-    for(let task of tasks){
-        prioritize.enqueue(task, task.priority)
-    }
-    return prioritize
 }
