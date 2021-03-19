@@ -1,9 +1,9 @@
 import store from '../../fixtures/store.json'
 
-const URL = 'http://localhost:3001/'
-// const URL = 'https://secure-shelf-48338.herokuapp.com/'
+// const URL = 'http://localhost:3001/'
+const URL = 'https://secure-shelf-48338.herokuapp.com'
 
-describe("Redux store", () => {
+describe("Redux store users", () => {
 
   beforeEach(()=>{
       cy.visit('')
@@ -24,12 +24,11 @@ describe("Redux store", () => {
     it('Loads all users', () => {
       cy.visit('/')
       
-      cy.request(`${URL}people`)
+      cy.request(`${URL}/people`)
         .then((response) => {
           expect(response.status).to.eq(200)
           cy.window().its('store').invoke('getState').its('people').should('deep.equal', store.people)
         })
-      
     })
 
     it('Adds a new user', () => {
@@ -40,14 +39,15 @@ describe("Redux store", () => {
       cy.get(':nth-child(6) > .ui > input').type('12345')
       cy.get('[type="submit"]').click()
 
-      const getPeople = (win) => win.store.getState().people
+      const getPeople = (window) => window.store.getState().people
 
+      
       cy.window().pipe(getPeople).should('have.length', 5)
     })
 
     it('Deletes a user', () => {
       cy.visit('/')
-      cy.get('#username-login').type('Javi')
+      cy.get('#username-login').type('Javi') 
       cy.get('#password-login').type('12345')
       cy.get('[type="submit"]').click()
 
@@ -58,9 +58,5 @@ describe("Redux store", () => {
       cy.window().pipe(getPeople).should('have.length', 4)
     })
 })
-
-
-
-
 })
 
